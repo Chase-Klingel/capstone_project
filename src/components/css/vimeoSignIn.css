@@ -1,0 +1,149 @@
+/* html and body will be added to main css */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+  background: #f5f5f5;
+  margin: 0 0 65px;
+}
+
+#authContainer {
+  padding-top: 190px;
+  margin-left: 600px;
+  width: 35%;
+  margin-right: 100px;
+}
+
+#haveAccount {
+  color: #596377;
+}
+
+#haveAccount p {
+  position: absolute;
+  right: 170px;
+  top: 15px;
+  font-size: 13px;
+  color: #596377;
+  letter-spacing: 0;
+  line-height: 36px;
+}
+
+#signinButton {
+  position: absolute;
+  top: 26px;
+  right: 45px;
+  background: transparent;
+  border: 1px solid #C6CCD7;
+  border-radius: 100px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  color: #596377;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-left: 12px;
+  padding: 0 28px;
+  height: 36px;
+  line-height: 36px;
+  transition: .5s ease all;
+  color: #daa520;
+}
+
+#signinButton:hover {
+  border: 1px solid #daa520;
+  transition: .5s ease all;
+}
+
+#authTitle {
+  color: #596377;
+  font-size: 28px;
+}
+
+.signupButtonContainer {
+  margin-bottom: 20px;
+}
+
+.button7 {
+  width: 250px;
+  height: 75px;
+  border: 2px solid #daa520;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  margin: 0 auto;
+}
+
+.button7 a {
+  color: #5a5a5a;
+  line-height: 75px;
+  transition:all .5s ease;
+  z-index:2;
+  position:relative;
+}
+
+.eff7 {
+  width: 250px;
+  height: 75px;
+  border: 0px solid #daa520;
+  position: absolute;
+  transition:all .5s ease;
+  z-index: 1;
+}
+
+.button7:hover .eff7 {
+  border: 70px solid #daa520;
+}
+
+.button7:hover a {
+  color:#fff;
+}
+
+/******** VIMEO SIGN UP *******/
+#vimeoButtonContainer {
+  position: relative;
+}
+
+#vimeoButtonContainer.a {
+  display: inline-block;
+  background: #1ab7ea;
+  color: white;
+  width: 200px;
+  line-height: 50px;
+  vertical-align:top;
+  text-align: center;
+  border-left: 1px solid lightgrey;
+}
+
+#vimeoImg {
+  max-width: 100%;
+  width: 50px;
+  height: 50px;
+}
+
+@media (max-width: 1062px) {
+  #authContainer {
+    margin-left: 525px;
+  }
+}
+
+@media (max-width: 1000px) {
+  #authContainer {
+    margin-left: 500px;
+  }
+}
+
+@media (max-width: 970px) {
+  #authContainer {
+    margin: 0 auto;
+    width: 50%;
+  }
+}
+
+@media (max-width: 544px) {
+  #authContainer {
+    margin: 0 auto;
+    width: 70%;
+  }
+}

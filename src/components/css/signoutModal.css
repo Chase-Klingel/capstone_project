@@ -1,0 +1,92 @@
+#clickableName {
+  position: absolute;
+  right: 10px;
+  top: 3px;
+  background: none;
+  border: none;
+  color: #787878;
+  transition: .5s ease all;
+}
+
+#signout:hover {
+  color: white;
+  transition: .5s ease all;
+}
+
+.carrotIcon {
+  position: relative;
+  top: 7px;
+  left: 3px;
+}
+
+#profileImgContainer {
+  position: absolute;
+  top: 34px;
+  left: 34px;
+}
+
+#profileImgContainer img {
+  height: 70px;
+  width: 75px;
+  border-radius: 5px;
+}
+
+#infoContainer {
+  position: absolute;
+  top: 45px;
+  left: 125px;
+}
+
+#name {
+  margin: 0;
+  margin-bottom: 12px;
+  color: #4b5362;
+}
+
+#viewProfile {
+  background: #20daa5;
+  padding: 8px 15px;
+  border-radius: 2px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+}
+
+#viewProfile:hover {
+  background: #33e1af;
+}
+
+hr {
+  position: relative;
+  top: 125px;
+  margin-left: 34px;
+  margin-right: 34px;
+  height: 1px;
+  color: lightgrey;
+  background-color: lightgrey;
+  border: none;
+}
+
+.modalButton {
+  position: absolute;
+  top: 150px;
+  color: #9da0a7;
+  left: 34px;
+  font-size: 14px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.notificationsButton {
+  top: 180px;
+}
+
+.signoutButton {
+  top: 210px;
+  color: #cdd3dd;
+}
+
+.modalButton:hover {
+  color: black;
+}

@@ -1,0 +1,86 @@
+#noPadding {
+  padding: 0;
+}
+
+.bannerContainer {
+  width: 400px;
+}
+
+#banner {
+  position: relative;
+}
+
+#logo {
+  z-index: 1;
+  color: white;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  border-radius: 5px;
+  margin: 0;
+  background: #141414;
+  padding: 10px;
+  font-size: 40px;
+}
+
+#av {
+  color: white;
+}
+
+#descriptionContainer {
+  position: absolute;
+  top: 37.5vh;
+  color: white;
+  z-index: 1;
+}
+
+#title {
+  margin-left: 37%;
+  text-transform:uppercase;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#description {
+  width: 300px;
+  font-size: 16px;
+  margin-left: 52px;
+  margin-right: 50px;
+}
+
+#slogan {
+  margin-top: 20px;
+  margin-left: 105px;
+  margin-right: 105px;
+}
+
+#videoImg {
+  height: 50vh;
+  background-size: cover;
+  max-width: 100%;
+}
+
+#musicImg {
+  height: 50vh;
+  background: url('http://theproducersunited.com/wp-content/uploads/2014/05/Producer.jpg');
+  background-size: cover;
+  max-width: 100%;
+}
+
+#banner:before {
+  content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background:  #daa520;
+	opacity: .5;
+  z-index: 1;
+}
+
+@media (max-width: 970px) {
+  .bannerContainer {
+    display: none;
+  }
+}

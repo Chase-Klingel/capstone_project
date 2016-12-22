@@ -1,0 +1,57 @@
+#navbar {
+  height: 168px;
+  background: #212121;
+}
+
+#navList {
+  position: fixed;
+  right: 120px;
+}
+
+#navList a {
+  position: relative;
+  z-index: 5000 !important;
+  display: inline;
+  margin-right: 35px;
+  color: #787878;
+}
+
+#navList a:hover {
+  color: white;
+  transition: .5s ease all;
+}
+
+#logo a {
+  position: absolute;
+  top: 0;
+  font-size: 32px;
+  padding: 10px 20px;
+  background: #141414;
+  margin-left: 35px;
+  color: #daa520;
+}
+
+#queueButton {
+  position: absolute;
+  right: 50px;
+  top: 75px;
+  font-family: 'Open Sans';
+  font-weight: 300;
+  font-size: 16px;
+  width: 170px;
+  height: 50px;
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid lightgrey;
+  line-height: 34px;
+  color: white;
+}
+
+#modalContainer {
+  position: absolute;
+  top: 0;
+  right: 35px;
+  height: 360px;
+  width: 270px;
+  padding: 0 34px 0 34px;
+}
