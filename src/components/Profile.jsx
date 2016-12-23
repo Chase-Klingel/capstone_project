@@ -4,6 +4,7 @@ import Styles from './css/profile';
 import ProfileBanner from '../img/profile-pic.png';
 import PlayButton from './PlayButton';
 import Header from './Header';
+import UploadsContainer from './UploadsContainer';
 
 const imgUrl = '../assets/img/video.jpg';
 const styles = {
@@ -82,16 +83,6 @@ export default class Profile extends React.Component {
   //   }
   // }
 
-  test() {
-    axios.get('/api/music-comments')
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
   render() {
     return (
       <div>
@@ -99,12 +90,32 @@ export default class Profile extends React.Component {
           <div style={{backgroundImage: `url(${ProfileBanner})`, backgroundPosition: 'no-repeat center center', height: '500px', width: '100vw', backgroundSize: 'cover'} }>
             <h5 id={Styles.profileImgUsername}>Chase Klingel</h5>
           </div>
-          <button onClick={this.test.bind(this)}>test</button>
+          <UploadsContainer
+            userInfo={this.props.userInfo}
+            getUserInfo={this.props.getUserInfo}
+          />
         </div>
     </div>
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

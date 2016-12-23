@@ -28,10 +28,14 @@ export default class App extends React.Component {
 
     this.state = {
       loggedIn: false,
+      vimeoUser: true,
+      scUser: false,
+      userInfo: []
     }
 
     this.authUser = this.authUser.bind(this);
     this.showHeader = this.showHeader.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
   }
 
   componentDidMount() {
@@ -45,8 +49,15 @@ export default class App extends React.Component {
       });
   }
 
-  authUser(bool) {
-    this.setState({ loggedIn: bool });
+  authUser(bool, userType) {
+    if (bool === true && userType === 'vimeo-user') {
+      this.setState({ loggedIn: bool });
+    } else if (bool === true && userType === 'sc-user') {
+      this.setState({ loggedIn: bool, scUser: true, vimeoUser: false });
+    } else {
+      console.log('in this section');
+      this.setState({loggedIn: bool, scUser: false, vimeoUser: false });
+    }
   }
 
   showHeader() {
@@ -56,6 +67,11 @@ export default class App extends React.Component {
         authUser={this.authUser.bind(this)}
       />
     }
+  }
+
+  getUserInfo(userInfo) {
+    const nextUserInfo = this.state.userInfo.concat(userInfo);
+    this.setState({ userInfo: nextUserInfo });
   }
 
   render() {
@@ -69,6 +85,8 @@ export default class App extends React.Component {
             <Main
               loggedIn={this.state.loggedIn}
               authUser={this.authUser}
+              userInfo={this.state.userInfo}
+              getUserInfo={this.getUserInfo}
             />
           </main>
 

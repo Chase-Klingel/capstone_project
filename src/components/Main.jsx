@@ -78,6 +78,8 @@ export default class Main extends React.Component {
           ) : (
             <Profile
               authUser={this.props.authUser}
+              userInfo={this.props.userInfo}
+              getUserInfo={this.props.getUserInfo}
             />
           )
         }/>

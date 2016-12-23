@@ -25,7 +25,7 @@ const authorize = function(req, res, next) {
 };
 
 // used for getting a logged in vimeo users info
-router.get('/api/vimeo/user', authorize, (req, res, next) => {
+router.get('/api/vimeo-user', authorize, (req, res, next) => {
   const { userId } = req.token;
 
   knex('vimeo_users')
@@ -51,7 +51,7 @@ router.get('/api/vimeo/user', authorize, (req, res, next) => {
 
 // used for getting a logged in sc users info on initial signup
 // just to get basic info.
-router.get('/api/sc/user', authorize, (req, res, next) => {
+router.get('/api/sc-user', authorize, (req, res, next) => {
   const { userId } = req.token;
   knex('sc_users')
     .where('id', userId)
@@ -121,8 +121,7 @@ router.get('/api/videos/:username', (req, res, next) => {
 });
 
 router.post('/api/user', ev(validations.post), (req, res, next) => {
-  const { username, email, password } = req.body;
-
+  const { scUsername, email, password } = req.body;
   knex('sc_users')
     .select(knex.raw('1=1'))
     .where('email', email)
@@ -136,8 +135,7 @@ router.post('/api/user', ev(validations.post), (req, res, next) => {
     })
     .then((hashedPassword) => {
 
-      const insertUser = { username, email, hashedPassword };
-
+      const insertUser = { scUsername, email, hashedPassword };
       return knex('sc_users')
         .insert(decamelizeKeys(insertUser), '*');
     })

@@ -21,7 +21,7 @@ export default class SCSignIn extends React.Component {
     })
     .then(res => {
       notify.show('Signed In!', 'success')
-      this.props.authUser(true).bind(this);
+      this.props.authUser(true, 'sc-user').bind(this);
     })
     .catch(err => {
       notify.show('Incorrect username or password', 'error')

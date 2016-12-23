@@ -14,10 +14,11 @@ export default class VimeoSignUp extends React.Component {
 
   signup() {
     window.location.href = '/auth/vimeo';
-    this.props.authUser(true).bind(this);
+    this.props.authUser(true, 'vimeo-user');
   }
 
   render() {
+    console.log('here in vimeo signup');
     return (
       <div className="row">
         <SideBanner />

@@ -45,7 +45,7 @@ export default class SignOutModal extends React.Component {
     axios.delete('/token')
       .then(res => {
         console.log('here is the res ', res.data);
-        this.props.authUser(false).bind(this);
+        this.props.authUser(false, null).bind(this);
       })
       .catch(err => {
         return err;

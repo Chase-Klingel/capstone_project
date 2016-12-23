@@ -15,7 +15,7 @@ export default class CloudSignup extends React.Component {
   signup(event) {
     event.preventDefault();
 
-    if (!this.refs['username'].value) {
+    if (!this.refs['scUsername'].value) {
       notify.show('Username must not be blank.', 'error', 2000);
     }
 
@@ -34,8 +34,9 @@ export default class CloudSignup extends React.Component {
     if (this.refs['password'].value.length < 8) {
       notify.show('Password must be at least 8 characters long.', 'error', 2000);
     }
+
     axios.post('/api/user', {
-      username: this.refs['username'].value,
+      scUsername: this.refs['scUsername'].value,
       email: this.refs['email'].value,
       password: this.refs['password'].value
     })
@@ -46,13 +47,13 @@ export default class CloudSignup extends React.Component {
       })
       .then(res => {
         notify.show('You are now signed up!', 'success');
-        this.props.authUser(res.data.bool).bind(this);
+        this.props.authUser(true, 'sc-user').bind(this);
       })
       .catch(err => {
         notify.show('something went wrong', 'error');
       });
     })
-    .catch(function (error) {
+    .catch((err) => {
       notify.show('An error occurred while processing your info. Please try again.', 'error');
     });
   }
@@ -70,7 +71,7 @@ export default class CloudSignup extends React.Component {
           <p id={Styles.authTitle} className="center-align">Create an account</p>
 
           <div>
-            <input type="text" ref="username" placeholder="soundcloud username" autoFocus/>
+            <input type="text" ref="scUsername" placeholder="soundcloud username" autoFocus/>
             <input type="email" ref="email" placeholder="email" />
             <input type="password" ref="password" placeholder="password" />
           </div>

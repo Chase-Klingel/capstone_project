@@ -12,8 +12,8 @@ export default class VimeoSignIn extends React.Component {
   }
 
   signIn() {
+    this.props.authUser(true, 'vimeo-user');
     window.location.href = '/auth/vimeo';
-    this.props.authUser(true).bind(this);
   }
 
   render() {
