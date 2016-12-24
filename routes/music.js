@@ -87,6 +87,29 @@ router.get('/api/music', authorize, (req, res, next) => {
     });
 });
 
+// get music content for specific user when another user goes to their profile
+router.get('/api/music/:username', (req, res, next) => {
+  let userName = req.params.username;
+  // uppercase first letter to match db.
+  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+  knex('sc_users')
+    .innerJoin('music', 'music.user_id', 'sc_users.id')
+    .where('sc_users.sc_username', userName)
+    .then((rows) => {
+      const userData = camelizeKeys(rows);
+
+      for (let i = 0; i < userData.length; i++) {
+        delete userData[i].hashedPassword;
+        delete userData[i].email;
+      }
+
+      res.send(userData);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 // post to '/api/music' happens after axios get request for sc music
 // goal is to simply store the 'src'
 // later you will patch for 'mood'

@@ -74,51 +74,51 @@ router.get('/api/sc-user', authorize, (req, res, next) => {
     });
 });
 
-// get music content for specific user when another user goes to their profile
-router.get('/api/music/:username', (req, res, next) => {
-  let userName = req.params.username;
-  // uppercase first letter to match db.
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-  knex('sc_users')
-    .innerJoin('music', 'music.user_id', 'sc_users.id')
-    .where('sc_users.sc_username', userName)
-    .then((rows) => {
-      const userData = camelizeKeys(rows);
+// // get music content for specific user when another user goes to their profile
+// router.get('/api/music/:username', (req, res, next) => {
+//   let userName = req.params.username;
+//   // uppercase first letter to match db.
+//   userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+//   knex('sc_users')
+//     .innerJoin('music', 'music.user_id', 'sc_users.id')
+//     .where('sc_users.sc_username', userName)
+//     .then((rows) => {
+//       const userData = camelizeKeys(rows);
+//
+//       for (let i = 0; i < userData.length; i++) {
+//         delete userData[i].hashedPassword;
+//         delete userData[i].email;
+//       }
+//
+//       res.send(userData);
+//     })
+//     .catch((err) => {
+//       next(err);
+//     });
+// });
 
-      for (let i = 0; i < userData.length; i++) {
-        delete userData[i].hashedPassword;
-        delete userData[i].email;
-      }
-
-      res.send(userData);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
-
-// get video content for specific user when another user goes to their profile
-router.get('/api/videos/:username', (req, res, next) => {
-  let userName = req.params.username;
-  // uppercase first letter to match db.
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
-  knex('vimeo_users')
-    .innerJoin('videos', 'videos.user_id', 'vimeo_users.id')
-    .where('vimeo_users.vimeo_username', userName)
-    .then((rows) => {
-      const userData = camelizeKeys(rows);
-
-      for (let i = 0; i < userData.length; i++) {
-        delete userData[i].hashedPassword;
-        delete userData[i].email;
-      }
-
-      res.send(userData);
-    })
-    .catch((err) => {
-      next(err);
-    });
-});
+// // get video content for specific user when another user goes to their profile
+// router.get('/api/videos/:username', (req, res, next) => {
+//   let userName = req.params.username;
+//   // uppercase first letter to match db.
+//   userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+//   knex('vimeo_users')
+//     .innerJoin('videos', 'videos.user_id', 'vimeo_users.id')
+//     .where('vimeo_users.vimeo_username', userName)
+//     .then((rows) => {
+//       const userData = camelizeKeys(rows);
+//
+//       for (let i = 0; i < userData.length; i++) {
+//         delete userData[i].hashedPassword;
+//         delete userData[i].email;
+//       }
+//
+//       res.send(userData);
+//     })
+//     .catch((err) => {
+//       next(err);
+//     });
+// });
 
 router.post('/api/user', ev(validations.post), (req, res, next) => {
   const { scUsername, email, password } = req.body;

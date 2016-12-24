@@ -1,14 +1,13 @@
-import { BrowserRouter } from 'react-router';
-import PlayButton from './PlayButton';
 import React from 'react';
+import { BrowserRouter } from 'react-router';
+import Notifications, {notify} from 'react-notify-toast';
 import axios from 'axios';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import { Redirect, Match, Miss } from 'react-router';
-import Notifications, {notify} from 'react-notify-toast';
-import { SoundPlayerContainer } from 'react-soundplayer/addons';
-const corsURL = 'https://cors-anywhere.herokuapp.com/';
+// import { Redirect, Match, Miss } from 'react-router';
+// import { SoundPlayerContainer } from 'react-soundplayer/addons';
+// const corsURL = 'https://cors-anywhere.herokuapp.com/';
 // const chartsURL = 'https://api-v2.soundcloud.com/charts?';
 // const clientId = 'client_id=c6e1e2a98490d428460f8d36af919bb4&limit=100&offset=0';
 // const electronicURL = 'kind=top&genre=soundcloud%3Agenres%3Aelectronic&client';
@@ -30,12 +29,16 @@ export default class App extends React.Component {
       loggedIn: false,
       vimeoUser: true,
       scUser: false,
-      userInfo: []
+      userInfo: [],
+      uploads: [],
+      profileContent: []
     }
 
     this.authUser = this.authUser.bind(this);
     this.showHeader = this.showHeader.bind(this);
     this.getUserInfo = this.getUserInfo.bind(this);
+    this.getUploads = this.getUploads.bind(this);
+    this.getProfileContent = this.getProfileContent.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +77,15 @@ export default class App extends React.Component {
     this.setState({ userInfo: nextUserInfo });
   }
 
+  getUploads(uploads) {
+    this.setState({ uploads: uploads });
+  }
+
+  // get existing user media
+  getProfileContent(content) {
+    this.setState({ profileContent: content });
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -84,9 +96,15 @@ export default class App extends React.Component {
           <main>
             <Main
               loggedIn={this.state.loggedIn}
+              vimeoUser={this.state.vimeoUser}
+              scUser={this.state.scUser}
               authUser={this.authUser}
               userInfo={this.state.userInfo}
               getUserInfo={this.getUserInfo}
+              uploads={this.state.uploads}
+              getUploads={this.getUploads}
+              profileContent={this.state.profileContent}
+              getProfileContent={this.getProfileContent}
             />
           </main>
 

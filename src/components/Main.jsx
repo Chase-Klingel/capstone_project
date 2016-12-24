@@ -1,14 +1,18 @@
 import React from 'react';
-import { Match, Miss, Link, Redirect} from 'react-router';
+import { Match, Miss, Link, Redirect } from 'react-router';
+import axios from 'axios';
+
 import SignUp from './SignUp';
 import VimeoSignUp from './VimeoSignUp';
 import VimeoSignIn from './VimeoSignIn';
+
+import SignIn from './SignIn';
 import SCSignUp from './SCSignUp';
 import SCSignIn from './SCSignIn';
-import SignIn from './SignIn';
+
 import PlayButton from './PlayButton';
-import axios from 'axios';
-import Profile from './Profile';
+import ProfileSetup from './ProfileSetup';
+import MyProfile from './MyProfile';
 
 export default class Main extends React.Component {
   render() {
@@ -24,7 +28,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/signup/vimeo" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/profile" />
+            <Redirect to="/profile-setup" />
           ) : (
             <VimeoSignUp
               authUser={this.props.authUser}
@@ -34,7 +38,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/signup/sc" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/profile" />
+            <Redirect to="/profile-setup" />
           ) : (
             <SCSignUp
               authUser={this.props.authUser}
@@ -64,7 +68,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/signin/sc" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/profile" />
+            <Redirect to="/" />
           ) : (
             <SCSignIn
               authUser={this.props.authUser}
@@ -72,17 +76,45 @@ export default class Main extends React.Component {
           )
         }/>
 
-        <Match pattern="/profile" exactly render={() =>
+        <Match pattern="/profile-setup" exactly render={() =>
+          !this.props.loggedIn ? (
+            <Redirect to="/signin" />
+          ) : (
+            <ProfileSetup
+              vimeoUser={this.props.vimeoUser}
+              scUser={this.props.scUser}
+              userInfo={this.props.userInfo}
+              getUserInfo={this.props.getUserInfo}
+              uploads={this.props.uploads}
+              getUploads={this.props.getUploads}
+            />
+          )
+        }/>
+
+        {/* test this after you are sure profile-setup is working properly */}
+        {/* <Match pattern="/profile" exactly render={() =>
+          !this.props.loggedIn ? (
+            <Redirect to="/signin" />
+          ) : (
+            <MyProfile
+              vimeoUser={this.props.vimeoUser}
+              scUser={this.props.scUser}
+              profileContent={this.props.profileContent}
+              getProfileContent={this.props.getProfileContent}
+            />
+          )
+        }/> */}
+
+        {/* <Match pattern="/profile/:username?" exactly render={() =>
           !this.props.loggedIn ? (
             <Redirect to="/signin" />
           ) : (
             <Profile
-              authUser={this.props.authUser}
-              userInfo={this.props.userInfo}
-              getUserInfo={this.props.getUserInfo}
+              profileContent={this.props.profileContent}
+              getProfileContent={this.props.getProfileContent}
             />
           )
-        }/>
+        }/> */}
       </div>
     );
   }

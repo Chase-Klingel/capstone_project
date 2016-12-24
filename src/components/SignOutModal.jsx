@@ -62,7 +62,7 @@ export default class SignOutModal extends React.Component {
           </div>
           <div id={Styles.infoContainer}>
             <p id={Styles.name}>Chase Klingel</p>
-            <Link to="profile" id={Styles.viewProfile}>View Profile</Link>
+            <Link to="/myProfile" id={Styles.viewProfile}>View Profile</Link>
           </div>
           <hr />
           <Link to="/" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>

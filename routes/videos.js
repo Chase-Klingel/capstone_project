@@ -96,6 +96,29 @@ router.get('/api/videos', authorize, (req, res, next) => {
     });
 });
 
+// get video content for specific user when another user goes to their profile
+router.get('/api/videos/:username', (req, res, next) => {
+  let userName = req.params.username;
+  // uppercase first letter to match db.
+  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+  knex('vimeo_users')
+    .innerJoin('videos', 'videos.user_id', 'vimeo_users.id')
+    .where('vimeo_users.vimeo_username', userName)
+    .then((rows) => {
+      const userData = camelizeKeys(rows);
+
+      for (let i = 0; i < userData.length; i++) {
+        delete userData[i].hashedPassword;
+        delete userData[i].email;
+      }
+
+      res.send(userData);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 // post to '/api/videos' happens after axios get request for private videos & public videos
 // goal is to simply store the 'src list associated with a user'
 // later you will patch for 'needs_music' & mood
