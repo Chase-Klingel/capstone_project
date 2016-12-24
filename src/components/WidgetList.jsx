@@ -15,7 +15,7 @@ export default class WidgetList extends React.Component {
           <Widget
             key={i}
             src={video.src}
-            title={video.title} // check what the prop is
+            name={video.name} // check what the prop is
           />
         );
       });
@@ -27,7 +27,7 @@ export default class WidgetList extends React.Component {
           <Widget
             key={i}
             src={song.src}
-            title={song.title} // check what the prop is
+            name={song.name} // check what the prop is
           />
         );
       });
@@ -40,7 +40,7 @@ export default class WidgetList extends React.Component {
           <Widget
             key={i}
             src={media.src}
-            title={media.title} // this is assuming both vimeo and sc objects property for 'the name of the song' or 'the name of the video' is 'title'. If it isn't you will have to create another case to seperate the two concerns.
+            title={media.name} // this is assuming both vimeo and sc objects property for 'the name of the song' or 'the name of the video' is 'title'. If it isn't you will have to create another case to seperate the two concerns.
           />
         );
       });

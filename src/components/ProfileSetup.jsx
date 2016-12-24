@@ -50,8 +50,7 @@ export default class UploadsContainer extends React.Component {
               .then((tracks) => {
                 console.log(tracks, ' track list');
                 for (let i = 0; i < tracks.length; i++) {
-                  let src = tracks[i].permalink_url;
-                  console.log(src);
+                  let src = (tracks[i].id).toString();
                   let name = tracks[i].title;
                   let song = { src: src, name: name };
                   songUploads = songUploads.concat(song);
