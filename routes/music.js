@@ -118,7 +118,7 @@ router.post('/api/music/bulk', authorize, ev(validations.post), (req, res, next)
   const { songList } = req.body;
 
   const insertMusicList = songList.map((song) => {
-    return { userId: userId, songId: song.songId, songName: song.songName, artistName: song.artistName };
+    return { userId: userId, songId: song.songId, songName: song.songName, artistName: song.artistName, mood: song.mood };
   });
 
   knex('music')

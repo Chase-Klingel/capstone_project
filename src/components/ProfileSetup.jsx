@@ -4,20 +4,12 @@ import Styles from './css/profileSetup';
 import ProfileBannerSetup from './ProfileBannerSetup';
 import ProfileBanner from './ProfileBanner';
 import WidgetList from './WidgetList';
+import StartExploringButton from './StartExploringButton';
 import SC from 'soundcloud';
 
 const corsURL = 'https://cors-anywhere.herokuapp.com/';
 const clientId = 'client_id=c6e1e2a98490d428460f8d36af919bb4&limit=100&offset=0';
-const imgUrl = '../assets/img/video.jpg';
-const styles = {
-  root: {
-    background: 'url(' + imgUrl + ') noRepeat center center fixed',
-    backgroundSize: 'cover'
-  }
-}
-
 let songUploads = [];
-
 
 SC.initialize({
   client_id: 'c6e1e2a98490d428460f8d36af919bb4'
@@ -78,6 +70,14 @@ export default class ProfileSetup extends React.Component {
     this.profileSetup = this.profileSetup.bind(this);
   }
 
+  componentDidMount() {
+    var element = ReactDOM.findDOMNode(this.refs.mood)
+
+    $(element).ready(function() {
+      $('select').material_select();
+    })
+  }
+
   profileSetup() {
     if (this.props.vimeoUser) {
       return false;
@@ -86,6 +86,7 @@ export default class ProfileSetup extends React.Component {
         <div>
           <ProfileBannerSetup
             getUserInfo={this.props.getUserInfo}
+            getUploads={this.props.getUploads}
             uploads={this.props.uploads}
           />
 
@@ -95,7 +96,13 @@ export default class ProfileSetup extends React.Component {
                 vimeoUser={this.props.vimeoUser}
                 scUser={this.props.scUser}
                 uploads={this.props.uploads}
+                getUploads={this.props.getUploads}
               />
+              <div className="col s6 offset-s3">
+                <StartExploringButton
+                  uploads={this.props.uploads}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -112,6 +119,12 @@ export default class ProfileSetup extends React.Component {
               <WidgetList
                 vimeoUser={this.props.vimeoUser}
                 scUser={this.props.scUser}
+                uploads={this.props.uploads}
+                getUploads={this.props.getUploads}
+              />
+            </div>
+            <div className="col s6 offset-s3">
+              <StartExploringButton
                 uploads={this.props.uploads}
               />
             </div>
@@ -147,13 +160,6 @@ export default class ProfileSetup extends React.Component {
 
 
 
-
-/* this should happen after you have filled a stateful array of music they want to allow on the site. */
-// .then((songUploads) => {
-//   axios.post('/api/music/bulk', {
-//     songList: songUploads
-//   })
-// })
 
 
 

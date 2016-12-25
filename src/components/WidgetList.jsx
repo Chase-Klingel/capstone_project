@@ -29,6 +29,7 @@ export default class WidgetList extends React.Component {
             songId={song.songId}
             songName={song.songName}
             artistName={song.artistName}
+            getUploads={this.props.getUploads}
           />
         );
       });

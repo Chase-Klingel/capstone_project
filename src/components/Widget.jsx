@@ -180,7 +180,12 @@ export default class Widget extends Component {
             </div>
           </div>
         </div>
-        <MoodButton />
+        <MoodButton
+          songId={this.props.songId}
+          songName={this.props.songName}
+          artistName={this.props.artistName}
+          getUploads={this.props.getUploads}
+        />
       </div>
     )
   }

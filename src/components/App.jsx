@@ -76,7 +76,20 @@ export default class App extends React.Component {
   }
 
   getUploads(uploads) {
-    this.setState({ uploads: uploads });
+    if (uploads[0].mood) {
+      const mappedUploads = this.state.uploads.map((upload) => {
+        if (uploads[0].songId !== upload.songId) {
+
+          return upload;
+        }
+
+        return uploads[0];
+      })
+
+      this.setState({ uploads: mappedUploads });
+    } else {
+      this.setState({ uploads: uploads });
+    }
   }
 
   // get existing user media
