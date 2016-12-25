@@ -125,7 +125,7 @@ export default class Widget extends Component {
       return (
         <div className={Styles.player__control__iconsPause}>
           <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
-            <Pause  />
+            <Pause />
           </div>
           {skipButtons}
         </div>
@@ -156,15 +156,15 @@ export default class Widget extends Component {
       	<div className={classnames(Styles.player,  Styles.player__trackActive)}>
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
-
+          <div>
+            <h4 style={{fontSize: '14px', color: '#474747'}}>{this.props.name}</h4>
+          </div>
           <div className={Styles.player__control}>
             { this.renderPlayerIcons() }
           </div>
 
           <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
-            <div>
-              <h4 style={{fontSize: '14px'}}>{this.props.name}</h4>
-            </div>
+
             <div className={Styles.player__progress}>
               <span className={Styles.player__progress__time}>{current_time}</span>
               <span className={Styles.player__progress__bar}>
