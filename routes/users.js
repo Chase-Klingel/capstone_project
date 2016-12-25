@@ -62,7 +62,7 @@ router.get('/api/sc-user', authorize, (req, res, next) => {
       }
 
       const userData = camelizeKeys(user);
-      console.log(userData);
+
       delete userData.hashedPassword;
       delete userData.vimeoId;
       delete userData.vimeoToken;
@@ -141,6 +141,47 @@ router.post('/api/user', ev(validations.post), (req, res, next) => {
     })
     .then((row) => {
       res.send('success');
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.patch('/api/sc-user', authorize, (req, res, next) => {
+  const { userId } = req.token;
+
+  const { photoUrl, bio } = req.body;
+
+  return knex('sc_users')
+    .where('id', userId)
+    .update({
+      photo_url: photoUrl,
+      bio: bio
+    }, '*')
+    .then((row) => {
+      console.log(row, 'here is the row');
+      const updatedUser = camelizeKeys(row[0]);
+      res.send(updatedUser);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.patch('/api/vimeo-user', authorize, (req, res, next) => {
+  const { userId } = req.token;
+
+  const { photoUrl, bio } = req.body;
+
+  return knex('vimeo_users')
+    .where('id', userId)
+    .update({
+      photo_url: photoUrl,
+      bio: bio
+    })
+    .then((row) => {
+      const updatedUser = camelizeKeys(row[0]);
+      res.send(updatedUser);
     })
     .catch((err) => {
       next(err);

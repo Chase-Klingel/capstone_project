@@ -44,7 +44,6 @@ export default class App extends React.Component {
   componentDidMount() {
     axios.get('/api/token')
       .then(res => {
-        console.log(res.data, 'res in did mount');
         this.setState({ loggedIn: res.data });
       })
       .catch(err => {
@@ -58,7 +57,6 @@ export default class App extends React.Component {
     } else if (bool === true && userType === 'sc-user') {
       this.setState({ loggedIn: bool, scUser: true, vimeoUser: false });
     } else {
-      console.log('in this section');
       this.setState({loggedIn: bool, scUser: false, vimeoUser: false });
     }
   }
@@ -73,8 +71,8 @@ export default class App extends React.Component {
   }
 
   getUserInfo(userInfo) {
-    const nextUserInfo = this.state.userInfo.concat(userInfo);
-    this.setState({ userInfo: nextUserInfo });
+    console.log(userInfo, ' user info in app');
+    this.setState({ userInfo: userInfo });
   }
 
   getUploads(uploads) {

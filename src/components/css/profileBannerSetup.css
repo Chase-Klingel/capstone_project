@@ -1,0 +1,46 @@
+#bannerContainer {
+  background: black;
+}
+
+#username {
+  color: white;
+  position: absolute;
+  top: 275px;
+  left: 45px;
+  font-size: 72px;
+  text-transform: uppercase;
+}
+
+#uploadButtonsContainer {
+  text-align: center;
+  padding-top: 250px;
+}
+
+#uploadInputContainer {
+  text-align: center;
+  padding-top: 130px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: grey;
+  font-size: 14px;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: grey;
+  font-size: 14px;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: grey;
+  font-size: 14px;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: grey;
+  font-size: 14px;
+}
+
+textarea {
+  padding-left: 5px;
+  resize: none;
+  height: 180px;
+  color: grey;
+}

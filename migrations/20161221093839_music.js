@@ -8,8 +8,9 @@ exports.up = function(knex) {
       .references('id')
       .inTable('sc_users')
       .onDelete('CASCADE');
-    table.string('src').notNullable().defaultTo('');
-    table.string('name').notNullable().defaultTo('');
+    table.string('song_id').notNullable().defaultTo('');
+    table.string('song_name').notNullable().defaultTo('');
+    table.string('artist_name').notNullable().defaultTo('');
     table.string('mood').defaultTo('');
     table.timestamps(true, true);
   });

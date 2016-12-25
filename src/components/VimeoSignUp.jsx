@@ -18,7 +18,6 @@ export default class VimeoSignUp extends React.Component {
   }
 
   render() {
-    console.log('here in vimeo signup');
     return (
       <div className="row">
         <SideBanner />

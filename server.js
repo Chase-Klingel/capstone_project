@@ -95,8 +95,7 @@ app.use((err, _req, res, _next) => {
 
 app.listen(port, err => {
   if (err) {
-    console.log(err);
-    return;
+    return err;
   }
 
   console.log('Listening on port: ' + port);

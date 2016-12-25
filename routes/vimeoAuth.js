@@ -29,7 +29,6 @@ router.get('/vimeo/callback', passport.authenticate('vimeo', { session: false, f
   const email = user.profile._json.email;
   const vimeoId = user.profile.id;
   const vimeoToken = user.accessToken;
-  // console.log(`username: ${username}, email: ${email}, userPhoto: ${userPhoto} vimeoId: ${vimeoId}, vimeoToken: ${vimeoToken}`);
 
   return knex('vimeo_users')
     .where('vimeo_id', vimeoId)

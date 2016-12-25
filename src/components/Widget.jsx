@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
-import FormatTime from './FormatTime'
+import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
+import FormatTime from './FormatTime';
 import classnames from 'classnames';
-import Play from './Play'
-import Pause from './Pause'
-import Replay from './Replay'
-import Forward from './Forward'
-import Styles from './css/widget'
+import Play from './Play';
+import Pause from './Pause';
+import Replay from './Replay';
+import Forward from './Forward';
+import Styles from './css/widget';
+import MoodButton from './MoodButton';
 
 
 /**
@@ -17,7 +18,6 @@ export default class Widget extends Component {
 
   static get propTypes () {
     return {
-      audio_id: PropTypes.string.isRequired,
       title: PropTypes.string,
       link: PropTypes.string
     }
@@ -145,7 +145,7 @@ export default class Widget extends Component {
   render () {
     const { audio_id, title, link } = this.props
     const { playing, audioPlayer, percent_remains, percent_progress_remains, duration, current_time, client_id } = this.state
-    let streamUrl = `https://api.soundcloud.com/tracks/${this.props.src}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
+    let streamUrl = `https://api.soundcloud.com/tracks/${this.props.songId}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
     let iconClass = playing ? 'player__control__icon--pause' : 'player__control__icon--play'
     iconClass += ' player__control__icon'
     let time_remains = { transform: `translateX(-${percent_remains.toString()}%)` }
@@ -157,7 +157,8 @@ export default class Widget extends Component {
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
           <div>
-            <h4 style={{fontSize: '14px', color: '#474747'}}>{this.props.name}</h4>
+            <h4 style={{fontSize: '14px', color: '#474747'}}>{this.props.artistName}</h4>
+            <h4 style={{fontSize: '14px', color: '#474747'}}>{this.props.songName}</h4>
           </div>
           <div className={Styles.player__control}>
             { this.renderPlayerIcons() }
@@ -179,50 +180,8 @@ export default class Widget extends Component {
             </div>
           </div>
         </div>
+        <MoodButton />
       </div>
     )
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import Player from 'react-soundcloud-player';
-// // import classnames from 'classnames';
-// import Styles from './css/widget';
-//
-// // className={classnames('player', 'player__control', 'player__control__icon', 'player__control__icon--play', 'player__control__icon--pause', 'player__track--active', 'player__display', 'player__progress', 'player__progress__position', 'player__progress__time', 'player__progress__bar', 'player__progress__bar--container', 'player__progress__bar--percent', 'player__progress__bar--progress' )}
-//
-// export default class Widget extends React.Component {
-//   render() {
-//     return (
-//       <div className="col s12 m6">
-//         <Player audio_id={this.props.src} title={this.props.name} />
-//       </div>
-//     )
-//   }
-// }
-
-// export default class Widget extends React.Component {
-//   render() {
-//     return (
-//       <div className="col s12 m6">
-//         <iframe src={`https://w.soundcloud.com/player?url=${this.props.src}`} width="100%" height="267" scrolling="no"></iframe>
-//         <h5>title goes here</h5>
-//       </div>
-//     )
-//
-//   }
-// }

@@ -74,7 +74,7 @@ router.post('/api/videos-comments', authorize, (req, res, next) => {
 // route you will 'get'.
 router.get('/api/videos', authorize, (req, res, next) => {
   const { userId } = req.token;
-  console.log(userId);
+  
   knex('vimeo_users')
     .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
     .innerJoin('comments', 'videos.id', 'comments.video_id')

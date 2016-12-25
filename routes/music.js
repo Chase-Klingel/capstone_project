@@ -71,7 +71,7 @@ router.post('/api/music-comments', authorize, (req, res, next) => {
 // route you will 'get'.
 router.get('/api/music', authorize, (req, res, next) => {
   const { userId } = req.token;
-  console.log(userId);
+
   knex('sc_users')
     .innerJoin('music', 'sc_users.id', 'music.user_id')
     .innerJoin('comments', 'music.id', 'comments.music_id')
@@ -117,10 +117,8 @@ router.post('/api/music/bulk', authorize, ev(validations.post), (req, res, next)
   const { userId } = req.token;
   const { songList } = req.body;
 
-  console.log(songList, ' songList');
-
   const insertMusicList = songList.map((song) => {
-    return { userId: userId, src: song.src, name: song.name };
+    return { userId: userId, songId: song.songId, songName: song.songName, artistName: song.artistName };
   });
 
   knex('music')

@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import Styles from './css/profile';
-import ProfileBanner from '../img/profile-pic.png';
+import Styles from './css/profileSetup';
+import ProfileBannerSetup from './ProfileBannerSetup';
+import ProfileBanner from './ProfileBanner';
 import WidgetList from './WidgetList';
 import SC from 'soundcloud';
 
@@ -22,7 +23,7 @@ SC.initialize({
   client_id: 'c6e1e2a98490d428460f8d36af919bb4'
 });
 
-export default class UploadsContainer extends React.Component {
+export default class ProfileSetup extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +34,8 @@ export default class UploadsContainer extends React.Component {
     } else {
       axios.get('/api/sc-user')
         .then((res) => {
-          this.props.getUserInfo(res.data);
+          const userInfo = [res.data];
+          this.props.getUserInfo(userInfo);
         })
         .then(() => {
           const name = this.props.userInfo[0].scUsername;
@@ -48,22 +50,17 @@ export default class UploadsContainer extends React.Component {
                 user_id: id, limit: 100
               })
               .then((tracks) => {
-                console.log(tracks, ' track list');
                 for (let i = 0; i < tracks.length; i++) {
-                  let src = (tracks[i].id).toString();
-                  let name = tracks[i].title;
-                  let song = { src: src, name: name };
+                  let songId = (tracks[i].id).toString();
+                  let songName = tracks[i].title;
+                  let artistName = tracks[i].user.username;
+                  let song = { songId: songId, songName: songName, artistName: artistName };
                   songUploads = songUploads.concat(song);
                 }
 
                 this.props.getUploads(songUploads);
 
                 return songUploads;
-              })
-              .then((songUploads) => {
-                axios.post('/api/music/bulk', {
-                  songList: songUploads
-                })
               })
               .catch((err) => {
                 return err;
@@ -77,32 +74,61 @@ export default class UploadsContainer extends React.Component {
           return err;
         });
     }
+
+    this.profileSetup = this.profileSetup.bind(this);
+  }
+
+  profileSetup() {
+    if (this.props.vimeoUser) {
+      return false;
+    } else if (this.props.userInfo[0].photoUrl === '' || this.props.userInfo[0].bio === '') {
+      return (
+        <div>
+          <ProfileBannerSetup
+            getUserInfo={this.props.getUserInfo}
+            uploads={this.props.uploads}
+          />
+
+          <div className="container">
+            <div className="row">
+              <WidgetList
+                vimeoUser={this.props.vimeoUser}
+                scUser={this.props.scUser}
+                uploads={this.props.uploads}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <ProfileBanner
+            userInfo={this.props.userInfo}
+          />
+
+          <div className="container">
+            <div className="row">
+              <WidgetList
+                vimeoUser={this.props.vimeoUser}
+                scUser={this.props.scUser}
+                uploads={this.props.uploads}
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 
   render() {
-    if (this.props.userInfo.length === 0) {
+    if (this.props.userInfo.length === 0 || this.props.uploads.length === 0) {
       return false;
     }
 
-    return (
-      <div>
-        <div className="row">
-          <div style={{backgroundImage: `url(${ProfileBanner})`, backgroundPosition: 'no-repeat center center', height: '500px', width: '100vw', backgroundSize: 'cover'} }>
-            <h5 id={Styles.profileImgUsername}>Chase Klingel</h5>
-          </div>
-        </div>
-
-        <div className="container">
-          <div className="row">
-            <WidgetList
-              vimeoUser={this.props.vimeoUser}
-              scUser={this.props.scUser}
-              uploads={this.props.uploads}
-            />
-          </div>
-        </div>
-      </div>
-    );
+    return <div>
+      { this.profileSetup() }
+    </div>
   }
 }
 
@@ -122,8 +148,12 @@ export default class UploadsContainer extends React.Component {
 
 
 
-
-
+/* this should happen after you have filled a stateful array of music they want to allow on the site. */
+// .then((songUploads) => {
+//   axios.post('/api/music/bulk', {
+//     songList: songUploads
+//   })
+// })
 
 
 

@@ -1,0 +1,16 @@
+#username {
+  color: white;
+  position: absolute;
+  top: 275px;
+  left: 45px;
+  font-size: 72px;
+  text-transform: uppercase;
+}
+
+#bio {
+  color: white;
+  position: absolute;
+  top: 375px;
+  left: 45px;
+  font-size: 16px;
+}

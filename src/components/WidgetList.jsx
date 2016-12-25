@@ -26,8 +26,9 @@ export default class WidgetList extends React.Component {
         return (
           <Widget
             key={i}
-            src={song.src}
-            name={song.name} // check what the prop is
+            songId={song.songId}
+            songName={song.songName}
+            artistName={song.artistName}
           />
         );
       });
