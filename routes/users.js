@@ -27,7 +27,7 @@ const authorize = function(req, res, next) {
 // used for getting a logged in vimeo users info
 router.get('/api/vimeo-user', authorize, (req, res, next) => {
   const { userId } = req.token;
-
+  console.log(userId, ' this is the user id');
   knex('vimeo_users')
     .where('id', userId)
     .first()
@@ -39,8 +39,8 @@ router.get('/api/vimeo-user', authorize, (req, res, next) => {
       const userData = camelizeKeys(user);
       delete userData.email;
       delete userData.hashedPassword;
-      delete userData.vimeoId;
-      delete userData.vimeoToken;
+      // delete userData.vimeoId;
+      // delete userData.vimeoToken;
 
       res.send(userData);
     })

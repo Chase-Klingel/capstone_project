@@ -8,10 +8,10 @@ exports.up = function(knex) {
       .references('id')
       .inTable('vimeo_users')
       .onDelete('CASCADE');
-    table.string('src').notNullable().defaultTo('');
-    table.string('name').notNullable().defaultTo('');
+    table.string('video_id').notNullable().defaultTo('');
+    table.string('video_name').notNullable().defaultTo('');
     table.boolean('needs_music').notNullable().defaultTo(false);
-    table.string('mood');
+    table.string('mood').notNullable().defaultTo('');
     table.timestamps(true, true);
   });
 };

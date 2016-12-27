@@ -1,7 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
 import Styles from './css/signoutModal';
-import ProfileImg from '../img/profile-pic.png';
 import Modal from 'boron/FadeModal';
 import { Link, Redirect } from 'react-router';
 import axios from 'axios';
@@ -29,6 +28,7 @@ export default class SignOutModal extends React.Component {
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.signOut = this.signOut.bind(this);
+    this.signOutModal = this.signOutModal.bind(this);
   }
 
   showModal() {
@@ -52,24 +52,53 @@ export default class SignOutModal extends React.Component {
       });
   }
 
+  signOutModal() {
+    if (this.props.vimeoUser) {
+      return (
+        <div>
+          <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].vimeoUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
+          <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
+            <div id={Styles.profileImgContainer}>
+              <img src={this.props.userInfo[0].photoUrl} />
+            </div>
+            <div id={Styles.infoContainer}>
+              <p id={Styles.name}>{this.props.userInfo[0].vimeoUsername}</p>
+              <Link to="/myProfile" id={Styles.viewProfile}>View Profile</Link>
+            </div>
+            <hr />
+            <Link to="/" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>
+            <Link to="/notifications" className={classnames(Styles.modalButton, Styles.notificationsButton)}>notifications</Link>
+            <Link onClick={this.signOut} to="/signin" className={classnames(Styles.modalButton, Styles.signoutButton)}>sign out</Link>
+          </Modal>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].scUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
+          <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
+            <div id={Styles.profileImgContainer}>
+              <img src={this.props.userInfo[0].photoUrl} />
+            </div>
+            <div id={Styles.infoContainer}>
+              <p id={Styles.name}>{this.props.userInfo[0].scUsername}</p>
+              <Link to="/myProfile" id={Styles.viewProfile}>View Profile</Link>
+            </div>
+            <hr />
+            <Link to="/" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>
+            <Link to="/notifications" className={classnames(Styles.modalButton, Styles.notificationsButton)}>notifications</Link>
+            <Link onClick={this.signOut} to="/signin" className={classnames(Styles.modalButton, Styles.signoutButton)}>sign out</Link>
+          </Modal>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
-        <button onClick={this.showModal} id={Styles.clickableName}>Chase<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
-        <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
-          <div id={Styles.profileImgContainer}>
-            <img src={ProfileImg} />
-          </div>
-          <div id={Styles.infoContainer}>
-            <p id={Styles.name}>Chase Klingel</p>
-            <Link to="/myProfile" id={Styles.viewProfile}>View Profile</Link>
-          </div>
-          <hr />
-          <Link to="/" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>
-          <Link to="/notifications" className={classnames(Styles.modalButton, Styles.notificationsButton)}>notifications</Link>
-          <Link onClick={this.signOut} to="/signin" className={classnames(Styles.modalButton, Styles.signoutButton)}>sign out</Link>
-        </Modal>
+        { this.signOutModal() }
       </div>
-    );
+    )
   }
 }

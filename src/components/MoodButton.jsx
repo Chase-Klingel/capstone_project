@@ -17,10 +17,19 @@ export default class MoodButton extends React.Component {
     this.onSelect = this.onSelect.bind(this)
   }
 
-  onSelect (option) {
+  onSelect(option) {
     this.setState({selected: option});
-    let songWithMood = [{ songId: this.props.songId, songName: this.props.songName, artistName: this.props.artistName, mood: option.value }];
-    this.props.getUploads(songWithMood);
+
+    if (this.props.vimeoUser && !this.props.uploads[this.props.index].needsMusic) {
+      const videoWithMood = [{ videoId: this.props.videoId, videoName: this.props.videoName, mood: option.value, needsMusic: this.props.uploads[this.props.index].needsMusic }];
+      this.props.getUploads(videoWithMood);
+    } else if (this.props.vimeoUser) {
+      const videoWithMood = [{ videoId: this.props.videoId, videoName: this.props.videoName, mood: option.value }];
+      this.props.getUploads(videoWithMood);
+    } else {
+      const songWithMood = [{ songId: this.props.songId, songName: this.props.songName, artistName: this.props.artistName, mood: option.value}];
+      this.props.getUploads(songWithMood);
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState) {

@@ -18,9 +18,24 @@ export default class Main extends React.Component {
   render() {
     return (
       <div>
+        <Match pattern="/profile-setup" exactly render={() =>
+          !this.props.loggedIn ? (
+            <Redirect to="/signin" />
+          ) : (
+            <ProfileSetup
+              vimeoUser={this.props.vimeoUser}
+              scUser={this.props.scUser}
+              signupInfo={this.props.signupInfo}
+              getsignupInfo={this.props.getsignupInfo}
+              uploads={this.props.uploads}
+              getUploads={this.props.getUploads}
+            />
+          )
+        }/>
+
         <Match pattern="/signup" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/profile" />
+            <Redirect to="/profile-setup" />
           ) : (
             <SignUp />
           )
@@ -46,7 +61,7 @@ export default class Main extends React.Component {
           )
         }/>
 
-        <Match pattern="/signin" exactly render={() =>
+        {/* <Match pattern="/signin" exactly render={() =>
           this.props.loggedIn ? (
             <Redirect to="/profile" />
           ) : (
@@ -54,7 +69,7 @@ export default class Main extends React.Component {
               authUser={this.props.authUser}
             />
           )
-        }/>
+        }/> */}
 
         <Match pattern="/signin/vimeo" exactly render={() =>
           this.props.loggedIn ? (
@@ -72,21 +87,6 @@ export default class Main extends React.Component {
           ) : (
             <SCSignIn
               authUser={this.props.authUser}
-            />
-          )
-        }/>
-
-        <Match pattern="/profile-setup" exactly render={() =>
-          !this.props.loggedIn ? (
-            <Redirect to="/signin" />
-          ) : (
-            <ProfileSetup
-              vimeoUser={this.props.vimeoUser}
-              scUser={this.props.scUser}
-              userInfo={this.props.userInfo}
-              getUserInfo={this.props.getUserInfo}
-              uploads={this.props.uploads}
-              getUploads={this.props.getUploads}
             />
           )
         }/>

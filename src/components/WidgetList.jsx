@@ -1,5 +1,6 @@
 import React from 'react';
-import Widget from './Widget';
+import SCProfileWidget from './SCProfileWidget';
+import VimeoWidget from './VimeoWidget';
 
 export default class WidgetList extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ export default class WidgetList extends React.Component {
     if (this.props.vimeoUser && this.props.uploads) {
       const widgetList = this.props.uploads.map((video, i) => {
         return (
-          <Widget
+          <VimeoProfileWidget
             key={i}
-            src={video.src}
-            name={video.name} // check what the prop is
+            index={i}
+            videoId={video.videoId}
+            videoName={video.videoName}
+            uploads={this.props.uploads}
+            getUploads={this.props.getUploads}
+            vimeoUser={this.props.vimeoUser}
           />
         );
       });
@@ -24,7 +29,7 @@ export default class WidgetList extends React.Component {
     } else if (this.props.scUser && this.props.uploads) {
       const widgetList = this.props.uploads.map((song, i) => {
         return (
-          <Widget
+          <SCProfileWidget
             key={i}
             songId={song.songId}
             songName={song.songName}

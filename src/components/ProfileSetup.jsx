@@ -10,6 +10,7 @@ import SC from 'soundcloud';
 const corsURL = 'https://cors-anywhere.herokuapp.com/';
 const clientId = 'client_id=c6e1e2a98490d428460f8d36af919bb4&limit=100&offset=0';
 let songUploads = [];
+let videoUploads = [];
 
 SC.initialize({
   client_id: 'c6e1e2a98490d428460f8d36af919bb4'
@@ -20,17 +21,48 @@ export default class ProfileSetup extends React.Component {
     super(props);
 
     if (this.props.vimeoUser) {
-      return (
-        <div>no</div>
-      );
+      console.log('we are in the right ball park');
+      axios.get('/api/vimeo-user')
+        .then((res) => {
+          const signupInfo = [res.data];
+          this.props.getsignupInfo(signupInfo);
+          const vimeoToken = signupInfo[0].vimeoToken;
+          const vimeoId = signupInfo[0].vimeoId;
+          const info = [vimeoId, vimeoToken];
+          return info;
+        })
+        .then((info) => {
+          axios.get(`https://api.vimeo.com/users/${info[0]}/videos`, {
+            headers: { "Authorization": `Bearer ${info[1]}`}
+          })
+          .then((res) => {
+            console.log(res.data.data[0].name, ' video name first');
+            const videoData = res.data.data;
+            for (let i = 0; i < videoData.length; i++) {
+              let videoId = videoData[i].link.slice(18, 27);
+              let videoName = videoData[i].name;
+              console.log(videoName, ' video name inside for loop');
+              let video = { videoId: videoId, videoName: videoName };
+              videoUploads = videoUploads.concat(video);
+            }
+
+            return this.props.getUploads(videoUploads);
+          })
+          .catch((err) => {
+            return err;
+          })
+        })
+        .catch(err => {
+          return err;
+        });
     } else {
       axios.get('/api/sc-user')
         .then((res) => {
-          const userInfo = [res.data];
-          this.props.getUserInfo(userInfo);
+          const signupInfo = [res.data];
+          this.props.getsignupInfo(signupInfo);
         })
         .then(() => {
-          const name = this.props.userInfo[0].scUsername;
+          const name = this.props.signupInfo[0].scUsername;
           axios.get(`${corsURL}http://api.soundcloud.com/resolve?url=http://soundcloud.com/${name}&${clientId}`)
             .then((res) => {
               const id = res.data.id;
@@ -51,7 +83,7 @@ export default class ProfileSetup extends React.Component {
                 }
 
                 this.props.getUploads(songUploads);
-
+                // you can probably just return line 85. Test later.
                 return songUploads;
               })
               .catch((err) => {
@@ -70,72 +102,122 @@ export default class ProfileSetup extends React.Component {
     this.profileSetup = this.profileSetup.bind(this);
   }
 
-  componentDidMount() {
-    var element = ReactDOM.findDOMNode(this.refs.mood)
-
-    $(element).ready(function() {
-      $('select').material_select();
-    })
-  }
-
   profileSetup() {
     if (this.props.vimeoUser) {
-      return false;
-    } else if (this.props.userInfo[0].photoUrl === '' || this.props.userInfo[0].bio === '') {
-      return (
-        <div>
-          <ProfileBannerSetup
-            getUserInfo={this.props.getUserInfo}
-            getUploads={this.props.getUploads}
-            uploads={this.props.uploads}
-          />
+      if (this.props.signupInfo[0].photoUrl === '' || this.props.signupInfo[0].bio === '') {
+        return (
+          <div>
+            <ProfileBannerSetup
+              getsignupInfo={this.props.getsignupInfo}
+              getUploads={this.props.getUploads}
+              uploads={this.props.uploads}
+            />
 
-          <div className="container">
-            <div className="row">
-              <WidgetList
-                vimeoUser={this.props.vimeoUser}
-                scUser={this.props.scUser}
-                uploads={this.props.uploads}
-                getUploads={this.props.getUploads}
-              />
+            <div className="container">
+              <div className="row">
+                <WidgetList
+                  vimeoUser={this.props.vimeoUser}
+                  uploads={this.props.uploads}
+                  getUploads={this.props.getUploads}
+                />
+                <div className="col s6 offset-s3">
+                  <StartExploringButton
+                    vimeoUser={this.props.vimeoUser}
+                    scUser={this.props.scUser}
+                    uploads={this.props.uploads}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <ProfileBanner
+              signupInfo={this.props.signupInfo}
+            />
+
+            <div className="container">
+              <div className="row">
+                <WidgetList
+                  vimeoUser={this.props.vimeoUser}
+                  uploads={this.props.uploads}
+                  getUploads={this.props.getUploads}
+                />
+              </div>
               <div className="col s6 offset-s3">
                 <StartExploringButton
+                  vimeoUser={this.props.vimeoUser}
+                  scUser={this.props.scUser}
                   uploads={this.props.uploads}
                 />
               </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
     } else {
-      return (
-        <div>
-          <ProfileBanner
-            userInfo={this.props.userInfo}
-          />
+      if (this.props.signupInfo[0].photoUrl === '' || this.props.signupInfo[0].bio === '') {
+        return (
+          <div>
+            <ProfileBannerSetup
+              getsignupInfo={this.props.getsignupInfo}
+              getUploads={this.props.getUploads}
+              uploads={this.props.uploads}
+            />
 
-          <div className="container">
-            <div className="row">
-              <WidgetList
-                vimeoUser={this.props.vimeoUser}
-                scUser={this.props.scUser}
-                uploads={this.props.uploads}
-                getUploads={this.props.getUploads}
-              />
-            </div>
-            <div className="col s6 offset-s3">
-              <StartExploringButton
-                uploads={this.props.uploads}
-              />
+            <div className="container">
+              <div className="row">
+                <WidgetList
+                  scUser={this.props.scUser}
+                  uploads={this.props.uploads}
+                  getUploads={this.props.getUploads}
+                />
+                <div className="col s6 offset-s3">
+                  <StartExploringButton
+                    vimeoUser={this.props.vimeoUser}
+                    scUser={this.props.scUser}
+                    uploads={this.props.uploads}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      } else {
+        return (
+          <div>
+            <ProfileBanner
+              signupInfo={this.props.signupInfo}
+            />
+
+            <div className="container">
+              <div className="row">
+                <WidgetList
+                  vimeoUser={this.props.vimeoUser}
+                  scUser={this.props.scUser}
+                  uploads={this.props.uploads}
+                  getUploads={this.props.getUploads}
+                />
+              </div>
+              <div className="col s6 offset-s3">
+                <StartExploringButton
+                  vimeoUser={this.props.vimeoUser}
+                  scUser={this.props.scUser}
+                  uploads={this.props.uploads}
+                />
+              </div>
+            </div>
+          </div>
+        );
+      }
     }
   }
 
   render() {
-    if (this.props.userInfo.length === 0 || this.props.uploads.length === 0) {
+
+    if (this.props.signupInfo.length === 0 || this.props.uploads.length === 0) {
       return false;
     }
 
@@ -169,63 +251,33 @@ export default class ProfileSetup extends React.Component {
 
 
 
-// import React from 'react';
-// import axios from 'axios';
-// import Styles from './css/profile';
-// import ProfileBanner from '../img/profile-pic.png';
-// import PlayButton from './PlayButton';
-// import Header from './Header';
-// import UploadsContainer from './UploadsContainer';
-//
-// const imgUrl = '../assets/img/video.jpg';
-// const styles = {
-//   root: {
-//     background: 'url(' + imgUrl + ') noRepeat center center fixed',
-//     backgroundSize: 'cover'
-//   }
-// }
-//
-// export default class ProfileSetup extends React.Component {
-//   constructor(props) {
-//     super(props);
-//
-//     this.state = {
-//       playingVideo: false
-//     }
-//
-//     // this.video = this.video.bind(this);
-//     // this.playVideo = this.playVideo.bind(this);
-//   }
-//   // componentDidMount() {
-//   //   axios.get('/api/userData')
-//   //     .then(res => {
-//   //       this.props.getUserData(res.data).bind(this);
-//   //       const vimeoToken = res.data[0].vimeoToken;
-//   //       const vimeoId = res.data[0].vimeoId;
-//   //       const info = [vimeoId, vimeoToken];
-//   //       return info;
-//   //     })
-//   //     .then((info) => {
-//   //       axios.get(`https://api.vimeo.com/users/${info[0]}/videos`, {
-//   //         headers: { "Authorization": `Bearer ${info[1]}`}
-//   //       })
-//   //       .then((res) => {
-//   //         console.log(res.data);
-//   //         // console.log(res.data.metadata.connections.videos.uri, 'here it is');
-//   //         // return res.data.metadata.connections.videos.uri;
-//   //       })
-//   //       .catch((err) => {
-//   //         return err;
-//   //       })
-//   //     })
-//   //     .catch(err => {
-//   //       return err;
-//   //   });
-//   // }
-//
-//   // playVideo() {
-//   //   this.setState({playingVideo: true});
-//   // }
+
+    // componentDidMount() {
+    //   axios.get('/api/vimeo-user')
+    //     .then(res => {
+    //       this.props.getsignupInfo(res.data);
+    //       const vimeoToken = res.data[0].vimeoToken;
+    //       const vimeoId = res.data[0].vimeoId;
+    //       const info = [vimeoId, vimeoToken];
+    //       return info;
+    //     })
+    //     .then((info) => {
+    //       axios.get(`https://api.vimeo.com/users/${info[0]}/videos`, {
+    //         headers: { "Authorization": `Bearer ${info[1]}`}
+    //       })
+    //       .then((res) => {
+    //         return res.data.metadata.connections.videos.uri;
+    //       })
+    //       .catch((err) => {
+    //         return err;
+    //       })
+    //     })
+    //     .catch(err => {
+    //       return err;
+    //     });
+    // }
+
+
 //
 //   // video() {
 //   //   console.log('here');
@@ -254,31 +306,6 @@ export default class ProfileSetup extends React.Component {
 //   //   }
 //   // }
 //
-//   render() {
-//     return (
-//       <div>
-//         <div className="row">
-//           <div style={{backgroundImage: `url(${ProfileBanner})`, backgroundPosition: 'no-repeat center center', height: '500px', width: '100vw', backgroundSize: 'cover'} }>
-//             <h5 id={Styles.profileImgUsername}>Chase Klingel</h5>
-//           </div>
-//           <UploadsContainer
-//             userInfo={this.props.userInfo}
-//             getUserInfo={this.props.getUserInfo}
-//             uploads={this.props.uploads}
-//             getUploads={this.props.getUploads}
-//           />
-//     </div>
-//     );
-//   }
-// }
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -289,11 +316,10 @@ export default class ProfileSetup extends React.Component {
 
 
 
-
-{/*
+/*
         <iframe src="https://player.vimeo.com/video/195883596?badge=0&autopause=0&player_id=0&amp;color=daa520&amp;background=000000" width="100" height="100" frameBorder="0" title="test-2" allowFullScreen></iframe>
 
         <div style={{backgroundImage: 'url(' + imgUrl + ') noRepeat center center fixed', backgroundSize: styles.root.backgroundSize, height: '500px', width: '100vw'}}>
 
         </div>
-         { this.video() }  */}
+         { this.video() }  */

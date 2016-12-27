@@ -74,7 +74,7 @@ router.post('/api/videos-comments', authorize, (req, res, next) => {
 // route you will 'get'.
 router.get('/api/videos', authorize, (req, res, next) => {
   const { userId } = req.token;
-  
+
   knex('vimeo_users')
     .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
     .innerJoin('comments', 'videos.id', 'comments.video_id')
@@ -127,13 +127,14 @@ router.post('/api/videos/bulk', authorize, ev(validations.post), (req, res, next
   const { videoList } = req.body; // will be an array of strings
 
   const insertVideoList = videoList.map((video) => {
-    return { userId: userId, src: video.src, name: video.name };
+    return { userId: userId, videoId: video.videoId, videoName: video.name, needsMusic: true, mood: video.mood };
   });
 
   knex('videos')
     .insert(decamelizeKeys(insertVideoList), '*')
     .then((rows) => {
       const insertedVideoList = camelizeKeys(rows[0]);
+
       res.send(insertedVideoList);
     })
     .catch((err) => {

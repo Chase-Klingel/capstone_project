@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import FormatTime from './FormatTime';
 import classnames from 'classnames';
@@ -6,25 +6,13 @@ import Play from './Play';
 import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
-import Styles from './css/widget';
+import Styles from './css/scProfileWidget';
 import MoodButton from './MoodButton';
 
-
-/**
- * SoundCloud Player
- * A simple SoundCloud player.
-**/
-export default class Widget extends Component {
-
-  static get propTypes () {
-    return {
-      title: PropTypes.string,
-      link: PropTypes.string
-    }
-  }
-
+export default class SCProfileWidget extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       playing: false,
       audioPlayer: null,
@@ -143,7 +131,6 @@ export default class Widget extends Component {
   }
 
   render () {
-    const { audio_id, title, link } = this.props
     const { playing, audioPlayer, percent_remains, percent_progress_remains, duration, current_time, client_id } = this.state
     let streamUrl = `https://api.soundcloud.com/tracks/${this.props.songId}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
     let iconClass = playing ? 'player__control__icon--pause' : 'player__control__icon--play'

@@ -1,11 +1,31 @@
 import React from 'react';
 import Styles from './css/header';
+import axios from 'axios';
 import { Link } from 'react-router';
 import SignOutModal from './SignOutModal';
 
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
+    if (this.props.vimeoUser) {
+      axios.get('/api/vimeo-user')
+        .then((res) => {
+          const userInfo = [res.data];
+          this.props.getUserInfo(userInfo);
+        })
+        .catch((err) => {
+          return err;
+        })
+    } else {
+      axios.get('/api/sc-user')
+        .then((res) => {
+          const userInfo = [res.data];
+          this.props.getUserInfo(userInfo);
+        })
+        .catch((err) => {
+          return err;
+        })
+    }
 
     this.header = this.header.bind(this);
   }
@@ -31,6 +51,7 @@ export default class Header extends React.Component {
             </div>
             <div id={Styles.modalContainer}>
               <SignOutModal
+                userInfo={this.props.userInfo}
                 authUser={this.props.authUser}
               />
             </div>
@@ -58,6 +79,7 @@ export default class Header extends React.Component {
             </div>
             <div id={Styles.modalContainer}>
               <SignOutModal
+                userInfo={this.props.userInfo}
                 authUser={this.props.authUser}
               />
             </div>
@@ -68,6 +90,10 @@ export default class Header extends React.Component {
     }
   }
   render() {
+    if (this.props.userInfo.length === 0) {
+      return false;
+    }
+
     return (
       <div>
         { this.header() }

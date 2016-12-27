@@ -6,11 +6,28 @@ import Styles from './css/startExploringButton';
 export default class StartExploringButton extends React.Component {
   constructor(props) {
     super(props);
-
-    this.postUserInfo = this.postUserInfo.bind(this);
+    this.postVideos = this.postVideos.bind(this)
+    this.postSongs = this.postSongs.bind(this);
+    this.startExploring = this.startExploring.bind(this);
   }
 
-  postUserInfo() {
+  postVideos() {
+    const videosNeedingMusic = this.props.uploads.filter((video) => {
+      console.log(video.mood, ' video mood and ', video.needsMusic, ' needs music');
+      // return (video.mood && video.needsMusic === true);
+    });
+
+    console.log(videosNeedingMusic);
+
+    axios.post('/api/videos/bulk', {
+      videoList: videosNeedingMusic
+    })
+    .then(() => {
+      window.location.href = '/profile';
+    })
+  }
+
+  postSongs() {
     const songsWithMoods = this.props.uploads.filter((song) => {
       return song.mood;
     });
@@ -23,10 +40,26 @@ export default class StartExploringButton extends React.Component {
     })
   }
 
+  startExploring() {
+    if (this.props.vimeoUser) {
+      return (
+        <div>
+          <button onClick={this.postVideos}>Start Exploring</button>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <button onClick={this.postSongs}>Start Exploring</button>
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <div>
-        <button onClick={this.postUserInfo}>Start Exploring</button>
+        { this.startExploring() }
       </div>
     )
   }

@@ -34,8 +34,8 @@ export default class ProfileBannerSetup extends React.Component {
       photoUrl: this.refs['photo'].value
     })
     .then((res) => {
-      const userInfo = [res.data];
-      this.props.getUserInfo(userInfo);
+      const signupInfo = [res.data];
+      this.props.getsignupInfo(signupInfo);
       this.setState({ updatingImg: false });
     })
     .catch((err) => {
@@ -50,8 +50,8 @@ export default class ProfileBannerSetup extends React.Component {
       bio: this.refs['bio'].value
     })
     .then((res) => {
-      const userInfo = [res.data];
-      this.props.getUserInfo(userInfo);
+      const signupInfo = [res.data];
+      this.props.getsignupInfo(signupInfo);
       this.setState({ updatingBio: false })
     })
     .catch((err) => {

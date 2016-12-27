@@ -5,7 +5,7 @@ import axios from 'axios';
 import { Link } from 'react-router';
 import SideBanner from './SideBanner';
 
-export default class CloudSignup extends React.Component {
+export default class SCSignUp extends React.Component {
   constructor(props) {
     super(props);
 

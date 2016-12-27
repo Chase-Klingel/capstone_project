@@ -25,10 +25,11 @@ router.get('/vimeo', passport.authenticate('vimeo', { session: false }));
 router.get('/vimeo/callback', passport.authenticate('vimeo', { session: false, failureRedirect: '/'}), (req, res, next) => {
   const user = req.user;
   const vimeoUsername = user.profile.username;
-  const photoUrl = user.profile._json.pictures[3].link;
+  // const photoUrl = user.profile._json.pictures[3].link;
   const email = user.profile._json.email;
   const vimeoId = user.profile.id;
   const vimeoToken = user.accessToken;
+  let setupProfile = true;
 
   return knex('vimeo_users')
     .where('vimeo_id', vimeoId)
@@ -37,13 +38,14 @@ router.get('/vimeo/callback', passport.authenticate('vimeo', { session: false, f
       if (user) {
         // must make user an array b/c the newUser returned on line 53 is an array.
         user = [user];
+        setupProfile = false;
         return user;
       }
 
       const newUser = {
         vimeoUsername,
         email,
-        photoUrl,
+        // photoUrl,
         vimeoId,
         vimeoToken
       }
@@ -60,7 +62,12 @@ router.get('/vimeo/callback', passport.authenticate('vimeo', { session: false, f
         secure: router.get('env') === 'production',
       });
 
-      res.redirect('/profile');
+      if (setupProfile) {
+        res.redirect('/signup/vimeo');
+      } else {
+        res.redirect('/signin/vimeo');
+      }
+
     })
     .catch(err => {
       next(err);

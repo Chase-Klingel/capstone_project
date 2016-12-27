@@ -29,6 +29,7 @@ export default class App extends React.Component {
       loggedIn: false,
       vimeoUser: true,
       scUser: false,
+      signupInfo: [],
       userInfo: [],
       uploads: [],
       profileContent: []
@@ -36,6 +37,7 @@ export default class App extends React.Component {
 
     this.authUser = this.authUser.bind(this);
     this.showHeader = this.showHeader.bind(this);
+    this.getsignupInfo = this.getsignupInfo.bind(this);
     this.getUserInfo = this.getUserInfo.bind(this);
     this.getUploads = this.getUploads.bind(this);
     this.getProfileContent = this.getProfileContent.bind(this);
@@ -65,18 +67,25 @@ export default class App extends React.Component {
     if (this.state.loggedIn) {
       return <Header
         loggedIn={this.state.loggedIn}
+        vimeoUser={this.state.vimeoUser}
+        scUser={this.state.scUser}
         authUser={this.authUser.bind(this)}
+        userInfo={this.state.userInfo}
+        getUserInfo={this.getUserInfo}
       />
     }
   }
 
+  getsignupInfo(signupInfo) {
+    this.setState({ signupInfo: signupInfo });
+  }
+
   getUserInfo(userInfo) {
-    console.log(userInfo, ' user info in app');
     this.setState({ userInfo: userInfo });
   }
 
   getUploads(uploads) {
-    if (uploads[0].mood) {
+    if (uploads[0].mood && this.state.scUser === true) {
       const mappedUploads = this.state.uploads.map((upload) => {
         if (uploads[0].songId !== upload.songId) {
 
@@ -84,8 +93,32 @@ export default class App extends React.Component {
         }
 
         return uploads[0];
-      })
+      });
 
+      this.setState({ uploads: mappedUploads });
+    } else if (uploads[0].mood && this.state.vimeoUser === true) {
+      const mappedUploads = this.state.uploads.map((upload) => {
+        if (uploads[0].videoId !== upload.videoId) {
+
+          return upload;
+        }
+
+        return uploads[0];
+      });
+
+      this.setState({ uploads: mappedUploads });
+    } else if (uploads[0].needsMusic === true || uploads[0].needsMusic === false) {
+      console.log('inside of right path');
+      const mappedUploads = this.state.uploads.map((upload) => {
+        if (uploads[0].videoId !== upload.videoId) {
+
+          return upload;
+        }
+
+        return uploads[0];
+      });
+
+      console.log(mappedUploads, ' mappedUploads');
       this.setState({ uploads: mappedUploads });
     } else {
       this.setState({ uploads: uploads });
@@ -110,8 +143,8 @@ export default class App extends React.Component {
               vimeoUser={this.state.vimeoUser}
               scUser={this.state.scUser}
               authUser={this.authUser}
-              userInfo={this.state.userInfo}
-              getUserInfo={this.getUserInfo}
+              signupInfo={this.state.signupInfo}
+              getsignupInfo={this.getsignupInfo}
               uploads={this.state.uploads}
               getUploads={this.getUploads}
               profileContent={this.state.profileContent}
@@ -125,171 +158,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-//   constructor(props) {
-//     super(props);
-//
-//     this.state = {
-//       loggedIn: false,
-//       srcList: []
-//     }
-//   }
-//
-//   componentDidMount() {
-//
-//     // axios.get(`${corsURL}http://api.soundcloud.com/resolve?url=http://soundcloud.com/dayejack&${clientId}`)
-//     // .then((res) => {
-//     //   return res.data.id;
-//     // })
-//     // .then((id) => {
-//     //   SC.get('/tracks', {
-//     //     user_id: id, limit: 100
-//     //   }).then((tracks) => {
-//     //     for (let i = 0; i < tracks.length; i++) {
-//     //       const nextSrc = `https://w.soundcloud.com/player/?visual=true&url=${tracks[i].permalink_url}`;
-//     //       const newSrcList = this.state.srcList.concat(nextSrc);
-//     //       this.setState({ srcList: newSrcList });
-//     //     }
-//     //   });
-//     // })
-//   }
-//
-//   render() {
-//     return (
-//       <div>
-//         {/* <iframe src={this.state.srcList[0]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[1]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[2]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[3]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[4]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[5]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[6]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[7]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[8]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[9]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[10]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[11]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[12]} width="100%" height="400" scrolling="no"></iframe>
-//         <iframe src={this.state.srcList[13]} width="100%" height="400" scrolling="no"></iframe> */}
-//
-//       </div>
-//
-//       // <BrowserRouter>
-//       //   <div>
-//       //     <Header
-//       //       loggedIn={this.state.loggedIn}
-//       //     />
-//       //
-//       //     <main>
-//       //       <Main />
-//       //     </main>
-//       //
-//       //     <Footer />
-//       //   </div>
-//       // </BrowserRouter>
-//     );
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// youtube process
-
-/*import React from 'react';
-import axios from 'axios';
-import YouTube from 'react-youtube';
-
-
-// youtube key: AIzaSyDZA3Dssn6o37i4X4oSk0gr1bkMTOesIKo
-
-// sc key: c6e1e2a98490d428460f8d36af919bb4 --> this is from music-circle. You submitted application for api key.
-
-// we will need the users channel id for youtube --> oatuh required I believe.
-
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      videoIds: [],
-    }
-  }
-  componentDidMount() {
-    // first step: query for channel ID
-    axios.get('https://www.googleapis.com/youtube/v3/channels?part=contentDetails&id=UCEi0EgWJ5m7gVBQ68a1L0TA&key=AIzaSyDZA3Dssn6o37i4X4oSk0gr1bkMTOesIKo')
-      .then(res => {
-        const id = res.data.items[0].contentDetails.relatedPlaylists.uploads;
-        return id;
-      })
-      // const id = id associated with all user uploads
-      // step 2: query whree playlistId = 'const id'
-      .then(res => {
-        console.log(res);
-        axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${res}&key=AIzaSyDZA3Dssn6o37i4X4oSk0gr1bkMTOesIKo`)
-          .then((res) => {
-            for (let i = 0; i < res.data.items.length; i++) {
-              const nextVideoId = this.state.videoIds.concat(res.data.items[i].snippet.resourceId.videoId);
-              this.setState({ videoIds: nextVideoId });
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          })
-      })
-      .catch(err => {
-        console.log(err);
-    })
-  }
-
-
-
-  render() {
-    console.log(this.state.videoIds);
-    const opts = {
-      height: '390',
-      width: '640',
-      playerVars: { // https://developers.google.com/youtube/player_parameters
-        autoplay: 0
-      }
-    };
-
-    return (
-      <div>
-        test
-        <YouTube
-          videoId={this.state.videoIds[0]}
-          opts={opts}
-        />
-        <YouTube
-          videoId={this.state.videoIds[1]}
-          opts={opts}
-        />
-        <YouTube
-          videoId={this.state.videoIds[2]}
-          opts={opts}
-        />
-        <YouTube
-          videoId={this.state.videoIds[3]}
-          opts={opts}
-        />
-        <YouTube
-          videoId={this.state.videoIds[4]}
-          opts={opts}
-        />
-    </div>
-    )
-  }
-};
-*/
