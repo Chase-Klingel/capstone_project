@@ -120,12 +120,14 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   uploads={this.props.uploads}
                   getUploads={this.props.getUploads}
+                  signupInfo={this.props.signupInfo}
                 />
                 <div className="col s6 offset-s3">
                   <StartExploringButton
                     vimeoUser={this.props.vimeoUser}
                     scUser={this.props.scUser}
                     uploads={this.props.uploads}
+                    signupInfo={this.props.signupInfo}
                   />
                 </div>
               </div>
@@ -155,6 +157,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
+                  signupInfo={this.props.signupInfo}
                 />
               </div>
             </div>
@@ -185,6 +188,7 @@ export default class ProfileSetup extends React.Component {
                     vimeoUser={this.props.vimeoUser}
                     scUser={this.props.scUser}
                     uploads={this.props.uploads}
+                    signupInfo={this.props.signupInfo}
                   />
                 </div>
               </div>
@@ -215,6 +219,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
+                  signupInfo={this.props.signupInfo}
                 />
               </div>
             </div>

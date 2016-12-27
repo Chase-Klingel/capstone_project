@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Notifications, { notify } from 'react-notify-toast';
 import axios from 'axios';
 import Styles from './css/startExploringButton';
 
@@ -11,7 +11,16 @@ export default class StartExploringButton extends React.Component {
     this.startExploring = this.startExploring.bind(this);
   }
 
-  postVideos() {
+  postVideos(e) {
+    e.preventDefault();
+
+    if (this.props.signupInfo[0].photoUrl === '') {
+      return notify.show('Please add a profile photo', 'error');
+      return;
+    } else if (this.props.signupInfo[0].bio === '') {
+      return notify.show('Please add a bio', 'error');
+    }
+
     const videosNeedingMusic = this.props.uploads.filter((video) => {
       return (video.mood && video.needsMusic === true);
     });
@@ -24,7 +33,15 @@ export default class StartExploringButton extends React.Component {
     })
   }
 
-  postSongs() {
+  postSongs(e) {
+    e.preventDefault();
+
+    if (this.props.signupInfo[0].photoUrl === '') {
+      return notify.show('Please add a profile photo', 'error');
+    } else if (this.props.signupInfo[0].bio === '') {
+      return notify.show('Please add a bio', 'error');
+    }
+
     const songsWithMoods = this.props.uploads.filter((song) => {
       return song.mood;
     });
