@@ -64,6 +64,7 @@ export default class ProfileBannerSetup extends React.Component {
       return (
         <div className="row">
           <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <h5 id={Styles.username}>{this.props.uploads[0].vimeoUsername}</h5>
             <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
             <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
               <input type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
@@ -76,6 +77,7 @@ export default class ProfileBannerSetup extends React.Component {
       return (
         <div className="row">
           <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <h5 id={Styles.username}>{this.props.uploads[0].vimeoUsername}</h5>
             <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
             <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
               <textarea type="text" placeholder="What should we know about you..." ref="bio"></textarea>
@@ -88,6 +90,7 @@ export default class ProfileBannerSetup extends React.Component {
       return (
         <div className="row">
           <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <h5 id={Styles.username}>{this.props.uploads[0].vimeoUsername}</h5>
             <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
             <div id={Styles.uploadButtonsContainer}>
               <button onClick={this.showPhotoInput}>upload profile image</button>

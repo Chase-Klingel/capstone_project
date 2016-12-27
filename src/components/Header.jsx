@@ -51,6 +51,7 @@ export default class Header extends React.Component {
             </div>
             <div id={Styles.modalContainer}>
               <SignOutModal
+                vimeoUser={this.props.vimeoUser}
                 userInfo={this.props.userInfo}
                 authUser={this.props.authUser}
               />
@@ -79,6 +80,7 @@ export default class Header extends React.Component {
             </div>
             <div id={Styles.modalContainer}>
               <SignOutModal
+                scUser={this.props.scUser}
                 userInfo={this.props.userInfo}
                 authUser={this.props.authUser}
               />

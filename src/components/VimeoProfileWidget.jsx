@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import MoodButton from './MoodButton';
 import NeedsMusicButton from './NeedsMusicButton';
 
-export default class VimeoWidget extends React.Component {
+export default class VimeoProfileWidget extends React.Component {
   render() {
     const src = `https://player.vimeo.com/video/${this.props.videoId}?badge=0&autopause=0&player_id=0&amp;color=daa520&amp;background=000000`
 

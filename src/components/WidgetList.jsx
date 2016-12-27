@@ -1,6 +1,6 @@
 import React from 'react';
 import SCProfileWidget from './SCProfileWidget';
-import VimeoWidget from './VimeoWidget';
+import VimeoProfileWidget from './VimeoProfileWidget';
 
 export default class WidgetList extends React.Component {
   constructor(props) {

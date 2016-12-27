@@ -21,7 +21,6 @@ export default class ProfileSetup extends React.Component {
     super(props);
 
     if (this.props.vimeoUser) {
-      console.log('we are in the right ball park');
       axios.get('/api/vimeo-user')
         .then((res) => {
           const signupInfo = [res.data];
