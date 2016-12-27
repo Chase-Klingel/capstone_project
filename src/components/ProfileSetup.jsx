@@ -40,8 +40,8 @@ export default class ProfileSetup extends React.Component {
             for (let i = 0; i < videoData.length; i++) {
               let videoId = videoData[i].link.slice(18, 27);
               let videoName = videoData[i].name;
-              console.log(videoName, ' video name inside for loop');
-              let video = { videoId: videoId, videoName: videoName };
+              let producerName = this.props.signupInfo[0].vimeoUsername;
+              let video = { videoId: videoId, videoName: videoName, producerName: producerName };
               videoUploads = videoUploads.concat(video);
             }
 
@@ -107,6 +107,8 @@ export default class ProfileSetup extends React.Component {
         return (
           <div>
             <ProfileBannerSetup
+              scUser={this.props.scUser}
+              vimeoUser={this.props.vimeoUser}
               getsignupInfo={this.props.getsignupInfo}
               getUploads={this.props.getUploads}
               uploads={this.props.uploads}
@@ -134,6 +136,9 @@ export default class ProfileSetup extends React.Component {
         return (
           <div>
             <ProfileBanner
+              scUser={this.props.scUser}
+              vimeoUser={this.props.vimeoUser}
+              uploads={this.props.uploads}
               signupInfo={this.props.signupInfo}
             />
 
@@ -161,6 +166,8 @@ export default class ProfileSetup extends React.Component {
         return (
           <div>
             <ProfileBannerSetup
+              scUser={this.props.scUser}
+              vimeoUser={this.props.vimeoUser}
               getsignupInfo={this.props.getsignupInfo}
               getUploads={this.props.getUploads}
               uploads={this.props.uploads}
@@ -188,6 +195,9 @@ export default class ProfileSetup extends React.Component {
         return (
           <div>
             <ProfileBanner
+              scUser={this.props.scUser}
+              vimeoUser={this.props.vimeoUser}
+              uploads={this.props.uploads}
               signupInfo={this.props.signupInfo}
             />
 

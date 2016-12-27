@@ -18,20 +18,19 @@ export default class NeedsMusicButton extends React.Component {
   }
 
   onSelect(option) {
-    console.log(this.props.uploads[this.props.index]);
     this.setState({selected: option});
 
-    if (option.value === 'yes' && !this.props.uploads[this.props.index].mood) {
-      const needsMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, mood: this.props.uploads[this.props.index].mood, needsMusic: true }];
+    if (option.value === 'yes' && this.props.uploads[this.props.index].mood !== undefined) {
+      const needsMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, producerName: this.props.uploads[0].producerName, mood: this.props.uploads[this.props.index].mood, needsMusic: true }];
       this.props.getUploads(needsMusic);
-    } else if (option.value === 'yes') {
-      const needsMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, needsMusic: true }];
+    } else if (option.value === 'yes' && this.props.uploads[this.props.index].mood === undefined) {
+      const needsMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, producerName: this.props.uploads[0].producerName, needsMusic: true }];
       this.props.getUploads(needsMusic);
-    } else if (option.value === 'no' && !this.props.uploads[this.props.index].mood) {
-      const noMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, mood: this.props.uploads[this.props.index].mood, needsMusic: false }];
+    } else if (option.value === 'no' && this.props.uploads[this.props.index].mood !== undefined) {
+      const noMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, producerName: this.props.uploads[0].producerName, mood: this.props.uploads[this.props.index].mood, needsMusic: false }];
       this.props.getUploads(noMusic);
     } else {
-      const noMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, needsMusic: false }];
+      const noMusic = [{ videoId: this.props.videoId, videoName: this.props.videoName, producerName: this.props.uploads[0].producerName, needsMusic: false }];
       this.props.getUploads(noMusic);
     }
   }

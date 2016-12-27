@@ -127,7 +127,7 @@ router.post('/api/videos/bulk', authorize, ev(validations.post), (req, res, next
   const { videoList } = req.body; // will be an array of strings
 
   const insertVideoList = videoList.map((video) => {
-    return { userId: userId, videoId: video.videoId, videoName: video.name, needsMusic: true, mood: video.mood };
+    return { userId: userId, videoId: video.videoId, videoName: video.videoName, producerName: video.producerName, needsMusic: true, mood: video.mood };
   });
 
   knex('videos')

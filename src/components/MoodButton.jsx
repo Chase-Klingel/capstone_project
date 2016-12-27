@@ -20,11 +20,11 @@ export default class MoodButton extends React.Component {
   onSelect(option) {
     this.setState({selected: option});
 
-    if (this.props.vimeoUser && !this.props.uploads[this.props.index].needsMusic) {
-      const videoWithMood = [{ videoId: this.props.videoId, videoName: this.props.videoName, mood: option.value, needsMusic: this.props.uploads[this.props.index].needsMusic }];
+    if (this.props.vimeoUser && this.props.uploads[this.props.index].needsMusic !== undefined) {
+      const videoWithMood = [{ videoId: this.props.videoId, videoName: this.props.videoName, producerName: this.props.uploads[0].producerName, mood: option.value, needsMusic: this.props.uploads[this.props.index].needsMusic }];
       this.props.getUploads(videoWithMood);
-    } else if (this.props.vimeoUser) {
-      const videoWithMood = [{ videoId: this.props.videoId, videoName: this.props.videoName, mood: option.value }];
+    } else if (this.props.vimeoUser && this.props.uploads[this.props.index].needsMusic === undefined) {
+      const videoWithMood = [{ videoId: this.props.videoId, videoName: this.props.videoName, producerName: this.props.uploads[0].producerName, mood: option.value }];
       this.props.getUploads(videoWithMood);
     } else {
       const songWithMood = [{ songId: this.props.songId, songName: this.props.songName, artistName: this.props.artistName, mood: option.value}];

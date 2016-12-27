@@ -13,11 +13,8 @@ export default class StartExploringButton extends React.Component {
 
   postVideos() {
     const videosNeedingMusic = this.props.uploads.filter((video) => {
-      console.log(video.mood, ' video mood and ', video.needsMusic, ' needs music');
-      // return (video.mood && video.needsMusic === true);
+      return (video.mood && video.needsMusic === true);
     });
-
-    console.log(videosNeedingMusic);
 
     axios.post('/api/videos/bulk', {
       videoList: videosNeedingMusic

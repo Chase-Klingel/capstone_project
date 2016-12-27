@@ -159,7 +159,6 @@ router.patch('/api/sc-user', authorize, (req, res, next) => {
       bio: bio
     }, '*')
     .then((row) => {
-      console.log(row, 'here is the row');
       const updatedUser = camelizeKeys(row[0]);
       res.send(updatedUser);
     })
@@ -178,7 +177,7 @@ router.patch('/api/vimeo-user', authorize, (req, res, next) => {
     .update({
       photo_url: photoUrl,
       bio: bio
-    })
+    }, '*')
     .then((row) => {
       const updatedUser = camelizeKeys(row[0]);
       res.send(updatedUser);

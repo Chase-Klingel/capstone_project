@@ -10,6 +10,7 @@ exports.up = function(knex) {
       .onDelete('CASCADE');
     table.string('video_id').notNullable().defaultTo('');
     table.string('video_name').notNullable().defaultTo('');
+    table.string('producer_name').notNullable().defaultTo('');
     table.boolean('needs_music').notNullable().defaultTo(false);
     table.string('mood').notNullable().defaultTo('');
     table.timestamps(true, true);

@@ -54,6 +54,7 @@ export default class Header extends React.Component {
                 vimeoUser={this.props.vimeoUser}
                 userInfo={this.props.userInfo}
                 authUser={this.props.authUser}
+                signupInfo={this.props.signupInfo}
               />
             </div>
             <button id={Styles.queueButton}>Music Queue</button>
@@ -83,6 +84,7 @@ export default class Header extends React.Component {
                 scUser={this.props.scUser}
                 userInfo={this.props.userInfo}
                 authUser={this.props.authUser}
+                signupInfo={this.props.signupInfo}
               />
             </div>
             <button id={Styles.queueButton}>Video Queue</button>

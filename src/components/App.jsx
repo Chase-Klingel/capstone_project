@@ -5,21 +5,6 @@ import axios from 'axios';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-// import { Redirect, Match, Miss } from 'react-router';
-// import { SoundPlayerContainer } from 'react-soundplayer/addons';
-// const corsURL = 'https://cors-anywhere.herokuapp.com/';
-// const chartsURL = 'https://api-v2.soundcloud.com/charts?';
-// const clientId = 'client_id=c6e1e2a98490d428460f8d36af919bb4&limit=100&offset=0';
-// const electronicURL = 'kind=top&genre=soundcloud%3Agenres%3Aelectronic&client';
-// import SC from 'soundcloud';
-//
-//
-//
-// SC.initialize({
-//   client_id: 'c6e1e2a98490d428460f8d36af919bb4'
-// });
-// vimeo key: 71d16d2ed90f43a8718996f8a33ead1f
-
 
 export default class App extends React.Component {
   constructor(props) {
@@ -72,6 +57,7 @@ export default class App extends React.Component {
         authUser={this.authUser.bind(this)}
         userInfo={this.state.userInfo}
         getUserInfo={this.getUserInfo}
+        signupInfo={this.state.signupInfo}
       />
     }
   }
@@ -88,7 +74,6 @@ export default class App extends React.Component {
     if (uploads[0].mood && this.state.scUser === true) {
       const mappedUploads = this.state.uploads.map((upload) => {
         if (uploads[0].songId !== upload.songId) {
-
           return upload;
         }
 
@@ -96,7 +81,7 @@ export default class App extends React.Component {
       });
 
       this.setState({ uploads: mappedUploads });
-    } else if (uploads[0].mood && this.state.vimeoUser === true) {
+    } else if (uploads[0].mood && this.state.vimeoUser === true || uploads[0].needsMusic !== undefined) {
       const mappedUploads = this.state.uploads.map((upload) => {
         if (uploads[0].videoId !== upload.videoId) {
 
@@ -106,19 +91,6 @@ export default class App extends React.Component {
         return uploads[0];
       });
 
-      this.setState({ uploads: mappedUploads });
-    } else if (uploads[0].needsMusic === true || uploads[0].needsMusic === false) {
-      console.log('inside of right path');
-      const mappedUploads = this.state.uploads.map((upload) => {
-        if (uploads[0].videoId !== upload.videoId) {
-
-          return upload;
-        }
-
-        return uploads[0];
-      });
-
-      console.log(mappedUploads, ' mappedUploads');
       this.setState({ uploads: mappedUploads });
     } else {
       this.setState({ uploads: uploads });
@@ -158,3 +130,20 @@ export default class App extends React.Component {
     );
   }
 }
+
+/*
+
+else if (uploads[0].needsMusic !== undefined) {
+  const mappedUploads = this.state.uploads.map((upload) => {
+    if (uploads[0].videoId !== upload.videoId) {
+
+      return upload;
+    }
+
+    return uploads[0];
+  });
+
+  this.setState({ uploads: mappedUploads });
+}
+
+*/
