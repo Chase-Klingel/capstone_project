@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Styles from './css/moodButton';
 import Dropdown from 'react-dropdown';
 
 const options = ['Carefree', 'Contemplative', 'Eerie', 'Love', 'Sad', 'Serious', 'Tense'];
@@ -40,7 +39,7 @@ export default class MoodButton extends React.Component {
     const defaultOption = this.state.selected;
 
     return (
-      <div>
+      <div style={{background: 'white', color: 'grey', textAlign: 'center', padding: '10px'}}>
         <Dropdown options={options} onChange={this.onSelect} value={defaultOption} placeholder="Select a mood" />
       </div>
     );

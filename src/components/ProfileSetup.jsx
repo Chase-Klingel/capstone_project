@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import Notifications, { notify } from 'react-notify-toast';
 import Styles from './css/profileSetup';
 import ProfileBannerSetup from './ProfileBannerSetup';
 import ProfileBanner from './ProfileBanner';
@@ -112,6 +113,7 @@ export default class ProfileSetup extends React.Component {
               getsignupInfo={this.props.getsignupInfo}
               getUploads={this.props.getUploads}
               uploads={this.props.uploads}
+              signupInfo={this.props.signupInfo}
             />
 
             <div className="container">
@@ -122,15 +124,15 @@ export default class ProfileSetup extends React.Component {
                   getUploads={this.props.getUploads}
                   signupInfo={this.props.signupInfo}
                 />
-                <div className="col s6 offset-s3">
-                  <StartExploringButton
-                    vimeoUser={this.props.vimeoUser}
-                    scUser={this.props.scUser}
-                    uploads={this.props.uploads}
-                    signupInfo={this.props.signupInfo}
-                  />
-                </div>
               </div>
+
+              <StartExploringButton
+                vimeoUser={this.props.vimeoUser}
+                scUser={this.props.scUser}
+                uploads={this.props.uploads}
+                signupInfo={this.props.signupInfo}
+              />
+
             </div>
           </div>
         );
@@ -152,14 +154,13 @@ export default class ProfileSetup extends React.Component {
                   getUploads={this.props.getUploads}
                 />
               </div>
-              <div className="col s6 offset-s3">
-                <StartExploringButton
-                  vimeoUser={this.props.vimeoUser}
-                  scUser={this.props.scUser}
-                  uploads={this.props.uploads}
-                  signupInfo={this.props.signupInfo}
-                />
-              </div>
+
+              <StartExploringButton
+                vimeoUser={this.props.vimeoUser}
+                scUser={this.props.scUser}
+                uploads={this.props.uploads}
+                signupInfo={this.props.signupInfo}
+              />
             </div>
           </div>
         );
@@ -174,6 +175,7 @@ export default class ProfileSetup extends React.Component {
               getsignupInfo={this.props.getsignupInfo}
               getUploads={this.props.getUploads}
               uploads={this.props.uploads}
+              signupInfo={this.props.signupInfo}
             />
 
             <div className="container">
@@ -183,14 +185,14 @@ export default class ProfileSetup extends React.Component {
                   uploads={this.props.uploads}
                   getUploads={this.props.getUploads}
                 />
-                <div className="col s6 offset-s3">
-                  <StartExploringButton
-                    vimeoUser={this.props.vimeoUser}
-                    scUser={this.props.scUser}
-                    uploads={this.props.uploads}
-                    signupInfo={this.props.signupInfo}
-                  />
-                </div>
+
+                <StartExploringButton
+                  vimeoUser={this.props.vimeoUser}
+                  scUser={this.props.scUser}
+                  uploads={this.props.uploads}
+                  signupInfo={this.props.signupInfo}
+                />
+
               </div>
             </div>
           </div>
@@ -230,7 +232,6 @@ export default class ProfileSetup extends React.Component {
   }
 
   render() {
-
     if (this.props.signupInfo.length === 0 || this.props.uploads.length === 0) {
       return false;
     }

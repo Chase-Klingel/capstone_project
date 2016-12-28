@@ -2,10 +2,9 @@ import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
 export default class Forward extends Component {
-
   render() {
     return (
-      <svg fill="grey" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" >
+      <svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" >
           <defs>
               <path d="M24 24H0V0h24v24z" id="a"/>
           </defs>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Styles from './css/profileBannerSetup';
+import Notifications, { notify } from 'react-notify-toast';
 import axios from 'axios';
 
 export default class ProfileBannerSetup extends React.Component {
@@ -34,6 +35,7 @@ export default class ProfileBannerSetup extends React.Component {
         photoUrl: this.refs['photo'].value
       })
       .then((res) => {
+        notify.show('Profile photo was updated successfully!', 'success');
         const signupInfo = [res.data];
         this.props.getsignupInfo(signupInfo);
         this.setState({ updatingImg: false });
@@ -46,6 +48,7 @@ export default class ProfileBannerSetup extends React.Component {
         photoUrl: this.refs['photo'].value
       })
       .then((res) => {
+        notify.show('Profile photo was updated successfully!', 'success');
         const signupInfo = [res.data];
         this.props.getsignupInfo(signupInfo);
         this.setState({ updatingImg: false });
@@ -65,9 +68,10 @@ export default class ProfileBannerSetup extends React.Component {
         bio: this.refs['bio'].value
       })
       .then((res) => {
+        notify.show('Bio was updated successfully!', 'success');
         const signupInfo = [res.data];
         this.props.getsignupInfo(signupInfo);
-        this.setState({ updatingBio: false })
+        this.setState({ updatingBio: false });
       })
       .catch((err) => {
         return err;
@@ -77,6 +81,7 @@ export default class ProfileBannerSetup extends React.Component {
         bio: this.refs['bio'].value
       })
       .then((res) => {
+        notify.show('Bio was updated successfully!', 'success');
         const signupInfo = [res.data];
         this.props.getsignupInfo(signupInfo);
         this.setState({ updatingBio: false })
@@ -97,7 +102,7 @@ export default class ProfileBannerSetup extends React.Component {
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <input type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
-                <button type="submit" onClick={this.updateImg}>update</button>
+                <button id={Styles.update} type="submit" onClick={this.updateImg}>update</button>
               </div>
             </div>
           </div>
@@ -109,7 +114,7 @@ export default class ProfileBannerSetup extends React.Component {
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <textarea type="text" placeholder="What should we know about you..." ref="bio"></textarea>
-                <button type="submit" onClick={this.updateBio}>update</button>
+                <button id={Styles.update} type="submit" onClick={this.updateBio}>update</button>
               </div>
             </div>
           </div>
@@ -120,8 +125,8 @@ export default class ProfileBannerSetup extends React.Component {
             <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadButtonsContainer}>
-                <button onClick={this.showPhotoInput}>upload profile image</button>
-                <button onClick={this.showBioInput}>Add a bio</button>
+                <button id={Styles.uploadImg} onClick={this.showPhotoInput}>upload profile image</button>
+                <button id={Styles.addBio} onClick={this.showBioInput}>Add a bio</button>
               </div>
             </div>
           </div>
@@ -135,7 +140,7 @@ export default class ProfileBannerSetup extends React.Component {
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <input type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
-                <button type="submit" onClick={this.updateImg}>update</button>
+                <button id={Styles.update} type="submit" onClick={this.updateImg}>update</button>
               </div>
             </div>
           </div>
@@ -147,7 +152,7 @@ export default class ProfileBannerSetup extends React.Component {
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <textarea type="text" placeholder="What should we know about you..." ref="bio"></textarea>
-                <button type="submit" onClick={this.updateBio}>update</button>
+                <button id={Styles.update} type="submit" onClick={this.updateBio}>update</button>
               </div>
             </div>
           </div>
@@ -157,9 +162,9 @@ export default class ProfileBannerSetup extends React.Component {
           <div className="row">
             <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
+              <button id={Styles.addBio} onClick={this.showBioInput}>Add a bio</button>
               <div id={Styles.uploadButtonsContainer}>
-                <button onClick={this.showPhotoInput}>upload profile image</button>
-                <button onClick={this.showBioInput}>Add a bio</button>
+                <button id={Styles.uploadImg} onClick={this.showPhotoInput}>Upload profile image</button>
               </div>
             </div>
           </div>

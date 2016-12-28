@@ -1,0 +1,11 @@
+#moodButton {
+  padding-right: 0;
+}
+
+#needsMusicButton {
+  padding-left: 0;
+}
+
+.button div:hover {
+  cursor: pointer;
+}

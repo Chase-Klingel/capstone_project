@@ -61,7 +61,7 @@ export default class Main extends React.Component {
           )
         }/>
 
-        {/* <Match pattern="/signin" exactly render={() =>
+        <Match pattern="/signin" exactly render={() =>
           this.props.loggedIn ? (
             <Redirect to="/profile" />
           ) : (
@@ -69,7 +69,7 @@ export default class Main extends React.Component {
               authUser={this.props.authUser}
             />
           )
-        }/> */}
+        }/>
 
         <Match pattern="/signin/vimeo" exactly render={() =>
           this.props.loggedIn ? (

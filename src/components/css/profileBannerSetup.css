@@ -1,5 +1,6 @@
 #bannerContainer {
-  background: black;
+  margin-top: 168px;
+  background: #20daa5;
 }
 
 #username {
@@ -7,34 +8,67 @@
   position: absolute;
   top: 275px;
   left: 45px;
-  font-size: 72px;
+  font-size: 60px;
+  font-weight: bold;
+  letter-spacing: 1px;
   text-transform: uppercase;
+}
+
+#addBio {
+  position: absolute;
+  top: 398px;
+  left: 50px;
+  background: white;
+  border: 1px solid lightgrey;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: grey;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+#uploadImg {
+  border: none;
+  background: white;
+  padding: 10px 30px;
+  border-radius: 25px;
+  color: grey;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}
+
+#update {
+  margin-top: 5px;
+  background: white;
+  border: 1px solid lightgrey;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: grey;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
 }
 
 #uploadButtonsContainer {
   text-align: center;
-  padding-top: 250px;
+  padding-top: 230px;
 }
 
 #uploadInputContainer {
   text-align: center;
-  padding-top: 130px;
+  padding-top: 220px;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: grey;
+#uploadInputContainer > ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: white;
   font-size: 14px;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  color: grey;
+#uploadInputContainer > ::-moz-placeholder { /* Firefox 19+ */
+  color: white;
   font-size: 14px;
 }
-:-ms-input-placeholder { /* IE 10+ */
-  color: grey;
+#uploadInputContainer > :-ms-input-placeholder { /* IE 10+ */
+  color: white;
   font-size: 14px;
 }
-:-moz-placeholder { /* Firefox 18- */
-  color: grey;
+#uploadInputContainer >:-moz-placeholder { /* Firefox 18- */
+  color: white;
   font-size: 14px;
 }
 
@@ -42,5 +76,10 @@ textarea {
   padding-left: 5px;
   resize: none;
   height: 180px;
-  color: grey;
+  color: white;
+  border: 1px solid white;
+}
+
+textarea:focus {
+  outline: none;
 }

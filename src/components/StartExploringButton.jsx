@@ -57,22 +57,28 @@ export default class StartExploringButton extends React.Component {
   startExploring() {
     if (this.props.vimeoUser) {
       return (
-        <div>
-          <button onClick={this.postVideos}>Start Exploring</button>
-        </div>
-      )
+        <a className={Styles.btn} onClick={this.postVideos}>
+          <span className={Styles.btnInr}>
+            <span className={Styles.txtA}>Start Exploring</span>
+            <span className={Styles.txtB}>Start Exploring</span>
+          </span>
+        </a>
+      );
     } else {
       return (
-        <div>
-          <button onClick={this.postSongs}>Start Exploring</button>
-        </div>
-      )
+        <a className={Styles.btn} onClick={this.postSongs}>
+          <span className={Styles.btnInr}>
+            <span className={Styles.txtA}>Start Exploring</span>
+            <span className={Styles.txtB}>Start Exploring</span>
+          </span>
+        </a>
+      );
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="center-align" id="button-container">
         { this.startExploring() }
       </div>
     )

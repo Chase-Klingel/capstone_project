@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import Styles from './css/vimeoProfileWidget.css';
 import MoodButton from './MoodButton';
 import NeedsMusicButton from './NeedsMusicButton';
 
@@ -10,22 +11,27 @@ export default class VimeoProfileWidget extends React.Component {
     return (
       <div className={classnames('col', 's12', 'm6', 'widgetContainer')}>
         <iframe src={src} width="100%" height="250px" frameBorder="0" allowFullScreen></iframe>
-        <h5>{this.props.videoName}</h5>
-        <MoodButton
-          index={this.props.index}
-          vimeoUser={this.props.vimeoUser}
-          videoId={this.props.videoId}
-          videoName={this.props.videoName}
-          getUploads={this.props.getUploads}
-          uploads={this.props.uploads}
-        />
-        <NeedsMusicButton
-          index={this.props.index}
-          videoId={this.props.videoId}
-          videoName={this.props.videoName}
-          getUploads={this.props.getUploads}
-          uploads={this.props.uploads}
-        />
+        <div className="row">
+          <div className={classnames('col', 's6', Styles.button)} id={Styles.moodButton}>
+            <MoodButton
+              index={this.props.index}
+              vimeoUser={this.props.vimeoUser}
+              videoId={this.props.videoId}
+              videoName={this.props.videoName}
+              getUploads={this.props.getUploads}
+              uploads={this.props.uploads}
+            />
+          </div>
+          <div className={classnames('col', 's6', Styles.button)} id={Styles.needsMusicButton}>
+            <NeedsMusicButton
+              index={this.props.index}
+              videoId={this.props.videoId}
+              videoName={this.props.videoName}
+              getUploads={this.props.getUploads}
+              uploads={this.props.uploads}
+            />
+          </div>
+        </div>
       </div>
     );
   }

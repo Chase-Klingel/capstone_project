@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Styles from './css/moodButton';
 import Dropdown from 'react-dropdown';
 
 const options = ['yes', 'no'];
@@ -43,8 +42,8 @@ export default class NeedsMusicButton extends React.Component {
     const defaultOption = this.state.selected;
 
     return (
-      <div>
-        <Dropdown options={options} onChange={this.onSelect} value={defaultOption} placeholder="Needs Music" />
+      <div style={{background: 'grey', color: 'white', textAlign: 'center', padding: '10px'}}>
+        <Dropdown options={options} onChange={this.onSelect} value={defaultOption} placeholder="Needs Music?" />
       </div>
     );
   }

@@ -1,0 +1,79 @@
+.btn {
+  position: relative;
+  display: inline-block;
+  border: 6px solid #ed7669;
+  transition: all .1s ease-in-out;
+  z-index: 99;
+  margin: 50px;
+}
+
+.btn.active {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.btn:focus, .btn:hover {
+  border: 12px solid #e74c3c;
+}
+
+.btn,
+.btn > span {
+  cursor: pointer;
+}
+
+.btn > span {
+  min-width: 180px;
+}
+
+.btnInr {
+  display: inline-block;
+  color: white;
+  font-weight: 100;
+  font-size: 2em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: bold;
+  background: #ed7669;
+  padding: 1em 2em;
+  margin: 6px;
+  transition: all .1s ease-in-out;
+}
+
+.btnInr:focus, .btnInr:hover {
+  background: #e74c3c;
+  padding: 1em 2em;
+  margin: 0;
+}
+
+.txtA {
+  display: inline;
+}
+
+.txtB {
+  display: none;
+}
+
+.btn:focus .btnInr,
+.btn:hover .btnInr {
+  background: #e74c3c;
+  padding: 1em 2em;
+  margin: 0;
+}
+
+.btn:focus .txtA,
+.btn:hover .txtA {
+  display: none;
+}
+
+.btn:focus .txtB,
+.btn:hover .txtB {
+  display: inline;
+}
+
+@media (max-width: 570px) {
+  .btn {
+    margin: 50px auto;
+  }
+
+  .btnInr {
+    font-size: 24px;
+  }
+}

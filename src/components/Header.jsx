@@ -39,7 +39,7 @@ export default class Header extends React.Component {
               <div className="col s1">
                 <h1 id={Styles.logo}><Link to="/">AV</Link></h1>
               </div>
-              <div>
+              <div className="col s8 offset-s3">
                 <ul id={Styles.navList}>
                   <Link to="/">Home</Link>
                   <Link to="/">Notifications</Link>
@@ -69,23 +69,23 @@ export default class Header extends React.Component {
               <div className="col s1">
                 <h1 id={Styles.logo}><Link to="/">AV</Link></h1>
               </div>
-              <div>
+              <div className="col s8 offset-s3">
                 <ul id={Styles.navList}>
                   <Link to="/">Home</Link>
                   <Link to="/">Notifications</Link>
                   <Link to="/">Browse Music</Link>
                   <Link to="/">Browse Videos</Link>
-                  <Link to="/">Import Latest Music</Link>
+                  <Link to="/" id={Styles.last}>Import Latest Music</Link>
                 </ul>
               </div>
-            </div>
-            <div id={Styles.modalContainer}>
-              <SignOutModal
-                scUser={this.props.scUser}
-                userInfo={this.props.userInfo}
-                authUser={this.props.authUser}
-                signupInfo={this.props.signupInfo}
-              />
+              <div id={Styles.modalContainer}>
+                <SignOutModal
+                  scUser={this.props.scUser}
+                  userInfo={this.props.userInfo}
+                  authUser={this.props.authUser}
+                  signupInfo={this.props.signupInfo}
+                />
+              </div>
             </div>
             <button id={Styles.queueButton}>Video Queue</button>
           </div>

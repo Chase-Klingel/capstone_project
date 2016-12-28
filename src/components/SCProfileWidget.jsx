@@ -98,34 +98,37 @@ export default class SCProfileWidget extends React.Component {
   renderPlayerIcons() {
     const { playing } = this.state
 
-    let skipButtons = (
-      <span className={Styles.player__control__iconsSkip}>
-        <div className={Styles.player__control__icon} onClick={this.forward.bind(this)}>
-          <Forward  />
-        </div>
-        <div className={Styles.player__control__icon} onClick={this.replay.bind(this)}>
-          <Replay onClick={this.replay.bind(this)} />
-        </div>
-      </span>
-    )
-
     if (playing) {
       return (
-        <div className={Styles.player__control__iconsPause}>
-          <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
-            <Pause />
+        <div>
+          <div id={Styles.seekBack}  onClick={this.replay.bind(this)}>
+            <Replay onClick={this.replay.bind(this)} />
           </div>
-          {skipButtons}
+          <div className={Styles.player__control__iconsPause}>
+            <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
+              <Pause />
+            </div>
+          </div>
+          <div id={Styles.seekForward}  onClick={this.forward.bind(this)}>
+            <Forward  />
+          </div>
         </div>
       );
     }
 
     return (
-      <div className={Styles.player__control__iconsPlay}>
-        <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
-          <Play />
+      <div>
+        <div id={Styles.seekBack} onClick={this.replay.bind(this)}>
+          <Replay onClick={this.replay.bind(this)} />
         </div>
-        {skipButtons}
+        <div className={Styles.player__control__iconsPlay}>
+          <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
+            <Play />
+          </div>
+        </div>
+        <div id={Styles.seekForward} onClick={this.forward.bind(this)}>
+          <Forward />
+        </div>
       </div>
     )
   }
@@ -143,13 +146,10 @@ export default class SCProfileWidget extends React.Component {
       	<div className={classnames(Styles.player,  Styles.player__trackActive)}>
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
-          <div>
-            <h4 style={{fontSize: '14px', color: '#474747'}}>{this.props.artistName}</h4>
-            <h4 style={{fontSize: '14px', color: '#474747'}}>{this.props.songName}</h4>
+          <div className="center-align" style={{marginBottom: '30px'}}>
+            <h4 style={{fontSize: '14px', color: 'white'}}>{this.props.artistName} - {this.props.songName}</h4>
           </div>
-          <div className={Styles.player__control}>
-            { this.renderPlayerIcons() }
-          </div>
+
 
           <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
 
@@ -166,13 +166,19 @@ export default class SCProfileWidget extends React.Component {
               <span className={Styles.player__progress__time}>{duration}</span>
             </div>
           </div>
+
+          <div className={Styles.player__control}>
+            { this.renderPlayerIcons() }
+          </div>
         </div>
-        <MoodButton
-          songId={this.props.songId}
-          songName={this.props.songName}
-          artistName={this.props.artistName}
-          getUploads={this.props.getUploads}
-        />
+        <div className={Styles.moodButton}>
+          <MoodButton
+            songId={this.props.songId}
+            songName={this.props.songName}
+            artistName={this.props.artistName}
+            getUploads={this.props.getUploads}
+          />
+        </div>
       </div>
     )
   }

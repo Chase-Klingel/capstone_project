@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import Styles from './css/profileBanner';
 
 export default class ProfileBanner extends React.Component {
@@ -15,7 +16,10 @@ export default class ProfileBanner extends React.Component {
   profileBanner() {
     if (this.props.vimeoUser && this.props.uploads) {
       return (
-        <div className="row" style={{backgroundImage: `url(${this.props.signupInfo[0].photoUrl})`, backgroundPosition: 'no-repeat center center', height: '500px', width: '100vw', backgroundSize: 'cover'} }>
+        <div className='row' id={Styles.profileImg} style={{backgroundImage: `linear-gradient(
+      rgba(0, 0, 0, .3),
+      rgba(0, 0, 0, .3)
+    ),url(${this.props.signupInfo[0].photoUrl})`}}>
           <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
             <h5 id={Styles.username}>{this.props.signupInfo[0].vimeoUsername}</h5>
             <p id={Styles.bio}>{this.props.signupInfo[0].bio}</p>
@@ -24,9 +28,12 @@ export default class ProfileBanner extends React.Component {
       );
     } else if (this.props.scUser && this.props.uploads) {
       return (
-        <div className="row" style={{backgroundImage: `url(${this.props.signupInfo[0].photoUrl})`, backgroundPosition: 'no-repeat center center', height: '500px', width: '100vw', backgroundSize: 'cover'} }>
+        <div className="row" id={Styles.profileImg} style={{backgroundImage: `linear-gradient(
+      rgba(0, 0, 0, .3),
+      rgba(0, 0, 0, .3)
+    ),url(${this.props.signupInfo[0].photoUrl})`} }>
           <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
-            <h5 id={Styles.username}>{this.props.signupInfo[0].scUsername}</h5>
+            <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
             <p id={Styles.bio}>{this.props.signupInfo[0].bio}</p>
           </div>
         </div>
