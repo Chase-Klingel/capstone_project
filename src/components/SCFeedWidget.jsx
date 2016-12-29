@@ -7,9 +7,8 @@ import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
 import Styles from './css/scProfileWidget';
-import MoodButton from './MoodButton';
 
-export default class SCProfileWidget extends React.Component {
+export default class SCFeedWidget extends React.Component {
   constructor(props) {
     super(props);
 
@@ -142,89 +141,39 @@ export default class SCProfileWidget extends React.Component {
     iconClass += ' player__control__icon'
     let time_remains = { transform: `translateX(-${percent_remains.toString()}%)` }
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
-    if (this.props.uploads.length === 1) {
-      return (
-        <div className={classnames('col', 's12', 'm6', 'offset-m3', 'widgetContainer')}>
-        	<div className={classnames(Styles.player,  Styles.player__trackActive)}>
 
-            <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
-            <div className="center-align" style={{marginBottom: '30px'}}>
-              <h4 style={{fontSize: '14px', color: 'white'}}>{this.props.artistName} - {this.props.songName}</h4>
-            </div>
+    return (
+      <div className='col s12 m4' style={{marginTop: '50px', marginBottom: '50px'}}>
+      	<div className={classnames(Styles.player,  Styles.player__trackActive)}>
+
+          <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
+          <div className="center-align" style={{marginBottom: '30px'}}>
+            <h4 style={{fontSize: '14px', color: 'white'}}>{this.props.artistName} - {this.props.songName}</h4>
+          </div>
 
 
-            <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
+          <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
 
-              <div className={Styles.player__progress}>
-                <span className={Styles.player__progress__time}>{current_time}</span>
-                <span className={Styles.player__progress__bar}>
-                  <span ref='progress' className={Styles.player__progress__barContainer}>
+            <div className={Styles.player__progress}>
+              <span className={Styles.player__progress__time}>{current_time}</span>
+              <span className={Styles.player__progress__bar}>
+                <span ref='progress' className={Styles.player__progress__barContainer}>
 
-                    <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
-                          style={progress_remains}></span>
-                    <span className={Styles.player__progress__barPercent} style={time_remains}></span>
-                  </span>
+                  <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
+                        style={progress_remains}></span>
+                  <span className={Styles.player__progress__barPercent} style={time_remains}></span>
                 </span>
-                <span className={Styles.player__progress__time}>{duration}</span>
-              </div>
-            </div>
-
-            <div className={Styles.player__control}>
-              { this.renderPlayerIcons() }
+              </span>
+              <span className={Styles.player__progress__time}>{duration}</span>
             </div>
           </div>
-          <div className={Styles.moodButton}>
-            <MoodButton
-              songId={this.props.songId}
-              songName={this.props.songName}
-              artistName={this.props.artistName}
-              getUploads={this.props.getUploads}
-            />
+
+          <div className={Styles.player__control}>
+            { this.renderPlayerIcons() }
           </div>
         </div>
-      )
-    } else {
-      return (
-        <div className={classnames('col', 's12', 'm6', 'widgetContainer')}>
-        	<div className={classnames(Styles.player,  Styles.player__trackActive)}>
-
-            <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
-            <div className="center-align" style={{marginBottom: '30px'}}>
-              <h4 style={{fontSize: '14px', color: 'white'}}>{this.props.artistName} - {this.props.songName}</h4>
-            </div>
-
-
-            <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
-
-              <div className={Styles.player__progress}>
-                <span className={Styles.player__progress__time}>{current_time}</span>
-                <span className={Styles.player__progress__bar}>
-                  <span ref='progress' className={Styles.player__progress__barContainer}>
-
-                    <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
-                          style={progress_remains}></span>
-                    <span className={Styles.player__progress__barPercent} style={time_remains}></span>
-                  </span>
-                </span>
-                <span className={Styles.player__progress__time}>{duration}</span>
-              </div>
-            </div>
-
-            <div className={Styles.player__control}>
-              { this.renderPlayerIcons() }
-            </div>
-          </div>
-          <div className={Styles.moodButton}>
-            <MoodButton
-              songId={this.props.songId}
-              songName={this.props.songName}
-              artistName={this.props.artistName}
-              getUploads={this.props.getUploads}
-            />
-          </div>
-        </div>
-      )
-    }
+      </div>
+    )
   }
 
   render () {
@@ -235,3 +184,22 @@ export default class SCProfileWidget extends React.Component {
     )
   }
 }
+
+
+// import React from 'react';
+//
+// export default class SCFeedWidget extends React.Component {
+//   render() {
+//     <div className="row">
+//       <div className="col s4 center-align">
+//         hey
+//       </div>
+//       <div className="col s4 center-align">
+//         hi
+//       </div>
+//       <div className="col s4 center-align">
+//         hello
+//       </div>
+//     </div>
+//   }
+// }

@@ -55,6 +55,14 @@
   padding-top: 220px;
 }
 
+#uploadImgInput:focus {
+  border: 1px solid white;
+}
+
+#uploadImgInput {
+  color: white;
+}
+
 #uploadInputContainer > ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: white;
   font-size: 14px;

@@ -17,7 +17,10 @@ export default class App extends React.Component {
       signupInfo: [],
       userInfo: [],
       uploads: [],
-      profileContent: []
+      profileContent: [],
+
+      allMusic: [],
+      allVideos: []
     }
 
     this.authUser = this.authUser.bind(this);
@@ -26,6 +29,7 @@ export default class App extends React.Component {
     this.getUserInfo = this.getUserInfo.bind(this);
     this.getUploads = this.getUploads.bind(this);
     this.getProfileContent = this.getProfileContent.bind(this);
+    this.getAllMusic = this.getAllMusic.bind(this);
   }
 
   componentDidMount() {
@@ -102,6 +106,10 @@ export default class App extends React.Component {
     this.setState({ profileContent: content });
   }
 
+  getAllMusic(allMusic) {
+    this.setState({ allMusic: allMusic });
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -121,6 +129,8 @@ export default class App extends React.Component {
               getUploads={this.getUploads}
               profileContent={this.state.profileContent}
               getProfileContent={this.getProfileContent}
+              allMusic={this.state.allMusic}
+              getAllMusic={this.getAllMusic}
             />
           </main>
 

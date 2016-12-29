@@ -29,7 +29,7 @@ export default class StartExploringButton extends React.Component {
       videoList: videosNeedingMusic
     })
     .then(() => {
-      window.location.href = '/profile';
+      window.location.href = '/';
     })
   }
 
@@ -50,7 +50,7 @@ export default class StartExploringButton extends React.Component {
       songList: songsWithMoods
     })
     .then(() => {
-      window.location.href = '/profile';
+      window.location.href = '/';
     })
   }
 

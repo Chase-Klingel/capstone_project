@@ -116,7 +116,7 @@ export default class ProfileSetup extends React.Component {
               signupInfo={this.props.signupInfo}
             />
 
-            <div className="container">
+            <div className="container" id={Styles.widgetContainer}>
               <div className="row">
                 <WidgetList
                   vimeoUser={this.props.vimeoUser}
@@ -146,7 +146,7 @@ export default class ProfileSetup extends React.Component {
               signupInfo={this.props.signupInfo}
             />
 
-            <div className="container">
+            <div className="container" id={Styles.widgetContainer}>
               <div className="row">
                 <WidgetList
                   vimeoUser={this.props.vimeoUser}
@@ -178,7 +178,7 @@ export default class ProfileSetup extends React.Component {
               signupInfo={this.props.signupInfo}
             />
 
-            <div className="container">
+            <div className="container" id={Styles.widgetContainer}>
               <div className="row">
                 <WidgetList
                   scUser={this.props.scUser}
@@ -207,7 +207,7 @@ export default class ProfileSetup extends React.Component {
               signupInfo={this.props.signupInfo}
             />
 
-            <div className="container">
+            <div className="container" id={Styles.widgetContainer}>
               <div className="row">
                 <WidgetList
                   vimeoUser={this.props.vimeoUser}

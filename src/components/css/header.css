@@ -54,7 +54,7 @@
   position: absolute;
   top: 0;
   right: 35px;
-  height: 360px;
   width: 270px;
   padding: 0 34px 0 34px;
+  z-index: 300;
 }

@@ -14,10 +14,27 @@ import PlayButton from './PlayButton';
 import ProfileSetup from './ProfileSetup';
 import MyProfile from './MyProfile';
 
+import MusicFeed from './MusicFeed';
+import VideoFeed from './VideoFeed';
+
+
 export default class Main extends React.Component {
   render() {
     return (
       <div>
+        <Match pattern="/" exactly render={() =>
+          this.props.vimeoUser ? (
+            <MusicFeed
+              allMusic={this.props.allMusic}
+              getAllMusic={this.props.getAllMusic}
+              musicMoods={this.props.musicMoods}
+              getMusicMoods={this.props.getMusicMoods}
+            />
+          ) : (
+            <VideoFeed />
+          )
+        }/>
+
         <Match pattern="/profile-setup" exactly render={() =>
           !this.props.loggedIn ? (
             <Redirect to="/signin" />

@@ -101,7 +101,7 @@ export default class ProfileBannerSetup extends React.Component {
             <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
-                <input type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
+                <input id={Styles.uploadImgInput} type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
                 <button id={Styles.update} type="submit" onClick={this.updateImg}>update</button>
               </div>
             </div>
@@ -139,7 +139,7 @@ export default class ProfileBannerSetup extends React.Component {
             <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
-                <input type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
+                <input id={Styles.uploadImgInput} type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
                 <button id={Styles.update} type="submit" onClick={this.updateImg}>update</button>
               </div>
             </div>

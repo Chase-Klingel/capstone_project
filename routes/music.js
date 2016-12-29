@@ -25,6 +25,18 @@ const authorize = function(req, res, next) {
   });
 };
 
+router.get('/api/all-music', (req, res, next) => {
+  knex('music')
+    .then((rows) => {
+      const music = camelizeKeys(rows);
+
+      res.send(music);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 // to display a '+1' etc. notification for a specific user
 // use this route and filter by userId
 // otherwise this route is for displaying all music with commments on the feed view
