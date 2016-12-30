@@ -9,14 +9,15 @@ export default class MoodSection extends React.Component {
 
     this.state = {
       widgets: [],
-      showingNext: true,
-      showingPrevious: false,
-      index: 0
+      nextWidgets: true,
+      previousWidgets: false,
+      index: 0,
+      max: false,
+      min: true
     }
 
-    this.test = this.test.bind(this);
-    this.shownWidgets = this.shownWidgets.bind(this);
-    // this.showPrevious = this.showPrevious.bind(this);
+    this.displayWidgets = this.displayWidgets.bind(this);
+    this.threeOrLessWidgets = this.threeOrLessWidgets.bind(this);
     this.forward= this.forward.bind(this);
     this.showNext = this.showNext.bind(this);
 
@@ -34,7 +35,7 @@ export default class MoodSection extends React.Component {
     this.setState({ widgets: widgets });
   }
 
-  shownWidgets() {
+  threeOrLessWidgets() {
     const widgets = this.state.widgets.map((widget, i) => {
       if (i <= 2) {
         return <SCFeedWidget
@@ -51,7 +52,11 @@ export default class MoodSection extends React.Component {
   }
 
   previous() {
-    this.setState({showingNext: false, showingPrevious: true, index: this.state.index - 3 });
+    if ((this.state.index - 6) <= 0) {
+      this.setState({ min: true });
+    }
+
+    this.setState({nextWidgets: false, previousWidgets: true, index: this.state.index - 3, max: false });
   }
 
   showPrevious() {
@@ -76,7 +81,11 @@ export default class MoodSection extends React.Component {
   }
 
   forward() {
-    this.setState({ showingNext: true, showingPrevious: false, index: this.state.index + 3 });
+    if ((this.state.index + 6) >= this.state.widgets.length) {
+      this.setState({ max: true });
+    }
+
+    this.setState({ nextWidgets: true, previousWidgets: false, index: this.state.index + 3, min: false });
   }
 
   showNext() {
@@ -100,7 +109,7 @@ export default class MoodSection extends React.Component {
     return widgets;
   }
 
-  test() {
+  displayWidgets() {
     if (this.state.widgets.length > 3) {
       return (
         <div className="col s12">
@@ -108,11 +117,10 @@ export default class MoodSection extends React.Component {
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row" style={{marginTop: '50px', position: 'relative'}}>
               <div id={Styles.buttonsContainer}>
-                <button onClick={this.previous}>Backward</button>
-                <button onClick={this.forward}>forward</button>
+                <button onClick={this.previous} disabled={this.state.min}>Backward</button>
+                <button onClick={this.forward} disabled={this.state.max}>forward</button>
               </div>
-              {this.state.showingNext ? this.showNext() : this.showPrevious() }
-              {/* {this.state.showingPrevious ?  this.showPrevious() : this.shownWidgets()} */}
+              {this.state.nextWidgets ? this.showNext() : this.showPrevious() }
             </div>
           </div>
         </div>
@@ -123,7 +131,7 @@ export default class MoodSection extends React.Component {
           <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row">
-              { this.shownWidgets() }
+              { this.threeOrLessWidgets() }
             </div>
           </div>
         </div>
@@ -139,7 +147,7 @@ export default class MoodSection extends React.Component {
 
     return (
       <div>
-        { this.test() }
+        { this.displayWidgets() }
       </div>
     )
   }

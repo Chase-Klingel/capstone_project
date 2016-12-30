@@ -140,20 +140,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-/*
-
-else if (uploads[0].needsMusic !== undefined) {
-  const mappedUploads = this.state.uploads.map((upload) => {
-    if (uploads[0].videoId !== upload.videoId) {
-
-      return upload;
-    }
-
-    return uploads[0];
-  });
-
-  this.setState({ uploads: mappedUploads });
-}
-
-*/
