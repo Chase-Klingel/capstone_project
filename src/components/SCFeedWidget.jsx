@@ -7,6 +7,7 @@ import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
 import Styles from './css/scProfileWidget';
+import CommentModal from './CommentModal';
 
 export default class SCFeedWidget extends React.Component {
   constructor(props) {
@@ -19,7 +20,7 @@ export default class SCFeedWidget extends React.Component {
       percent_progress_remains: 100,
       duration: '0:00',
       current_time: '0:00',
-      client_id: 'c6e1e2a98490d428460f8d36af919bb4'
+      client_id: 'c6e1e2a98490d428460f8d36af919bb4',
     }
 
     this.renderWidget = this.renderWidget.bind(this);
@@ -172,6 +173,15 @@ export default class SCFeedWidget extends React.Component {
             { this.renderPlayerIcons() }
           </div>
         </div>
+        <div style={{display: 'inline'}}>
+          <button>Add to Queue</button>
+        </div>
+        <CommentModal
+          dbId={this.props.dbId}
+          songId={this.props.songId}
+          musicComments={this.props.musicComments}
+          userInfo={this.props.userInfo}
+        />
       </div>
     )
   }
@@ -184,22 +194,3 @@ export default class SCFeedWidget extends React.Component {
     )
   }
 }
-
-
-// import React from 'react';
-//
-// export default class SCFeedWidget extends React.Component {
-//   render() {
-//     <div className="row">
-//       <div className="col s4 center-align">
-//         hey
-//       </div>
-//       <div className="col s4 center-align">
-//         hi
-//       </div>
-//       <div className="col s4 center-align">
-//         hello
-//       </div>
-//     </div>
-//   }
-// }

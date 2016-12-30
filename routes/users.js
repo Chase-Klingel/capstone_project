@@ -36,6 +36,8 @@ router.get('/api/vimeo-user', authorize, (req, res, next) => {
         throw boom.create(400, 'Can\'t find user');
       }
 
+      console.log(user, 'here is the user');
+
       const userData = camelizeKeys(user);
       delete userData.email;
       delete userData.hashedPassword;

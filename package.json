@@ -91,6 +91,7 @@
     "react-router": "^4.0.0-alpha.6",
     "react-soundcloud-player": "^1.0.1",
     "react-soundplayer": "^0.3.6",
+    "react-vimeo": "^1.0.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "rimraf": "^2.4.3",

@@ -25,6 +25,19 @@ const authorize = function(req, res, next) {
   });
 };
 
+
+router.get('/api/all-videos', (req, res, next) => {
+  knex('videos')
+    .then((rows) => {
+      const videos = camelizeKeys(rows);
+
+      res.send(videos);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 // to display a '+1' etc. notification for a specific user
 // use this route and filter by userId
 // otherwise this route is for displaying all videos with commments on the feed view
@@ -53,9 +66,9 @@ router.get('/api/videos-comments', (req, res, next) => {
 // post comments to a video
 router.post('/api/videos-comments', authorize, (req, res, next) => {
   const { userId } = req.token;
-  const { videoId, commenter, comment, viewed } = req.body;
+  const { videoId, commenter, commenterPhotoUrl, comment, viewed } = req.body;
 
-  const insertComment = { videoId, commenter, comment, viewed };
+  const insertComment = { videoId, commenter, commenterPhotoUrl, comment, viewed };
 
   knex('comments')
     .insert(decamelizeKeys(insertComment), '*')

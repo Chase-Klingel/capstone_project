@@ -63,9 +63,9 @@ router.get('/api/music-comments', (req, res, next) => {
 // post comments to a song
 router.post('/api/music-comments', authorize, (req, res, next) => {
   const { userId } = req.token;
-  const { musicId, commenter, comment, viewed } = req.body;
+  const { musicId, commenter, commenterPhotoUrl, comment, viewed } = req.body;
 
-  const insertComment = { musicId, commenter, comment, viewed };
+  const insertComment = { musicId, commenter, commenterPhotoUrl, comment, viewed };
 
   knex('comments')
     .insert(decamelizeKeys(insertComment), '*')

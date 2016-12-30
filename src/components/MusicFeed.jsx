@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import MoodSection from './MoodSection';
+import MusicMoodSection from './MusicMoodSection';
 
 export default class MusicFeed extends React.Component {
   constructor(props) {
@@ -10,9 +10,20 @@ export default class MusicFeed extends React.Component {
       .then((res) => {
         this.props.getAllMusic(res.data);
       })
+      .then(() => {
+        axios.get('/api/music-comments')
+          .then((res) => {
+            console.log(res.data);
+            this.props.getMusicComments(res.data);
+          })
+          .catch((err) => {
+            return err;
+          })
+      })
       .catch((err) => {
         return err;
       })
+
 
     this.generateMoodSections = this.generateMoodSections.bind(this);
   }
@@ -22,10 +33,12 @@ export default class MusicFeed extends React.Component {
     const moodSections = [];
     for (let i = 0; i < musicMoods.length; i++) {
       moodSections.push(
-        <MoodSection
+        <MusicMoodSection
           key={i}
           allMusic={this.props.allMusic}
           musicMood={musicMoods[i]}
+          musicComments={this.props.musicComments}
+          userInfo={this.props.userInfo}
         />
       );
     }
@@ -34,7 +47,7 @@ export default class MusicFeed extends React.Component {
   }
 
   render() {
-    if (this.props.allMusic.length === 0) {
+    if (this.props.allMusic.length === 0 || this.props.musicComments.length === 0) {
       return false;
     }
 

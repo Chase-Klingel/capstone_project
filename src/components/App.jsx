@@ -9,7 +9,7 @@ import Footer from './Footer';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-
+    // NEED TO FIGURE OUT HOW TO SET VIMEO USER OR SC USER TO TRUE THROUGHOUT USER SESSION
     this.state = {
       loggedIn: false,
       vimeoUser: true,
@@ -20,7 +20,9 @@ export default class App extends React.Component {
       profileContent: [],
 
       allMusic: [],
-      allVideos: []
+      musicComments: [],
+      allVideos: [],
+      videoComments: [],
     }
 
     this.authUser = this.authUser.bind(this);
@@ -30,12 +32,15 @@ export default class App extends React.Component {
     this.getUploads = this.getUploads.bind(this);
     this.getProfileContent = this.getProfileContent.bind(this);
     this.getAllMusic = this.getAllMusic.bind(this);
+    this.getMusicComments = this.getMusicComments.bind(this);
+    this.getAllVideos = this.getAllVideos.bind(this);
+    this.getVideoComments = this.getVideoComments.bind(this);
   }
 
   componentDidMount() {
     axios.get('/api/token')
       .then(res => {
-        this.setState({ loggedIn: res.data });
+        this.setState({ loggedIn: res.data});
       })
       .catch(err => {
         return err;
@@ -110,6 +115,19 @@ export default class App extends React.Component {
     this.setState({ allMusic: allMusic });
   }
 
+  getMusicComments(musicComments) {
+    this.setState({ musicComments: musicComments });
+  }
+
+
+  getAllVideos(allVideos) {
+    this.setState({ allVideos: allVideos });
+  }
+
+  getVideoComments(videoComments) {
+    this.setState({ videoComments: videoComments });
+  }
+
   render() {
     return (
       <BrowserRouter>
@@ -131,6 +149,13 @@ export default class App extends React.Component {
               getProfileContent={this.getProfileContent}
               allMusic={this.state.allMusic}
               getAllMusic={this.getAllMusic}
+              musicComments={this.state.musicComments}
+              getMusicComments={this.getMusicComments}
+              allVideos={this.state.allVideos}
+              getAllVideos={this.getAllVideos}
+              videoComments={this.state.videoComments}
+              getVideoComments={this.getVideoComments}
+              userInfo={this.state.userInfo}
             />
           </main>
 

@@ -40,10 +40,13 @@ export default class MoodSection extends React.Component {
       if (i <= 2) {
         return <SCFeedWidget
           key={i}
+          dbId={this.state.widgets[i].id}
           songId={widget.songId}
           songName={widget.songName}
           artistName={widget.artistName}
           widgets={this.state.widgets}
+          musicComments={this.props.musicComments}
+          userInfo={this.props.userInfo}
         />
       }
     });
@@ -70,9 +73,12 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <SCFeedWidget
           key={i}
+          dbId={this.state.widgets[i].id}
           songId={this.state.widgets[i].songId}
           songName={this.state.widgets[i].songName}
           artistName={this.state.widgets[i].artistName}
+          musicComments={this.props.musicComments}
+          userInfo={this.props.userInfo}
         />
       );
     }
@@ -99,9 +105,12 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <SCFeedWidget
           key={i}
+          dbId={this.state.widgets[i].id}
           songId={this.state.widgets[i].songId}
           songName={this.state.widgets[i].songName}
           artistName={this.state.widgets[i].artistName}
+          musicComments={this.props.musicComments}
+          userInfo={this.props.userInfo}
         />
       );
     }
@@ -137,7 +146,6 @@ export default class MoodSection extends React.Component {
         </div>
       );
     }
-
   }
 
   render() {

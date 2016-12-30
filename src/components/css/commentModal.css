@@ -1,0 +1,33 @@
+.modalContainer {
+  display: inline;
+}
+
+.commentsContainer {
+  background: white;
+  padding-top: '25px';
+}
+
+.commentBox {
+  border: 1px solid lightgrey;
+  color: grey;
+  height: 80px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.buttonContainer {
+  padding: 20px;
+  text-align: center;
+}
+
+.commentButton {
+  background-color: #20daa5;
+  border: none;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 75px;
+  box-shadow: 0 2px 5px lightgrey;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Notifications, { notify } from 'react-notify-toast';
 import axios from 'axios';
 import Styles from './css/startExploringButton';
@@ -25,11 +26,10 @@ export default class StartExploringButton extends React.Component {
       return (video.mood && video.needsMusic === true);
     });
 
+    window.location.href = '/music-feed';
+
     axios.post('/api/videos/bulk', {
       videoList: videosNeedingMusic
-    })
-    .then(() => {
-      window.location.href = '/';
     })
   }
 
@@ -46,11 +46,13 @@ export default class StartExploringButton extends React.Component {
       return song.mood;
     });
 
+    window.location.href = '/video-feed';
+
     axios.post('/api/music/bulk', {
       songList: songsWithMoods
     })
-    .then(() => {
-      window.location.href = '/';
+    .catch((err) => {
+      return err;
     })
   }
 

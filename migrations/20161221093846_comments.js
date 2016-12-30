@@ -12,7 +12,8 @@ exports.up = function(knex) {
       .inTable('music')
       .onDelete('CASCADE');
     table.string('commenter').notNullable().defaultTo('');
-    table.string('comment').notNullable().defaultTo('');
+    table.string('commenter_photo_url').notNullable().defaultTo('');
+    table.string('comment', 5000).notNullable().defaultTo('');
     table.boolean('viewed').notNullable().defaultTo(false);
     table.timestamps(true, true);
   });

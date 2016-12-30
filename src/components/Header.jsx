@@ -7,7 +7,7 @@ import SignOutModal from './SignOutModal';
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.vimeoUser) {
+    if (this.props.vimeoUser === true) {
       axios.get('/api/vimeo-user')
         .then((res) => {
           const userInfo = [res.data];
@@ -41,10 +41,10 @@ export default class Header extends React.Component {
               </div>
               <div className="col s8 offset-s3">
                 <ul id={Styles.navList}>
-                  <Link to="/">Home</Link>
+                  <Link to="/music-feed">Home</Link>
                   <Link to="/">Notifications</Link>
-                  <Link to="/">Browse Music</Link>
-                  <Link to="/">Browse Videos</Link>
+                  <Link to="/music-feed">Browse Music</Link>
+                  <Link to="/video-feed">Browse Videos</Link>
                   <Link to="/">Import Latest Videos</Link>
                 </ul>
               </div>
@@ -71,10 +71,10 @@ export default class Header extends React.Component {
               </div>
               <div className="col s8 offset-s3">
                 <ul id={Styles.navList}>
-                  <Link to="/">Home</Link>
+                  <Link to="/video-feed">Home</Link>
                   <Link to="/">Notifications</Link>
-                  <Link to="/">Browse Music</Link>
-                  <Link to="/">Browse Videos</Link>
+                  <Link to="/music-feed">Browse Music</Link>
+                  <Link to="/video-feed">Browse Videos</Link>
                   <Link to="/" id={Styles.last}>Import Latest Music</Link>
                 </ul>
               </div>

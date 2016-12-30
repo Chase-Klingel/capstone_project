@@ -17,22 +17,28 @@ import MyProfile from './MyProfile';
 import MusicFeed from './MusicFeed';
 import VideoFeed from './VideoFeed';
 
-
 export default class Main extends React.Component {
   render() {
     return (
       <div>
-        <Match pattern="/" exactly render={() =>
-          this.props.vimeoUser ? (
-            <MusicFeed
-              allMusic={this.props.allMusic}
-              getAllMusic={this.props.getAllMusic}
-              musicMoods={this.props.musicMoods}
-              getMusicMoods={this.props.getMusicMoods}
-            />
-          ) : (
-            <VideoFeed />
-          )
+        <Match pattern="/music-feed" exactly render={() =>
+          <MusicFeed
+            allMusic={this.props.allMusic}
+            getAllMusic={this.props.getAllMusic}
+            musicComments={this.props.musicComments}
+            getMusicComments={this.props.getMusicComments}
+            userInfo={this.props.userInfo}
+          />
+        }/>
+
+        <Match pattern="/video-feed" exactly render={() =>
+          <VideoFeed
+            allVideos={this.props.allVideos}
+            getAllVideos={this.props.getAllVideos}
+            videoComments={this.props.videoComments}
+            getVideoComments={this.props.getVideoComments}
+            userInfo={this.props.userInfo}
+          />
         }/>
 
         <Match pattern="/profile-setup" exactly render={() =>
@@ -90,7 +96,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/signin/vimeo" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/" />
+            <Redirect to="/music-feed" />
           ) : (
             <VimeoSignIn
               authUser={this.props.authUser}
