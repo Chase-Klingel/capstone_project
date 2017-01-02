@@ -44,6 +44,8 @@ export default class CommentModal extends React.Component {
         return comment.songId === this.props.songId;
       });
 
+      console.log(comments, ' comments');
+
       this.setState({ comments: comments });
     }
   }
@@ -75,7 +77,6 @@ export default class CommentModal extends React.Component {
         return err;
       })
     } else if (this.props.userInfo[0].vimeoUsername && this.props.videoId) {
-      console.log('this one');
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, videoId: this.props.videoId }
       const nextComments = this.state.comments.concat(newComment);
       this.setState({ comments: nextComments });
@@ -86,9 +87,6 @@ export default class CommentModal extends React.Component {
         commenterPhotoUrl: this.props.userInfo[0].photoUrl,
         comment:  this.refs['comment'].value,
         viewed: false
-      })
-      .then((res) => {
-        console.log(res.data, ' here is your data');
       })
       .catch((err) => {
         return err;

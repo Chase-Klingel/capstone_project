@@ -50,9 +50,9 @@ export default class QueueButton extends React.Component {
           <img src={QueueIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
           <span style={{marginLeft: '10px'}}>Add to Queue</span>
         </button>
-        <button onClick={this.removeFromQueue} style={{display: this.removeDisplay(), border: 'none', background: 'transparent', color: 'grey'}}>
+        <button onClick={this.removeFromQueue} style={{display: this.removeDisplay(), border: 'none', background: 'transparent', color: 'gold'}}>
           <img src={QueueIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span style={{marginLeft: '10px'}}>Remove from Queue</span>
+          <span style={{marginLeft: '10px'}}>Add to Queue</span>
         </button>
       </div>
     );

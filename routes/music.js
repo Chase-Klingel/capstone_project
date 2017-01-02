@@ -26,8 +26,8 @@ const authorize = function(req, res, next) {
 };
 
 router.get('/api/all-music', (req, res, next) => {
-  knex('music')
-    .innerJoin('sc_users', 'sc_users.id', 'music.user_id')
+  knex('sc_users')
+    .innerJoin('music', 'sc_users.id', 'music.user_id')
     .then((rows) => {
       const music = camelizeKeys(rows);
 
@@ -35,7 +35,7 @@ router.get('/api/all-music', (req, res, next) => {
         delete music[i].email,
         delete music[i].hashedPassword
       }
-      
+
       res.send(music);
     })
     .catch((err) => {
