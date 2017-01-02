@@ -167,16 +167,19 @@ export default class SCEditRoomWidget extends React.Component {
           <div className={Styles.player__control}>
             { this.renderPlayerIcons() }
           </div>
-          <CommentModal
-            dbId={this.props.dbId}
-            songId={this.props.songId}
-            musicComments={this.props.musicComments}
-            backgroundPhoto={this.props.backgroundPhoto}
-            userInfo={this.props.userInfo}
-            artistName={this.props.artistName}
-            songName={this.props.songName}
-            musicQueue={this.props.musicQueue}
-          />
+          <div style={{marginTop: '50px', marginLeft: '15px'}}>
+            <CommentModal
+              dbId={this.props.dbId}
+              songId={this.props.songId}
+              musicComments={this.props.musicComments}
+              backgroundPhoto={this.props.backgroundPhoto}
+              userInfo={this.props.userInfo}
+              artistName={this.props.artistName}
+              songName={this.props.songName}
+              musicQueue={this.props.musicQueue}
+              userInfo={this.props.userInfo}
+            />
+          </div>
         </div>
     )
   }

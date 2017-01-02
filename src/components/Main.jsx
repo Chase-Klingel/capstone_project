@@ -122,6 +122,7 @@ export default class Main extends React.Component {
             <Redirect to="/music-feed" />
           ) : (
             <MusicEditingRoom
+              userInfo={this.props.userInfo}
               musicQueue={this.props.musicQueue}
             />
           )

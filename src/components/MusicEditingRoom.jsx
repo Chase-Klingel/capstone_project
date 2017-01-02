@@ -113,6 +113,7 @@ export default class MusicEditingRoom extends React.Component {
         <div className="row">
           <div className="col s12" style={{marginTop: '168px'}}>
             <SCEditRoomWidget
+              dbId={this.props.musicQueue[this.state.index].dbId}
               songPosition={this.state.index + 1}
               songId={this.props.musicQueue[this.state.index].songId}
               artistName={this.props.musicQueue[this.state.index].artistName}
@@ -122,6 +123,7 @@ export default class MusicEditingRoom extends React.Component {
               nextTrack={this.nextTrack}
               musicQueue={this.props.musicQueue}
               musicComments={this.filteredComments()}
+              userInfo={this.props.userInfo}
             />
           </div>
         </div>

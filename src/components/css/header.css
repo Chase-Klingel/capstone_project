@@ -71,3 +71,7 @@
   padding: 0 34px 0 34px;
   z-index: 300;
 }
+
+.disabled {
+  pointer-events: none;
+}

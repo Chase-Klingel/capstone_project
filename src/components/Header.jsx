@@ -30,6 +30,14 @@ export default class Header extends React.Component {
     this.header = this.header.bind(this);
   }
 
+  disabled() {
+    if (this.props.musicQueue.length === 0) {
+      return Styles.disabled;
+    } else {
+      return;
+    }
+  }
+
   header() {
     if (this.props.vimeoUser) {
       return (
@@ -57,7 +65,7 @@ export default class Header extends React.Component {
                 signupInfo={this.props.signupInfo}
               />
             </div>
-            <Link to="/testing-music" id={Styles.queueButton}>
+            <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
               Music Queue
               <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.musicQueue.length}</span>
             </Link>
