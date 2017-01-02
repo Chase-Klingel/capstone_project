@@ -39,6 +39,7 @@ export default class MusicFeed extends React.Component {
           musicMood={musicMoods[i]}
           musicComments={this.props.musicComments}
           userInfo={this.props.userInfo}
+          updateMusicQueue={this.props.updateMusicQueue}
         />
       );
     }

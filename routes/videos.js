@@ -88,16 +88,39 @@ router.post('/api/videos-comments', authorize, (req, res, next) => {
 router.get('/api/videos', authorize, (req, res, next) => {
   const { userId } = req.token;
 
-  knex('vimeo_users')
-    .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
-    .innerJoin('comments', 'videos.id', 'comments.video_id')
-    // may have some issues here. It was logging out userId as '2' when it should have been '1'
+  knex('videos')
+    .innerJoin('vimeo_users', 'vimeo_users.id', 'videos.user_id')
+    // .innerJoin('comments', 'videos.id', 'comments.video_id')
     .where('vimeo_users.id', userId)
     .then((rows) => {
 
       const userVideos = camelizeKeys(rows);
 
       for (let i = 0; i < userVideos.length; i++) {
+        delete userVideos[i].email;
+        delete userVideos[i].vimeoId;
+        delete userVideos[i].vimeoToken;
+      }
+
+      res.send(userVideos);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get('/api/videos/edit', authorize, (req, res, next) => {
+  const { userId } = req.token;
+
+  knex('videos')
+    .innerJoin('vimeo_users', 'vimeo_users.id', 'videos.user_id')
+    .where('vimeo_users.id', userId)
+    .then((rows) => {
+
+      const userVideos = camelizeKeys(rows);
+
+      for (let i = 0; i < userVideos.length; i++) {
+        delete userVideos[i].email;
         delete userVideos[i].vimeoId;
         delete userVideos[i].vimeoToken;
       }

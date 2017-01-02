@@ -5,7 +5,7 @@ html {
 }
 
 body {
-  background: #f5f5f5;
+  background: #141414;
   margin: 0 0 65px;
 }
 
@@ -58,7 +58,7 @@ body {
 }
 
 #authTitle {
-  color: #596377;
+  color: lightgrey;
   font-size: 28px;
 }
 
@@ -79,6 +79,10 @@ body {
 #authButton:hover {
   background: #1f1f1f;
   transition: .5s ease all;
+}
+
+#vimeoButton:hover {
+  cursor: pointer;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -117,7 +121,7 @@ input[type=password]:focus:not([readonly]) {
 .button7 {
   width: 250px;
   height: 75px;
-  border: 2px solid #daa520;
+  border: 1px solid #daa520;
   cursor:pointer;
   position:relative;
   overflow:hidden;

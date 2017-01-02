@@ -17,6 +17,8 @@ import MyProfile from './MyProfile';
 import MusicFeed from './MusicFeed';
 import VideoFeed from './VideoFeed';
 
+import MusicEditingRoom from './MusicEditingRoom';
+
 export default class Main extends React.Component {
   render() {
     return (
@@ -28,6 +30,7 @@ export default class Main extends React.Component {
             musicComments={this.props.musicComments}
             getMusicComments={this.props.getMusicComments}
             userInfo={this.props.userInfo}
+            updateMusicQueue={this.props.updateMusicQueue}
           />
         }/>
 
@@ -106,10 +109,20 @@ export default class Main extends React.Component {
 
         <Match pattern="/signin/sc" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/" />
+            <Redirect to="/video-feed" />
           ) : (
             <SCSignIn
               authUser={this.props.authUser}
+            />
+          )
+        }/>
+
+        <Match pattern="/testing-music" exactly render={() =>
+          !this.props.loggedIn ? (
+            <Redirect to="/music-feed" />
+          ) : (
+            <MusicEditingRoom
+              musicQueue={this.props.musicQueue}
             />
           )
         }/>

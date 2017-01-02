@@ -1,6 +1,10 @@
+body {
+  background: #141414;
+}
+
 #buttonsContainer {
   z-index: ;
   position: absolute;
-  right: 12px;
+  right: 0px;
   top: 0;
 }

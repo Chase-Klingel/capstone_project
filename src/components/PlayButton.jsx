@@ -1,16 +1,14 @@
 import React from 'react';
-
+import Styles from './css/VimeoFeedWidget';
+import Play from '../img/play.png';
 export default class PlayButton extends React.Component {
   render() {
     return (
       <button
-        className='vimeo-play-button'
+        className={Styles.vimeoPlayButton}
         // onClick={ this.props.onClick }
         type='button'>
-        <svg viewBox="298 388 16 16">
-          <path d="M298 404v-16l16 8"></path>
-        </svg>
-        {/* <span className="play-word-vimeo">play</span> */}
+        play
       </button>
     );
   }

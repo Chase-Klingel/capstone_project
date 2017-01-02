@@ -112,7 +112,7 @@ export default class SignOutModal extends React.Component {
     } else {
       return (
         <div>
-          <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].vimeoUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
+          <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].scUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
           <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
             <div id={Styles.profileImgContainer}>
               <img src={this.props.userInfo[0].photoUrl} />

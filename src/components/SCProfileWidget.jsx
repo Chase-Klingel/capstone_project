@@ -103,16 +103,10 @@ export default class SCProfileWidget extends React.Component {
     if (playing) {
       return (
         <div>
-          <div id={Styles.seekBack}  onClick={this.replay.bind(this)}>
-            <Replay onClick={this.replay.bind(this)} />
-          </div>
           <div className={Styles.player__control__iconsPause}>
             <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
               <Pause />
             </div>
-          </div>
-          <div id={Styles.seekForward}  onClick={this.forward.bind(this)}>
-            <Forward  />
           </div>
         </div>
       );
@@ -120,16 +114,10 @@ export default class SCProfileWidget extends React.Component {
 
     return (
       <div>
-        <div id={Styles.seekBack} onClick={this.replay.bind(this)}>
-          <Replay onClick={this.replay.bind(this)} />
-        </div>
         <div className={Styles.player__control__iconsPlay}>
           <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
             <Play />
           </div>
-        </div>
-        <div id={Styles.seekForward} onClick={this.forward.bind(this)}>
-          <Forward />
         </div>
       </div>
     )
@@ -149,14 +137,14 @@ export default class SCProfileWidget extends React.Component {
 
             <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
             <div className="center-align" style={{marginBottom: '30px'}}>
-              <h4 style={{fontSize: '14px', color: 'white'}}>{this.props.artistName} - {this.props.songName}</h4>
+              <h4 className={Styles.artistName}>{this.props.artistName}</h4>
+              <h4 className={Styles.songName}>{this.props.songName}</h4>
             </div>
 
 
             <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
 
               <div className={Styles.player__progress}>
-                <span className={Styles.player__progress__time}>{current_time}</span>
                 <span className={Styles.player__progress__bar}>
                   <span ref='progress' className={Styles.player__progress__barContainer}>
 
@@ -165,7 +153,6 @@ export default class SCProfileWidget extends React.Component {
                     <span className={Styles.player__progress__barPercent} style={time_remains}></span>
                   </span>
                 </span>
-                <span className={Styles.player__progress__time}>{duration}</span>
               </div>
             </div>
 
@@ -186,18 +173,18 @@ export default class SCProfileWidget extends React.Component {
     } else {
       return (
         <div className={classnames('col', 's12', 'm6', 'widgetContainer')}>
-        	<div className={classnames(Styles.player,  Styles.player__trackActive)}>
+          <div className={classnames(Styles.player,  Styles.player__trackActive)}>
 
             <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
             <div className="center-align" style={{marginBottom: '30px'}}>
-              <h4 style={{fontSize: '14px', color: 'white'}}>{this.props.artistName} - {this.props.songName}</h4>
+              <h4 className={Styles.artistName}>{this.props.artistName}</h4>
+              <h4 className={Styles.songName}>{this.props.songName}</h4>
             </div>
 
 
             <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
 
               <div className={Styles.player__progress}>
-                <span className={Styles.player__progress__time}>{current_time}</span>
                 <span className={Styles.player__progress__bar}>
                   <span ref='progress' className={Styles.player__progress__barContainer}>
 
@@ -206,7 +193,6 @@ export default class SCProfileWidget extends React.Component {
                     <span className={Styles.player__progress__barPercent} style={time_remains}></span>
                   </span>
                 </span>
-                <span className={Styles.player__progress__time}>{duration}</span>
               </div>
             </div>
 

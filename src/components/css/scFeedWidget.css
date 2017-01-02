@@ -2,13 +2,8 @@
   margin-top: 50px;
   margin-bottom: 75px;
   height: 200px;
-  border-right: 1px solid white;
   position: relative;
   padding: 0;
-}
-
-.player__trackActive {
-  background: #a7a7a7;
 }
 
 .player {
@@ -26,6 +21,10 @@
   font-size: 16px;
 }
 
+.artistName {
+  padding-top: 25px;
+}
+
 .songName {
   font-weight: 900;
   letter-spacing: 1.2px;
@@ -36,11 +35,16 @@
 .player__control__icon {
   cursor: pointer;
   margin-left: 1%;
-  margin-top: -10px;
+  margin-top: -30px;
 }
 
 .player__trackActive {
   z-index: 10;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .player__progress__barContainer {
@@ -49,9 +53,9 @@
   position: relative;
   width: 75%;
   margin-left: 20%;
-  top: 20px;
+  top: 0px;
   height: .4rem;
-  background: #eee;
+  background: rgba(255, 255, 255, .3);
   border-radius: 2px;
   overflow: hidden;
   transform: translateZ(0);
@@ -67,9 +71,18 @@
 }
 
 .player__progress__barProgress {
-  background: white;
+  background: rgba(253, 253, 253, .3);
 }
 
-.moodButton div:hover {
-  cursor: pointer;
+.buttonsContainer {
+  position: relative;
+  top: 40px;
+  padding: 0;
+  left: -10px;
+}
+
+@media (max-width: 601px) {
+  .widgetContainer {
+    margin-bottom: 1px;
+  }
 }

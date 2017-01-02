@@ -3,14 +3,18 @@ import Modal from 'boron/FadeModal';
 import axios from 'axios';
 import classnames from 'classnames';
 import Comments from './Comments';
+import SCCommentWidget from './SCCommentWidget';
+import VimeoCommentWidget from './VimeoCommentWidget';
 import Styles from './css/commentModal';
+import CommentIcon from '../img/comment-button.png';
+
 
 const contentStyle = {
     borderRadius: '5px'
 };
 
 const modalStyle = {
-  height: '500px',
+  maxHeight: '500px',
   overflowY: 'scroll'
 };
 
@@ -22,6 +26,7 @@ export default class CommentModal extends React.Component {
       comments: []
     }
 
+    this.commentModal = this.commentModal.bind(this);
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.postComment = this.postComment.bind(this);
@@ -32,8 +37,6 @@ export default class CommentModal extends React.Component {
       const comments = this.props.videoComments.filter((comment) => {
         return comment.videoId === this.props.dbId;
       });
-
-      console.log(comments, ' comments');
 
       this.setState({ comments: comments });
     } else {
@@ -127,23 +130,68 @@ export default class CommentModal extends React.Component {
     return false;
   }
 
+  commentModal() {
+    if (this.props.songId) {
+      return (
+        <div className={Styles.modalContainer}>
+          <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>
+            <img src={CommentIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
+            <span style={{marginLeft: '10px'}}>Comments</span>
+          </button>
+          <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
+            <div className={classnames('col', 's12', Styles.commentsContainer)}>
+              <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
+              <SCCommentWidget
+                songId={this.props.songId}
+                artistName={this.props.artistName}
+                songName={this.props.songName}
+                backgroundPhoto={this.props.backgroundPhoto}
+              />
+              <Comments
+                comments={this.state.comments}
+              />
+              <div className="col s12">
+                <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
+              </div>
+              <div className={Styles.buttonContainer}>
+                <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
+              </div>
+            </div>
+          </Modal>
+        </div>
+      );
+    } else {
+      return (
+        <div className={Styles.modalContainer}>
+          <button onClick={this.showModal}>comments</button>
+          <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
+            <div className={classnames('col', 's12', Styles.commentsContainer)}>
+              <h4 className={classnames('center-align', Styles.commentHeader)} style={{zIndex: '1'}}>comments</h4>
+              <VimeoCommentWidget
+                videoId={this.props.videoId}
+                videoName={this.props.videoName}
+                producerName={this.props.producerName}
+              />
+              <Comments
+                comments={this.state.comments}
+              />
+              <div className="col s12">
+                <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
+              </div>
+              <div className={Styles.buttonContainer}>
+                <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
+              </div>
+            </div>
+          </Modal>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
-      <div className={Styles.modalContainer}>
-        <button onClick={this.showModal}>comments</button>
-        <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
-          <div className={classnames('col', 's12', Styles.commentsContainer)}>
-            <Comments
-              comments={this.state.comments}
-            />
-            <div className="col s12">
-              <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
-            </div>
-            <div className={Styles.buttonContainer}>
-              <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
-            </div>
-          </div>
-        </Modal>
+      <div style={{display: 'inline'}}>
+        { this.commentModal() }
       </div>
     )
   }

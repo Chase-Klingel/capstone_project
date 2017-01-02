@@ -38,8 +38,13 @@ export default class MoodSection extends React.Component {
   threeOrLessWidgets() {
     const widgets = this.state.widgets.map((widget, i) => {
       if (i <= 2) {
+        if (widget.songName.length > 24) {
+          widget.songName = widget.songName.substr(0, 24).trim() + '...';
+        }
+
         return <SCFeedWidget
           key={i}
+          backgroundPhoto={this.state.widgets[i].photoUrl}
           dbId={this.state.widgets[i].id}
           songId={widget.songId}
           songName={widget.songName}
@@ -47,6 +52,7 @@ export default class MoodSection extends React.Component {
           widgets={this.state.widgets}
           musicComments={this.props.musicComments}
           userInfo={this.props.userInfo}
+          updateMusicQueue={this.props.updateMusicQueue}
         />
       }
     });
@@ -79,6 +85,8 @@ export default class MoodSection extends React.Component {
           artistName={this.state.widgets[i].artistName}
           musicComments={this.props.musicComments}
           userInfo={this.props.userInfo}
+          backgroundPhoto={this.state.widgets[i].photoUrl}
+          updateMusicQueue={this.props.updateMusicQueue}
         />
       );
     }
@@ -111,6 +119,8 @@ export default class MoodSection extends React.Component {
           artistName={this.state.widgets[i].artistName}
           musicComments={this.props.musicComments}
           userInfo={this.props.userInfo}
+          backgroundPhoto={this.state.widgets[i].photoUrl}
+          updateMusicQueue={this.props.updateMusicQueue}
         />
       );
     }
@@ -122,7 +132,7 @@ export default class MoodSection extends React.Component {
     if (this.state.widgets.length > 3) {
       return (
         <div className="col s12">
-          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
+          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '25px 0 25px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row" style={{marginTop: '50px', position: 'relative'}}>
               <div id={Styles.buttonsContainer}>
@@ -137,7 +147,7 @@ export default class MoodSection extends React.Component {
     } else {
       return (
         <div className="col s12">
-          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
+          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '25px 0 25px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row">
               { this.threeOrLessWidgets() }

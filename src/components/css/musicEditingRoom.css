@@ -1,0 +1,13 @@
+#selectedVideoContainer {
+  margin-top: 300px;
+  padding: 0;
+}
+
+#selectedVideoContainer button {
+  margin: 0 auto;
+  background: #20daa5;
+  padding: 15px 45px;
+  color: white;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+}

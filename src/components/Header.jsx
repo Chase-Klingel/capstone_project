@@ -37,7 +37,7 @@ export default class Header extends React.Component {
           <div id={Styles.navbar}>
             <div className="row">
               <div className="col s1">
-                <h1 id={Styles.logo}><Link to="/">AV</Link></h1>
+                <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
               </div>
               <div className="col s8 offset-s3">
                 <ul id={Styles.navList}>
@@ -57,7 +57,10 @@ export default class Header extends React.Component {
                 signupInfo={this.props.signupInfo}
               />
             </div>
-            <button id={Styles.queueButton}>Music Queue</button>
+            <Link to="/testing-music" id={Styles.queueButton}>
+              Music Queue
+              <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.musicQueue.length}</span>
+            </Link>
           </div>
         </div>
       );
@@ -67,7 +70,7 @@ export default class Header extends React.Component {
           <div id={Styles.navbar}>
             <div className="row">
               <div className="col s1">
-                <h1 id={Styles.logo}><Link to="/">AV</Link></h1>
+                <h1 id={Styles.logo}><Link to="/video-feed">AV</Link></h1>
               </div>
               <div className="col s8 offset-s3">
                 <ul id={Styles.navList}>

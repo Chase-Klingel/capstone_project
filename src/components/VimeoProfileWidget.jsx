@@ -11,7 +11,7 @@ export default class VimeoProfileWidget extends React.Component {
     this.renderWidget = this.renderWidget.bind(this);
   }
   renderWidget() {
-    const src = `https://player.vimeo.com/video/${this.props.videoId}?badge=0&autopause=0&player_id=0&amp;color=daa520&amp;background=000000`
+    const src = `https://player.vimeo.com/video/${this.props.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`
 
     if (this.props.uploads.length === 1) {
       return (

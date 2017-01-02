@@ -21,8 +21,10 @@ export default class App extends React.Component {
 
       allMusic: [],
       musicComments: [],
+      musicQueue: [],
       allVideos: [],
       videoComments: [],
+
     }
 
     this.authUser = this.authUser.bind(this);
@@ -33,6 +35,7 @@ export default class App extends React.Component {
     this.getProfileContent = this.getProfileContent.bind(this);
     this.getAllMusic = this.getAllMusic.bind(this);
     this.getMusicComments = this.getMusicComments.bind(this);
+    this.updateMusicQueue = this.updateMusicQueue.bind(this);
     this.getAllVideos = this.getAllVideos.bind(this);
     this.getVideoComments = this.getVideoComments.bind(this);
   }
@@ -67,6 +70,7 @@ export default class App extends React.Component {
         userInfo={this.state.userInfo}
         getUserInfo={this.getUserInfo}
         signupInfo={this.state.signupInfo}
+        musicQueue={this.state.musicQueue}
       />
     }
   }
@@ -119,6 +123,18 @@ export default class App extends React.Component {
     this.setState({ musicComments: musicComments });
   }
 
+  updateMusicQueue(song, operation) {
+    if (operation === 'adding') {
+      const nextQueue = this.state.musicQueue.concat(song);
+      this.setState({ musicQueue: nextQueue });
+    } else {
+      const nextQueue = this.state.musicQueue.filter((queueSong) => {
+        return queueSong.songId !== song.songId;
+      });
+      this.setState({ musicQueue: nextQueue });
+    }
+
+  }
 
   getAllVideos(allVideos) {
     this.setState({ allVideos: allVideos });
@@ -151,6 +167,8 @@ export default class App extends React.Component {
               getAllMusic={this.getAllMusic}
               musicComments={this.state.musicComments}
               getMusicComments={this.getMusicComments}
+              updateMusicQueue={this.updateMusicQueue}
+              musicQueue={this.state.musicQueue}
               allVideos={this.state.allVideos}
               getAllVideos={this.getAllVideos}
               videoComments={this.state.videoComments}

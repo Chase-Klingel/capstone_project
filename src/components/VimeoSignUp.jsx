@@ -32,7 +32,7 @@ export default class VimeoSignUp extends React.Component {
             <p id={Styles.authTitle} className="center-align">Create an account</p>
             <div className="col s12 center-align" id={Styles.vimeoButtonContainer}>
               <img src={VimeoImg} id={Styles.vimeoImg} />
-              <a onClick={this.signup}>sign up with vimeo</a>
+              <a id={Styles.vimeoButton} onClick={this.signup}>sign up with vimeo</a>
             </div>
           </div>
         </div>

@@ -1,0 +1,12 @@
+.selectButton {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #20daa5;
+  color: white;
+}
+
+.selectButton:hover {
+  background: #33e1af;
+  transition: .5s ease all;
+}

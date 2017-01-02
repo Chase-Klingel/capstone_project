@@ -116,6 +116,10 @@ body {
   border-left: 1px solid lightgrey;
 }
 
+#signInButton:hover {
+  cursor: pointer;
+}
+
 #vimeoImg {
   max-width: 100%;
   width: 50px;

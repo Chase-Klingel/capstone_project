@@ -6,9 +6,7 @@ import Play from './Play';
 import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
-import Styles from './css/scFeedWidget';
-import CommentModal from './CommentModal';
-import QueueButton from './QueueButton';
+import Styles from './css/scCommentWidget';
 
 export default class SCFeedWidget extends React.Component {
   constructor(props) {
@@ -133,8 +131,8 @@ export default class SCFeedWidget extends React.Component {
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
     return (
-      <div>
-      	<div className={classnames('col', 's12', 'm4', Styles.widgetContainer)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`,
+
+      	<div className={classnames(Styles.player,  Styles.player__trackActive)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)), url(${this.props.backgroundPhoto})`,
         backgroundPosition: 'center center'}}>
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
@@ -161,27 +159,8 @@ export default class SCFeedWidget extends React.Component {
           <div className={Styles.player__control}>
             { this.renderPlayerIcons() }
           </div>
-          <div className={classnames(Styles.buttonsContainer)}>
-            <QueueButton
-              updateMusicQueue={this.props.updateMusicQueue}
-              songId={this.props.songId}
-              artistName={this.props.artistName}
-              songName={this.props.songName}
-              backgroundPhoto={this.props.backgroundPhoto}
-            />
-            <CommentModal
-              dbId={this.props.dbId}
-              songId={this.props.songId}
-              musicComments={this.props.musicComments}
-              backgroundPhoto={this.props.backgroundPhoto}
-              userInfo={this.props.userInfo}
-              artistName={this.props.artistName}
-              songName={this.props.songName}
-            />
-          </div>
         </div>
-      </div>
-    );
+    )
   }
 
   render () {
