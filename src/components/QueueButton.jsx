@@ -33,13 +33,13 @@ export default class QueueButton extends React.Component {
 
   addToQueue() {
     this.setState({ added: true });
-    const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName, backgroundPhoto: this.props.backgroundPhoto };
+    const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, musicComments: this.props.musicComments };
     this.props.updateMusicQueue(song, 'adding');
   }
 
   removeFromQueue() {
     this.setState({ added: false });
-    const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName,  backgroundPhoto: this.props.backgroundPhoto };
+    const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName,  backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, musicComments: this.props.musicComments };
     this.props.updateMusicQueue(song, 'removing');
   }
 

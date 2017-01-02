@@ -168,6 +168,8 @@ export default class SCFeedWidget extends React.Component {
               artistName={this.props.artistName}
               songName={this.props.songName}
               backgroundPhoto={this.props.backgroundPhoto}
+              dbId={this.props.dbId}
+              musicComments={this.props.musicComments}
             />
             <CommentModal
               dbId={this.props.dbId}

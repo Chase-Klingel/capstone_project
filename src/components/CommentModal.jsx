@@ -129,7 +129,36 @@ export default class CommentModal extends React.Component {
   }
 
   commentModal() {
-    if (this.props.songId) {
+    if (this.props.songId && this.props.musicQueue) {
+      return (
+        <div className={Styles.modalContainer}>
+          <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>
+            <img src={CommentIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
+            <span style={{marginLeft: '10px'}}>Comments</span>
+          </button>
+          <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
+            <div className={classnames('col', 's12', Styles.commentsContainer)}>
+              <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
+              <SCCommentWidget
+                songId={this.props.songId}
+                artistName={this.props.artistName}
+                songName={this.props.songName}
+                backgroundPhoto={this.props.backgroundPhoto}
+              />
+              <Comments
+                comments={this.props.musicComments}
+              />
+              <div className="col s12">
+                <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
+              </div>
+              <div className={Styles.buttonContainer}>
+                <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
+              </div>
+            </div>
+          </Modal>
+        </div>
+      );
+    } else if (this.props.songId) {
       return (
         <div className={Styles.modalContainer}>
           <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>

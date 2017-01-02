@@ -99,6 +99,14 @@ export default class MusicEditingRoom extends React.Component {
     }
   }
 
+  filteredComments() {
+    const comments = this.props.musicQueue[this.state.index].musicComments.filter((comment) => {
+      return comment.songId === this.props.musicQueue[this.state.index].songId;
+    });
+
+    return comments;
+  }
+
   render() {
     return (
       <div>
@@ -113,6 +121,7 @@ export default class MusicEditingRoom extends React.Component {
               previousTrack={this.previousTrack}
               nextTrack={this.nextTrack}
               musicQueue={this.props.musicQueue}
+              musicComments={this.filteredComments()}
             />
           </div>
         </div>
