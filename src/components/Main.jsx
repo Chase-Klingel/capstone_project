@@ -31,6 +31,7 @@ export default class Main extends React.Component {
             getMusicComments={this.props.getMusicComments}
             userInfo={this.props.userInfo}
             updateMusicQueue={this.props.updateMusicQueue}
+            emptyQueue={this.props.emptyQueue}
           />
         }/>
 

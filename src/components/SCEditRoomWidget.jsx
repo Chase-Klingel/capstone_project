@@ -26,6 +26,7 @@ export default class SCEditRoomWidget extends React.Component {
     }
 
     this.renderWidget = this.renderWidget.bind(this);
+    this.timeUpdated = this.timeUpdated.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,7 @@ export default class SCEditRoomWidget extends React.Component {
   }
 
   togglePlay () {
+    this.props.playVideo();
     const { playing, audioPlayer } = this.state;
     this.setState({ playing: !playing, showAudioPlayer: true }, () => {
       if (audioPlayer.paused) {
@@ -83,22 +85,6 @@ export default class SCEditRoomWidget extends React.Component {
     }, 1000)
   }
 
-  forward() {
-    const { audioPlayer } = this.state
-    let newTime = audioPlayer.currentTime + 30
-    if(newTime < audioPlayer.duration) {
-      audioPlayer.currentTime = Math.floor(newTime)
-    }
-  }
-
-  replay() {
-    const { audioPlayer } = this.state
-    let newTime = audioPlayer.currentTime - 30
-    if(newTime > 0) {
-      audioPlayer.currentTime = Math.floor(newTime)
-    }
-  }
-
   renderPlayerIcons() {
     const { playing } = this.state
 
@@ -134,53 +120,59 @@ export default class SCEditRoomWidget extends React.Component {
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
     return (
-      	<div className={classnames(Styles.player,  Styles.player__trackActive)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`,
-        backgroundPosition: 'center center'}}>
-          <SCeditForward
-            nextTrack={this.props.nextTrack}
-          />
-          <SCeditPrevious
-            previousTrack={this.props.previousTrack}
-          />
-          <h5 className={Styles.playlistCount}>{this.props.songPosition}/{this.props.musicQueue.length}</h5>
-          <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
-          <div className="center-align" style={{marginBottom: '30px'}}>
-            <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> {this.props.artistName}</h4>
-            <h4 className={Styles.songName}>{this.props.songName}</h4>
-          </div>
+      <div className={classnames(Styles.player,  Styles.player__trackActive)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center'}}>
+        <SCeditForward
+          playVideo={this.props.playVideo}
+          nextTrack={this.props.nextTrack}
+        />
+
+        <h5 className={Styles.playlistCount}>{this.props.songPosition}/{this.props.musicQueue.length}</h5>
+
+        <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
+
+        <div className="center-align" style={{marginBottom: '30px'}}>
+          <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> {this.props.artistName}</h4>
+          <h4 className={Styles.songName}>{this.props.songName}</h4>
+        </div>
 
 
-          <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
+        <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
 
-            <div className={Styles.player__progress}>
-              <span className={Styles.player__progress__bar}>
-                <span ref='progress' className={Styles.player__progress__barContainer}>
+          <div className={Styles.player__progress}>
+            <span className={Styles.player__progress__bar}>
+              <span ref='progress' className={Styles.player__progress__barContainer}>
 
-                  <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
-                        style={progress_remains}></span>
-                  <span className={Styles.player__progress__barPercent} style={time_remains}></span>
-                </span>
+                <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
+                      style={progress_remains}></span>
+                <span className={Styles.player__progress__barPercent} style={time_remains}></span>
               </span>
-            </div>
-          </div>
-
-          <div className={Styles.player__control}>
-            { this.renderPlayerIcons() }
-          </div>
-          <div style={{marginTop: '50px', marginLeft: '15px'}}>
-            <CommentModal
-              dbId={this.props.dbId}
-              songId={this.props.songId}
-              musicComments={this.props.musicComments}
-              backgroundPhoto={this.props.backgroundPhoto}
-              userInfo={this.props.userInfo}
-              artistName={this.props.artistName}
-              songName={this.props.songName}
-              musicQueue={this.props.musicQueue}
-              userInfo={this.props.userInfo}
-            />
+            </span>
           </div>
         </div>
+
+        <div className={Styles.player__control}>
+          { this.renderPlayerIcons() }
+        </div>
+
+        <SCeditPrevious
+          playVideo={this.props.playVideo}
+          previousTrack={this.props.previousTrack}
+        />
+
+        <div>
+          <CommentModal
+            dbId={this.props.dbId}
+            songId={this.props.songId}
+            musicComments={this.props.musicComments}
+            backgroundPhoto={this.props.backgroundPhoto}
+            userInfo={this.props.userInfo}
+            artistName={this.props.artistName}
+            songName={this.props.songName}
+            musicQueue={this.props.musicQueue}
+            userInfo={this.props.userInfo}
+          />
+        </div>
+      </div>
     )
   }
 

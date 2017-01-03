@@ -12,7 +12,8 @@ export default class MusicEditingRoom extends React.Component {
       index: 0,
       videos: [],
       gettingVideos: false,
-      videoId: null
+      videoId: null,
+      playVideo: false
     }
 
     this.previousTrack = this.previousTrack.bind(this);
@@ -21,6 +22,7 @@ export default class MusicEditingRoom extends React.Component {
     this.selectedVideo = this.selectedVideo.bind(this);
     this.getVideoId = this.getVideoId.bind(this);
     this.display = this.display.bind(this);
+    this.playVideo = this.playVideo.bind(this);
   }
 
   componentDidMount() {
@@ -77,18 +79,34 @@ export default class MusicEditingRoom extends React.Component {
     return videoWidgets;
   }
 
-  selectedVideo() {
-    if (this.state.videoId === null) {
-      return;
+  playVideo(operation) {
+    if (operation === 'restart') {
+      console.log('here');
+      this.setState({ playVideo: false });
     }
 
-    const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`
+    this.setState({ playVideo: true });
+  }
 
-    return (
-      <div style={{margin: '100px 0'}}>
-        <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
-      </div>
-    )
+  selectedVideo(operation) {
+    if (this.state.videoId === null) {
+      return;
+    } else if (this.state.playVideo === false) {
+      const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`
+
+      return (
+        <div style={{marginTop: '-70px'}}>
+          <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
+        </div>
+      );
+    } else {
+      const src = `https://player.vimeo.com/video/${this.state.videoId}#t=0m4s?autoplay=1&portrait=0&title=0&byline=0&badge=0&player_id=0&amp;color=20daa5&amp;background=000000`;
+      return (
+        <div style={{marginTop: '-70px'}}>
+          <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
+        </div>
+      );
+    }
   }
 
   display() {
@@ -124,6 +142,7 @@ export default class MusicEditingRoom extends React.Component {
               musicQueue={this.props.musicQueue}
               musicComments={this.filteredComments()}
               userInfo={this.props.userInfo}
+              playVideo={this.playVideo}
             />
           </div>
         </div>

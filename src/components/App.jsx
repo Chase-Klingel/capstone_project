@@ -38,6 +38,7 @@ export default class App extends React.Component {
     this.updateMusicQueue = this.updateMusicQueue.bind(this);
     this.getAllVideos = this.getAllVideos.bind(this);
     this.getVideoComments = this.getVideoComments.bind(this);
+    this.emptyQueue = this.emptyQueue.bind(this);
   }
 
   componentDidMount() {
@@ -133,7 +134,10 @@ export default class App extends React.Component {
       });
       this.setState({ musicQueue: nextQueue });
     }
+  }
 
+  emptyQueue() {
+    this.setState({ musicQueue: []});
   }
 
   getAllVideos(allVideos) {
@@ -168,6 +172,7 @@ export default class App extends React.Component {
               musicComments={this.state.musicComments}
               getMusicComments={this.getMusicComments}
               updateMusicQueue={this.updateMusicQueue}
+              emptyQueue={this.emptyQueue}
               musicQueue={this.state.musicQueue}
               allVideos={this.state.allVideos}
               getAllVideos={this.getAllVideos}

@@ -10,12 +10,13 @@ import CommentIcon from '../img/comment-button.png';
 
 
 const contentStyle = {
-    borderRadius: '5px'
+    borderRadius: '5px',
 };
 
 const modalStyle = {
   maxHeight: '500px',
-  overflowY: 'scroll'
+  overflowY: 'scroll',
+  zIndex: '20000',
 };
 
 export default class CommentModal extends React.Component {
@@ -30,6 +31,7 @@ export default class CommentModal extends React.Component {
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
     this.postComment = this.postComment.bind(this);
+    this.commentButton = this.commentButton.bind(this);
   }
 
   componentDidMount() {
@@ -128,14 +130,30 @@ export default class CommentModal extends React.Component {
     return false;
   }
 
+  commentButton() {
+    if (this.props.musicQueue) {
+      return (
+        <div className="center-align">
+          <button onClick={this.showModal} id={Styles.editCommentButton}>
+            Comments
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>
+          <img src={CommentIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
+          <span className="center-align" style={{marginLeft: '10px', fontSize: '16px', color: 'grey'}}>Comments</span>
+        </button>
+      )
+    }
+  }
+
   commentModal() {
     if (this.props.songId) {
       return (
         <div className={Styles.modalContainer}>
-          <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>
-            <img src={CommentIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-            <span style={{marginLeft: '10px', fontSize: '16px'}}>Comments</span>
-          </button>
+          { this.commentButton() }
           <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
             <div className={classnames('col', 's12', Styles.commentsContainer)}>
               <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>

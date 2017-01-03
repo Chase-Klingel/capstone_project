@@ -104,6 +104,7 @@ export default class Header extends React.Component {
       );
     }
   }
+  
   render() {
     if (this.props.userInfo.length === 0) {
       return false;

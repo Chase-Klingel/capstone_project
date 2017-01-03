@@ -6,6 +6,8 @@ export default class MusicFeed extends React.Component {
   constructor(props) {
     super(props);
 
+    this.props.emptyQueue();
+
     axios.get('/api/all-music')
       .then((res) => {
         this.props.getAllMusic(res.data);
@@ -13,7 +15,6 @@ export default class MusicFeed extends React.Component {
       .then(() => {
         axios.get('/api/music-comments')
           .then((res) => {
-            console.log(res.data);
             this.props.getMusicComments(res.data);
           })
           .catch((err) => {

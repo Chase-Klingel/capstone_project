@@ -1,17 +1,19 @@
 .modalContainer {
   display: inline;
+  position: relative;
 }
 
 .commentsContainer {
   background: white;
   padding-top: 25px;
+  position: relative;
 }
 
 .commentHeader {
   background: #daa520;
   color: white;
   text-transform: uppercase;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -44,4 +46,17 @@
   text-transform: uppercase;
   font-size: 10px;
   letter-spacing: 1.5px;
+}
+
+#editCommentButton {
+  style=border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, .8);
+  font-size: 14px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  padding: 10px 30px;
+}
+
+#editCommentButton:hover {
+  border: 1px solid rgba(255, 255, 255, .7);
 }
