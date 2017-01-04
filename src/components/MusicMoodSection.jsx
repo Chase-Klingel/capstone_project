@@ -51,6 +51,7 @@ export default class MoodSection extends React.Component {
           userInfo={this.props.userInfo}
           updateMusicQueue={this.props.updateMusicQueue}
           musicQueue={this.props.musicQueue}
+          vimeoUser={this.props.vimeoUser}
         />
       }
     });
@@ -86,6 +87,8 @@ export default class MoodSection extends React.Component {
           backgroundPhoto={this.state.widgets[i].photoUrl}
           updateMusicQueue={this.props.updateMusicQueue}
           musicQueue={this.props.musicQueue}
+          vimeoUser={this.props.vimeoUser}
+
         />
       );
     }
@@ -121,6 +124,7 @@ export default class MoodSection extends React.Component {
           backgroundPhoto={this.state.widgets[i].photoUrl}
           updateMusicQueue={this.props.updateMusicQueue}
           musicQueue={this.props.musicQueue}
+          vimeoUser={this.props.vimeoUser}
         />
       );
     }
@@ -149,10 +153,7 @@ export default class MoodSection extends React.Component {
                    </svg>
                  </button>
                </div>
-              {/* <div id={Styles.buttonsContainer}>
-                <button className={Styles.seekButton} onClick={this.previous} disabled={this.state.min}>Backward</button>
-                <button className={Styles.seekButton} onClick={this.forward} disabled={this.state.max}></button>
-              </div> */}
+
               {this.state.nextWidgets ? this.showNext() : this.showPrevious() }
             </div>
           </div>

@@ -148,7 +148,7 @@ export default class SignOutModal extends React.Component {
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect}/>
     }
-    
+
     return (
       <div>
         { this.signOutModal() }

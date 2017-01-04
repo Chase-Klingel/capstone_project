@@ -40,6 +40,7 @@ export default class MusicFeed extends React.Component {
           userInfo={this.props.userInfo}
           updateMusicQueue={this.props.updateMusicQueue}
           musicQueue={this.props.musicQueue}
+          vimeoUser={this.props.vimeoUser}
         />
       );
     }

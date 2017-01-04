@@ -1,6 +1,7 @@
 #selectedVideoContainer {
   margin-top: 300px;
   padding: 0;
+  height: 500px;
 }
 
 #selectedVideoContainer button {

@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import classnames from 'classnames';
 import VimeoFeedWidget from './VimeoFeedWidget';
 import Styles from './css/moodSection';
 
@@ -47,6 +48,9 @@ export default class MoodSection extends React.Component {
           widgets={this.state.widgets}
           videoComments={this.props.videoComments}
           userInfo={this.props.userInfo}
+          updateVideoQueue={this.props.updateVideoQueue}
+          videoQueue={this.props.videoQueue}
+          scUser={this.props.scUser}
         />
       }
     });
@@ -80,6 +84,9 @@ export default class MoodSection extends React.Component {
           widgets={this.state.widgets}
           videoComments={this.props.videoComments}
           userInfo={this.props.userInfo}
+          updateVideoQueue={this.props.updateVideoQueue}
+          videoQueue={this.props.videoQueue}
+          scUser={this.props.scUser}
         />
       );
     }
@@ -113,6 +120,9 @@ export default class MoodSection extends React.Component {
           widgets={this.state.widgets}
           videoComments={this.props.videoComments}
           userInfo={this.props.userInfo}
+          updateVideoQueue={this.props.updateVideoQueue}
+          videoQueue={this.props.videoQueue}
+          scUser={this.props.scUser}
         />
       );
     }
@@ -124,7 +134,7 @@ export default class MoodSection extends React.Component {
     if (this.state.widgets.length > 3) {
       return (
         <div className="col s12">
-          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.videoMood}</h5>
+          <h5 className="center-align" style={{padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.videoMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row" style={{marginTop: '50px', position: 'relative'}}>
               <div id={Styles.buttonsContainer}>
@@ -139,7 +149,7 @@ export default class MoodSection extends React.Component {
     } else {
       return (
         <div className="col s12">
-          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.videoMood}</h5>
+          <h5 className="center-align" style={{padding: '50px 0 50px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.videoMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row">
               { this.threeOrLessWidgets() }

@@ -25,6 +25,7 @@ export default class SCFeedWidget extends React.Component {
     }
 
     this.renderWidget = this.renderWidget.bind(this);
+    this.queueButton = this.queueButton.bind(this);
   }
 
   componentDidMount() {
@@ -124,6 +125,24 @@ export default class SCFeedWidget extends React.Component {
     )
   }
 
+  queueButton() {
+    if (this.props.vimeoUser === true) {
+      return (
+        <QueueButton
+          updateMusicQueue={this.props.updateMusicQueue}
+          songId={this.props.songId}
+          artistName={this.props.artistName}
+          songName={this.props.songName}
+          backgroundPhoto={this.props.backgroundPhoto}
+          dbId={this.props.dbId}
+          musicComments={this.props.musicComments}
+          musicQueue={this.props.musicQueue}
+          vimeoUser={this.props.vimeoUser}
+        />
+      );
+    }
+  }
+
   renderWidget() {
     const { playing, audioPlayer, percent_remains, percent_progress_remains, duration, current_time, client_id } = this.state
     let streamUrl = `https://api.soundcloud.com/tracks/${this.props.songId}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
@@ -162,16 +181,7 @@ export default class SCFeedWidget extends React.Component {
             { this.renderPlayerIcons() }
           </div>
           <div className={classnames(Styles.buttonsContainer)}>
-            <QueueButton
-              updateMusicQueue={this.props.updateMusicQueue}
-              songId={this.props.songId}
-              artistName={this.props.artistName}
-              songName={this.props.songName}
-              backgroundPhoto={this.props.backgroundPhoto}
-              dbId={this.props.dbId}
-              musicComments={this.props.musicComments}
-              musicQueue={this.props.musicQueue}
-            />
+            { this.queueButton() }
             <CommentModal
               dbId={this.props.dbId}
               songId={this.props.songId}
@@ -180,6 +190,8 @@ export default class SCFeedWidget extends React.Component {
               userInfo={this.props.userInfo}
               artistName={this.props.artistName}
               songName={this.props.songName}
+              testingVideo={this.props.testingVideo}
+              testingSong={this.props.testingSong}
             />
           </div>
         </div>

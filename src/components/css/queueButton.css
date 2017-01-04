@@ -1,0 +1,19 @@
+.queueBtnContainer {
+  display: inline;
+  margin-right: 10px;
+}
+
+.addBtn {
+  background: transparent;
+  color: rgba(255, 255, 255, .8);
+  font-size: 14px;
+  background: #daa520;
+  padding: 6px 20px;
+}
+
+.addedBtn {
+  padding: 6px 30px;
+  background: none;
+  color: rgba(255, 255, 255, .8);
+  border-bottom: 1px solid #daa520;
+}

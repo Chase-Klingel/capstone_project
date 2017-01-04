@@ -123,7 +123,7 @@ export default class SCEditRoomWidget extends React.Component {
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
     return (
-      <div className={classnames(Styles.player,  Styles.player__trackActive)} style={{zIndex: '0', backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center'}}>
+      <div className={classnames(Styles.player,  Styles.player__trackActive)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center'}}>
         <SCeditForward
           playVideo={this.props.playVideo}
           nextTrack={this.props.nextTrack}
@@ -161,7 +161,7 @@ export default class SCEditRoomWidget extends React.Component {
           playVideo={this.props.playVideo}
           previousTrack={this.props.previousTrack}
         />
-
+  
         <CommentModal
           dbId={this.props.dbId}
           songId={this.props.songId}

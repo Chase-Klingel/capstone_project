@@ -28,8 +28,10 @@ export default class Header extends React.Component {
         })
     }
 
-    this.header = this.header.bind(this);
-    this.emptyQueue =this.emptyQueue.bind(this);
+    this.queueButton = this.queueButton.bind(this);
+    this.importOption = this.importOption.bind(this);
+    this.emptyQueue = this.emptyQueue.bind(this);
+    this.emptyMusicQueueButton = this.emptyMusicQueueButton.bind(this);
   }
 
   disabled() {
@@ -40,16 +42,33 @@ export default class Header extends React.Component {
     }
   }
 
-  emptyQueue() {
+  emptyQueue(queueType) {
     console.log('here');
-    this.props.emptyQueue();
+    console.log(queueType, ' this');
+    this.props.emptyQueue(queueType);
   }
 
-  header() {
-    if (this.props.vimeoUser) {
+  emptyMusicQueueButton() {
+    if (this.props.musicQueue.length === 0) {
+      return;
+    }
+
+    return <button id={Styles.deleteButton} onClick={() => this.emptyQueue('musicQueue')}>Empty Queue</button>;
+  }
+
+  emptyVideoQueueButton() {
+    if (this.props.videoQueue.length === 0) {
+      return;
+    }
+
+    return <button id={Styles.deleteButton} onClick={() => this.emptyQueue('videoQueue')}>Empty Queue</button>;
+  }
+
+  queueButton() {
+    if (this.props.vimeoUser === true) {
       return (
         <div id={Styles.queueContainer}>
-          <button id={Styles.deleteButton} onClick={this.emptyQueue}>Empty Queue</button>
+          { this.emptyMusicQueueButton() }
           <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
              Music Queue
              <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.musicQueue.length}</span>
@@ -57,7 +76,23 @@ export default class Header extends React.Component {
         </div>
       );
     } else {
-      return <button id={Styles.queueButton}>Video Queue</button>
+      return (
+        <div id={Styles.queueContainer}>
+          { this.emptyVideoQueueButton() }
+          <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
+             Video Queue
+             <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.videoQueue.length}</span>
+           </Link>
+        </div>
+      )
+    }
+  }
+
+  importOption() {
+    if (this.props.vimeoUser === true) {
+      return <Link to="/">Import Latest Videos</Link>
+    } else {
+      return <Link to="/">Import Latest Music</Link>
     }
   }
 
@@ -79,7 +114,7 @@ export default class Header extends React.Component {
                 <Link to="/">Notifications</Link>
                 <Link to="/music-feed">Browse Music</Link>
                 <Link to="/video-feed">Browse Videos</Link>
-                <Link to="/">Import Latest Videos</Link>
+                { this.importOption() }
               </ul>
             </div>
           </div>
@@ -91,7 +126,10 @@ export default class Header extends React.Component {
               signupInfo={this.props.signupInfo}
             />
           </div>
-          { this.header() }
+          <div id={Styles.queueContainer}>
+            { this.emptyMusicQueueButton() }
+            { this.queueButton() }
+          </div>
         </div>
       </div>
     );

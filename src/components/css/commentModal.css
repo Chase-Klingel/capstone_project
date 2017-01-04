@@ -3,17 +3,27 @@
   position: relative;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
+
 .commentsContainer {
   background: white;
   padding-top: 25px;
+  height: 500px;
+  overflow-y: scroll;
   position: relative;
 }
 
 .commentHeader {
   background: #daa520;
   color: white;
+  position: absolute;
   text-transform: uppercase;
-  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -24,10 +34,11 @@
 }
 
 .commentBox {
+  position: relative;
   border: 1px solid lightgrey;
   color: grey;
   height: 80px;
-  margin-top: 20px;
+  top: 280px;
   margin-bottom: 20px;
 }
 
@@ -37,9 +48,12 @@
 }
 
 .commentButton {
+  position: relative;
   background-color: #20daa5;
   border: none;
   color: white;
+  top: 280px;
+  margin-bottom: 50px;
   padding: 15px 30px;
   border-radius: 75px;
   box-shadow: 0 2px 5px lightgrey;
@@ -52,8 +66,8 @@
   background-color: #20daa5;
 }
 
-#editCommentButton {
-  style=border: none;
+#editCommentButton,
+#feedCommentButton {
   background: transparent;
   color: rgba(255, 255, 255, .8);
   font-size: 14px;
@@ -61,6 +75,12 @@
   padding: 10px 30px;
 }
 
-#editCommentButton:hover {
+#feedCommentButton {
+  color: grey;
+  padding: 6px 20px;
+}
+
+#editCommentButton:hover,
+#feedCommentButton:hover {
   border: 1px solid rgba(255, 255, 255, .7);
 }

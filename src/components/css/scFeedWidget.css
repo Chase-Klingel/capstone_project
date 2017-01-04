@@ -75,9 +75,9 @@
 
 .buttonsContainer {
   position: absolute;
-  top: 200px;
+  top: 210px;
   padding: 0;
-  left: 0px;
+  left: 11px;
 }
 
 @media (max-width: 601px) {

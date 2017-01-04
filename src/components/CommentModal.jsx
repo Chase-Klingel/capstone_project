@@ -19,10 +19,10 @@ const modalStyle = {
 };
 
 const editModalStyle = {
-  maxHeight: '500px',
+  maxHeight: '450px',
   overflowY: 'scroll',
-  marginTop: '50px',
-  marginBottom: '100px'
+  zIndex: '10000',
+  marginTop: '50px'
 };
 
 export default class CommentModal extends React.Component {
@@ -146,10 +146,11 @@ export default class CommentModal extends React.Component {
       );
     } else {
       return (
-        <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>
-          <img src={CommentIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span className="center-align" style={{marginLeft: '10px', fontSize: '16px', color: 'grey', fontWeight: '300'}}>Comments</span>
-        </button>
+        <div style={{display: 'inline'}}>
+          <button onClick={this.showModal} id={Styles.feedCommentButton}>
+            Comments
+          </button>
+        </div>
       )
     }
   }
@@ -161,13 +162,15 @@ export default class CommentModal extends React.Component {
           { this.commentButton() }
           <Modal ref="modal" contentStyle={contentStyle} modalStyle={editModalStyle}>
             <div className={classnames('col', 's12', Styles.commentsContainer)}>
-              <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
-              <SCCommentWidget
-                songId={this.props.songId}
-                artistName={this.props.artistName}
-                songName={this.props.songName}
-                backgroundPhoto={this.props.backgroundPhoto}
-              />
+              <div className={Styles.header}>
+                <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
+                <SCCommentWidget
+                  songId={this.props.songId}
+                  artistName={this.props.artistName}
+                  songName={this.props.songName}
+                  backgroundPhoto={this.props.backgroundPhoto}
+                />
+              </div>
               <Comments
                 comments={this.state.comments}
               />
@@ -184,10 +187,10 @@ export default class CommentModal extends React.Component {
     } else {
       return (
         <div className={Styles.modalContainer}>
-          <button onClick={this.showModal}>comments</button>
+          { this.commentButton() }
           <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
             <div className={classnames('col', 's12', Styles.commentsContainer)}>
-              <h4 className={classnames('center-align', Styles.commentHeader)} style={{zIndex: '1'}}>comments</h4>
+              <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
               <VimeoCommentWidget
                 videoId={this.props.videoId}
                 videoName={this.props.videoName}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Styles from './css/queueButton';
 import QueueIcon from '../img/queue-button.png';
 
 export default class QueueButton extends React.Component {
@@ -9,13 +10,16 @@ export default class QueueButton extends React.Component {
       added: false
     }
 
+    this.queueButton = this.queueButton.bind(this);
     this.addToQueue = this.addToQueue.bind(this);
-    this.grey = this.grey.bind(this);
-    this.gold = this.gold.bind(this);
+    this.addToVideoQueue = this.addToVideoQueue.bind(this);
+    this.add = this.add.bind(this);
+    this.added = this.added.bind(this);
     this.removeFromQueue = this.removeFromQueue.bind(this);
+    this.removeFromVideoQueue = this.removeFromVideoQueue.bind(this);
   }
 
-  grey() {
+  add() {
     if (this.state.added === true) {
       return 'none'
     } else {
@@ -23,7 +27,7 @@ export default class QueueButton extends React.Component {
     }
   }
 
-  gold() {
+  added() {
     if (this.state.added === true) {
       return 'inline';
     } else {
@@ -34,6 +38,7 @@ export default class QueueButton extends React.Component {
   addToQueue() {
     this.setState({ added: true });
     const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, musicComments: this.props.musicComments };
+    console.log('zaaaa');
     this.props.updateMusicQueue(song, 'adding');
   }
 
@@ -43,18 +48,49 @@ export default class QueueButton extends React.Component {
     this.props.updateMusicQueue(song, 'removing');
   }
 
+  addToVideoQueue() {
+    this.setState({ added: true });
+    const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
+    this.props.updateVideoQueue(video, 'adding');
+  }
+
+  removeFromVideoQueue() {
+    this.setState({ added: false });
+    const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
+    this.props.updateVideoQueue(video, 'removing');
+  }
+
+  queueButton() {
+    if (this.props.vimeoUser) {
+      return (
+        <div className={Styles.queueBtnContainer}>
+          <button className={Styles.addBtn} onClick={this.addToQueue} style={{display: this.add()}}>
+            Add to Queue
+          </button>
+          <button onClick={this.removeFromQueue} className={Styles.addedBtn} style={{display: this.added()}}>
+            Added
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className={Styles.queueBtnContainer}>
+          <button className={Styles.addBtn} onClick={this.addToVideoQueue} style={{display: this.add()}}>
+            Add to Queue
+          </button>
+          <button onClick={this.removeFromVideoQueue} className={Styles.addedBtn} style={{display: this.added()}}>
+            Added
+          </button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
-      <div style={{display: 'inline'}}>
-        <button onClick={this.addToQueue} style={{display: this.grey(), border: 'none', background: 'transparent', color: 'grey'}}>
-          <img src={QueueIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span style={{marginLeft: '10px', fontWeight: '300'}}>Add to Queue</span>
-        </button>
-        <button onClick={this.removeFromQueue} style={{display: this.gold(), border: 'none', background: 'transparent', color: '#daa520'}}>
-          <img src={QueueIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span style={{marginLeft: '10px', fontWeight: '300'}}>Add to Queue</span>
-        </button>
+      <div>
+        { this.queueButton() }
       </div>
-    );
+    )
   }
 }

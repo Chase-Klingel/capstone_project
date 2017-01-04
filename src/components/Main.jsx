@@ -25,24 +25,29 @@ export default class Main extends React.Component {
       <div>
         <Match pattern="/music-feed" exactly render={() =>
           <MusicFeed
+            vimeoUser={this.props.vimeoUser}
             allMusic={this.props.allMusic}
             getAllMusic={this.props.getAllMusic}
             musicComments={this.props.musicComments}
             getMusicComments={this.props.getMusicComments}
             userInfo={this.props.userInfo}
             updateMusicQueue={this.props.updateMusicQueue}
-            emptyQueue={this.props.emptyQueue}
+            // emptyQueue={this.props.emptyQueue}
             musicQueue={this.props.musicQueue}
           />
         }/>
 
         <Match pattern="/video-feed" exactly render={() =>
           <VideoFeed
+            scUser={this.props.scUser}
             allVideos={this.props.allVideos}
             getAllVideos={this.props.getAllVideos}
             videoComments={this.props.videoComments}
             getVideoComments={this.props.getVideoComments}
             userInfo={this.props.userInfo}
+            updateVideoQueue={this.props.updateVideoQueue}
+            // emptyQueue={this.props.emptyQueue}
+            videoQueue={this.props.videoQueue}
           />
         }/>
 

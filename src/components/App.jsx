@@ -23,9 +23,10 @@ export default class App extends React.Component {
       allMusic: [],
       musicComments: [],
       musicQueue: JSON.parse(localStorage.getItem('musicQueue')) || [],
+
       allVideos: [],
       videoComments: [],
-
+      videoQueue: JSON.parse(localStorage.getItem('videoQueue')) || []
     }
 
     this.authUser = this.authUser.bind(this);
@@ -39,6 +40,7 @@ export default class App extends React.Component {
     this.updateMusicQueue = this.updateMusicQueue.bind(this);
     this.getAllVideos = this.getAllVideos.bind(this);
     this.getVideoComments = this.getVideoComments.bind(this);
+    this.updateVideoQueue = this.updateVideoQueue.bind(this);
     this.emptyQueue = this.emptyQueue.bind(this);
   }
 
@@ -77,6 +79,7 @@ export default class App extends React.Component {
         getUserInfo={this.getUserInfo}
         signupInfo={this.state.signupInfo}
         musicQueue={this.state.musicQueue}
+        videoQueue={this.state.videoQueue}
         emptyQueue={this.emptyQueue}
       />
     }
@@ -133,6 +136,7 @@ export default class App extends React.Component {
   updateMusicQueue(song, operation) {
     if (operation === 'adding') {
       const nextQueue = this.state.musicQueue.concat(song);
+      console.log(nextQueue, ' next queue');
       this.setState({ musicQueue: nextQueue });
     } else {
       const nextQueue = this.state.musicQueue.filter((queueSong) => {
@@ -142,8 +146,13 @@ export default class App extends React.Component {
     }
   }
 
-  emptyQueue() {
-    this.setState({ musicQueue: []});
+  emptyQueue(queueType) {
+    console.log('here and the queue type is ' + queueType);
+    if (queueType === 'musicQueue') {
+      this.setState({ musicQueue: [] });
+    } else {
+      this.setState({ videoQueue: [] });
+    }
   }
 
   getAllVideos(allVideos) {
@@ -154,9 +163,23 @@ export default class App extends React.Component {
     this.setState({ videoComments: videoComments });
   }
 
+  updateVideoQueue(video, operation) {
+    if (operation === 'adding') {
+      const nextQueue = this.state.videoQueue.concat(video);
+      this.setState({ videoQueue: nextQueue });
+    } else {
+      const nextQueue = this.state.videoQueue.filter((queueVideo) => {
+        return queueVideo.videoId !== video.videoId;
+      });
+
+      this.setState({ videoQueue: nextQueue });
+    }
+  }
+
   render() {
     localStorage.setItem('scUser', JSON.stringify(this.state.scUser));
     localStorage.setItem('musicQueue', JSON.stringify(this.state.musicQueue));
+    localStorage.setItem('videoQueue', JSON.stringify(this.state.videoQueue));
 
     return (
       <BrowserRouter>
@@ -187,6 +210,7 @@ export default class App extends React.Component {
               getAllVideos={this.getAllVideos}
               videoComments={this.state.videoComments}
               getVideoComments={this.getVideoComments}
+              updateVideoQueue={this.updateVideoQueue}
               userInfo={this.state.userInfo}
             />
           </main>

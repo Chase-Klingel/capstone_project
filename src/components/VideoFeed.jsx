@@ -37,6 +37,9 @@ export default class VideoFeed extends React.Component {
           videoMood={videoMoods[i]}
           videoComments={this.props.videoComments}
           userInfo={this.props.userInfo}
+          updateVideoQueue={this.props.updateVideoQueue}
+          videoQueue={this.props.videoQueue}
+          scUser={this.props.scUser}
         />
       );
     }
