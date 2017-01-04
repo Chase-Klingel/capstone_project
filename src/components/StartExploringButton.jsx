@@ -31,7 +31,7 @@ export default class StartExploringButton extends React.Component {
       return (video.mood && video.needsMusic === true);
     });
 
-    this.setState({ redirect: '/music-feed' });
+    this.setState({ redirect: '/' });
 
     axios.post('/api/videos/bulk', {
       videoList: videosNeedingMusic

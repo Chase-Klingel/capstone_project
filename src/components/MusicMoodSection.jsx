@@ -88,7 +88,6 @@ export default class MoodSection extends React.Component {
           updateMusicQueue={this.props.updateMusicQueue}
           musicQueue={this.props.musicQueue}
           vimeoUser={this.props.vimeoUser}
-
         />
       );
     }

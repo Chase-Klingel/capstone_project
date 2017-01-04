@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import classnames from 'classnames';
+import { Link } from 'react-router';
+import Styles from './css/header';
 import MusicMoodSection from './MusicMoodSection';
 
 export default class MusicFeed extends React.Component {
@@ -25,6 +28,7 @@ export default class MusicFeed extends React.Component {
 
 
     this.generateMoodSections = this.generateMoodSections.bind(this);
+    this.signupHeader = this.signupHeader.bind(this);
   }
 
   generateMoodSections() {
@@ -48,15 +52,50 @@ export default class MusicFeed extends React.Component {
     return moodSections
   }
 
+  signupHeader() {
+    if (this.props.loggedIn) {
+      return;
+    }
+
+    return (
+      <div id={Styles.navbar}>
+        <div className="row">
+          <div className="col s1">
+            <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
+          </div>
+          <div className={classnames(Styles.hideSmall, 'col', 'm8', 'offset-m3')}>
+            <ul id={Styles.navList}>
+              <Link to="/music-feed">Home</Link>
+              <Link to="/music-feed">Browse Music</Link>
+              <Link to="/video-feed">Browse Videos</Link>
+            </ul>
+          </div>
+          <div className="row">
+            <div className={Styles.signUpButtonContainer}>
+              <Link to="/signup">sign up</Link>
+            </div>
+            <div className={classnames(Styles.signUpButtonContainer, Styles.signInButtonContainer)}>
+              <Link to="/signup">sign in</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     if (this.props.allMusic.length === 0 || this.props.musicComments.length === 0) {
       return false;
     }
 
     return (
-      <div style={{marginTop: '168px'}}>
-        { this.generateMoodSections() }
+      <div>
+        { this.signupHeader() }
+        <div style={{marginTop: '168px'}}>
+          { this.generateMoodSections() }
+        </div>
       </div>
+
     );
   }
 }

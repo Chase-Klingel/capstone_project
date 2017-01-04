@@ -26,7 +26,7 @@ export default class MusicEditingRoom extends React.Component {
     this.pause = this.pause.bind(this);
   }
 
-  componentDidMount() {    
+  componentDidMount() {
     axios.get('/api/videos/edit')
       .then((res) => {
         this.setState({ videos: res.data });

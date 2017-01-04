@@ -14,13 +14,11 @@ const contentStyle = {
 };
 
 const modalStyle = {
-  maxHeight: '500px',
-  overflowY: 'scroll'
+  maxHeight: '500px'
 };
 
 const editModalStyle = {
   maxHeight: '450px',
-  overflowY: 'scroll',
   zIndex: '10000',
   marginTop: '50px'
 };
@@ -38,6 +36,7 @@ export default class CommentModal extends React.Component {
     this.hideModal = this.hideModal.bind(this);
     this.postComment = this.postComment.bind(this);
     this.commentButton = this.commentButton.bind(this);
+    this.widget = this.widget.bind(this);
   }
 
   componentDidMount() {
@@ -83,21 +82,6 @@ export default class CommentModal extends React.Component {
       .catch((err) => {
         return err;
       })
-    } else if (this.props.userInfo[0].vimeoUsername && this.props.videoId) {
-      const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, videoId: this.props.videoId }
-      const nextComments = this.state.comments.concat(newComment);
-      this.setState({ comments: nextComments });
-
-      axios.post('/api/videos-comments', {
-        videoId: this.props.dbId,
-        commenter: this.props.userInfo[0].vimeoUsername,
-        commenterPhotoUrl: this.props.userInfo[0].photoUrl,
-        comment:  this.refs['comment'].value,
-        viewed: false
-      })
-      .catch((err) => {
-        return err;
-      })
     } else if (this.props.userInfo[0].scUsername && this.props.songId) {
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].scUsername, comment: this.refs['comment'].value, songId: this.props.songId }
       const nextComments = this.state.comments.concat(newComment);
@@ -106,6 +90,21 @@ export default class CommentModal extends React.Component {
       axios.post('/api/music-comments', {
         musicId: this.props.dbId,
         commenter: this.props.userInfo[0].scUsername,
+        commenterPhotoUrl: this.props.userInfo[0].photoUrl,
+        comment:  this.refs['comment'].value,
+        viewed: false
+      })
+      .catch((err) => {
+        return err;
+      })
+    } else if (this.props.userInfo[0].vimeoUsername && this.props.videoId) {
+      const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, videoId: this.props.videoId }
+      const nextComments = this.state.comments.concat(newComment);
+      this.setState({ comments: nextComments });
+
+      axios.post('/api/videos-comments', {
+        videoId: this.props.dbId,
+        commenter: this.props.userInfo[0].vimeoUsername,
         commenterPhotoUrl: this.props.userInfo[0].photoUrl,
         comment:  this.refs['comment'].value,
         viewed: false
@@ -155,61 +154,50 @@ export default class CommentModal extends React.Component {
     }
   }
 
-  commentModal() {
+  widget() {
     if (this.props.songId) {
       return (
-        <div className={Styles.modalContainer}>
-          { this.commentButton() }
-          <Modal ref="modal" contentStyle={contentStyle} modalStyle={editModalStyle}>
-            <div className={classnames('col', 's12', Styles.commentsContainer)}>
-              <div className={Styles.header}>
-                <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
-                <SCCommentWidget
-                  songId={this.props.songId}
-                  artistName={this.props.artistName}
-                  songName={this.props.songName}
-                  backgroundPhoto={this.props.backgroundPhoto}
-                />
-              </div>
-              <Comments
-                comments={this.state.comments}
-              />
-              <div className="col s12">
-                <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
-              </div>
-              <div className={Styles.buttonContainer}>
-                <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
-              </div>
-            </div>
-          </Modal>
-        </div>
+        <SCCommentWidget
+          songId={this.props.songId}
+          artistName={this.props.artistName}
+          songName={this.props.songName}
+          backgroundPhoto={this.props.backgroundPhoto}
+        />
       );
     } else {
       return (
-        <div className={Styles.modalContainer}>
-          { this.commentButton() }
-          <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
-            <div className={classnames('col', 's12', Styles.commentsContainer)}>
-              <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
-              <VimeoCommentWidget
-                videoId={this.props.videoId}
-                videoName={this.props.videoName}
-                producerName={this.props.producerName}
-              />
-              <Comments
-                comments={this.state.comments}
-              />
-              <div className="col s12">
-                <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
-              </div>
-              <div className={Styles.buttonContainer}>
-                <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
-              </div>
-            </div>
-          </Modal>
-        </div>
+        <VimeoCommentWidget
+          videoId={this.props.videoId}
+          videoName={this.props.videoName}
+          producerName={this.props.producerName}
+        />
       );
     }
+  }
+
+  commentModal() {
+    return (
+      <div className={Styles.modalContainer}>
+        { this.commentButton() }
+        <Modal ref="modal" contentStyle={contentStyle} modalStyle={editModalStyle}>
+          <div className={classnames('col', 's12', Styles.commentsContainer)}>
+            <div className={Styles.header}>
+              <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
+              { this.widget() }
+            </div>
+            <Comments
+              comments={this.state.comments}
+            />
+            <div className="col s12">
+              <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
+            </div>
+            <div className={Styles.buttonContainer}>
+              <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
+            </div>
+          </div>
+        </Modal>
+      </div>
+    );
   }
 
   render() {

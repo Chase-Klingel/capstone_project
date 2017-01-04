@@ -105,6 +105,28 @@ router.get('/api/music', authorize, (req, res, next) => {
     });
 });
 
+router.get('/api/music/edit', authorize, (req, res, next) => {
+  const { userId } = req.token;
+
+  knex('music')
+    .innerJoin('sc_users', 'sc_users.id', 'music.user_id')
+    .where('sc_users.id', userId)
+    .then((rows) => {
+
+      const userSongs = camelizeKeys(rows);
+
+      for (let i = 0; i < userSongs.length; i++) {
+        delete userSongs[i].email;
+        delete userSongs[i].hashedPassword;
+      }
+
+      res.send(userSongs);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 // get music content for specific user when another user goes to their profile
 router.get('/api/music/:username', (req, res, next) => {
   let userName = req.params.username;

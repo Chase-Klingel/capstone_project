@@ -161,7 +161,7 @@ export default class SCEditRoomWidget extends React.Component {
           playVideo={this.props.playVideo}
           previousTrack={this.props.previousTrack}
         />
-  
+
         <CommentModal
           dbId={this.props.dbId}
           songId={this.props.songId}

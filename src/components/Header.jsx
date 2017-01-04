@@ -32,6 +32,8 @@ export default class Header extends React.Component {
     this.importOption = this.importOption.bind(this);
     this.emptyQueue = this.emptyQueue.bind(this);
     this.emptyMusicQueueButton = this.emptyMusicQueueButton.bind(this);
+    this.homeLink = this.homeLink.bind(this);
+    this.logoLink = this.logoLink.bind(this);
   }
 
   disabled() {
@@ -79,7 +81,7 @@ export default class Header extends React.Component {
       return (
         <div id={Styles.queueContainer}>
           { this.emptyVideoQueueButton() }
-          <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
+          <Link to="/testing-video" className={this.disabled()} id={Styles.queueButton}>
              Video Queue
              <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.videoQueue.length}</span>
            </Link>
@@ -96,6 +98,22 @@ export default class Header extends React.Component {
     }
   }
 
+  homeLink() {
+    if (this.props.vimeoUser) {
+      return <Link to="/">Home</Link>;
+    } else {
+      return <Link to="/video-feed">Home</Link>;
+    }
+  }
+
+  logoLink() {
+    if (this.props.vimeoUser) {
+      return <h1 id={Styles.logo}><Link to="/">AV</Link></h1>
+    } else {
+      return  <h1 id={Styles.logo}><Link to="/video-feed">AV</Link></h1>;
+    }
+  }
+
   render() {
     if (this.props.userInfo.length === 0) {
       return false;
@@ -106,13 +124,13 @@ export default class Header extends React.Component {
         <div id={Styles.navbar}>
           <div className="row">
             <div className="col s1">
-              <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
+              { this.logoLink() }
             </div>
             <div className={classnames(Styles.hideSmall, 'col', 'm8', 'offset-m3')}>
               <ul id={Styles.navList}>
-                <Link to="/music-feed">Home</Link>
+                { this.homeLink() }
                 <Link to="/">Notifications</Link>
-                <Link to="/music-feed">Browse Music</Link>
+                <Link to="/">Browse Music</Link>
                 <Link to="/video-feed">Browse Videos</Link>
                 { this.importOption() }
               </ul>

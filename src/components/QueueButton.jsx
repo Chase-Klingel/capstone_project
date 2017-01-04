@@ -38,7 +38,6 @@ export default class QueueButton extends React.Component {
   addToQueue() {
     this.setState({ added: true });
     const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, musicComments: this.props.musicComments };
-    console.log('zaaaa');
     this.props.updateMusicQueue(song, 'adding');
   }
 
@@ -58,6 +57,16 @@ export default class QueueButton extends React.Component {
     this.setState({ added: false });
     const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
     this.props.updateVideoQueue(video, 'removing');
+  }
+
+  test() {
+    if (this.musicQueue.length === 0 || !this.state.added) {
+      return  (
+        <button className={Styles.addBtn} onClick={this.addToQueue} style={{display: this.add()}}>
+          Add to Queue
+        </button>
+      );
+    }
   }
 
   queueButton() {
@@ -88,7 +97,7 @@ export default class QueueButton extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{display: 'inline'}}>
         { this.queueButton() }
       </div>
     )

@@ -18,13 +18,15 @@ import MusicFeed from './MusicFeed';
 import VideoFeed from './VideoFeed';
 
 import MusicEditingRoom from './MusicEditingRoom';
+import VideoEditingRoom from './VideoEditingRoom';
 
 export default class Main extends React.Component {
   render() {
     return (
       <div>
-        <Match pattern="/music-feed" exactly render={() =>
+        <Match pattern="/" exactly render={() =>
           <MusicFeed
+            loggedIn={this.props.loggedIn}
             vimeoUser={this.props.vimeoUser}
             allMusic={this.props.allMusic}
             getAllMusic={this.props.getAllMusic}
@@ -39,6 +41,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/video-feed" exactly render={() =>
           <VideoFeed
+            loggedIn={this.props.loggedIn}
             scUser={this.props.scUser}
             allVideos={this.props.allVideos}
             getAllVideos={this.props.getAllVideos}
@@ -106,7 +109,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/signin/vimeo" exactly render={() =>
           this.props.loggedIn ? (
-            <Redirect to="/music-feed" />
+            <Redirect to="/" />
           ) : (
             <VimeoSignIn
               authUser={this.props.authUser}
@@ -126,11 +129,22 @@ export default class Main extends React.Component {
 
         <Match pattern="/testing-music" exactly render={() =>
           !this.props.loggedIn ? (
-            <Redirect to="/music-feed" />
+            <Redirect to="/" />
           ) : (
             <MusicEditingRoom
               userInfo={this.props.userInfo}
               musicQueue={this.props.musicQueue}
+            />
+          )
+        }/>
+
+        <Match pattern="/testing-video" exactly render={() =>
+          !this.props.loggedIn ? (
+            <Redirect to="/video-feed" />
+          ) : (
+            <VideoEditingRoom
+              userInfo={this.props.userInfo}
+              videoQueue={this.props.musicQueue}
             />
           )
         }/>

@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import classnames from 'classnames';
+import { Link } from 'react-router';
+import Styles from './css/header';
 import VideoMoodSection from './VideoMoodSection';
 
 export default class VideoFeed extends React.Component {
@@ -24,10 +27,11 @@ export default class VideoFeed extends React.Component {
       })
 
     this.generateMoodSections = this.generateMoodSections.bind(this);
+    this.signupHeader = this.signupHeader.bind(this);
   }
 
   generateMoodSections() {
-    const videoMoods = ['Carefree', 'Beach Vibes', 'Passion', 'Contemplative', 'Love', 'Sad', 'Serious', 'Tense'];
+    const videoMoods = ['Beach Vibes', 'Passion', 'Carefree', 'Contemplative', 'Love', 'Sad'];
     const moodSections = [];
     for (let i = 0; i < videoMoods.length; i++) {
       moodSections.push(
@@ -47,15 +51,45 @@ export default class VideoFeed extends React.Component {
     return moodSections
   }
 
+  signupHeader() {
+    if (this.props.loggedIn) {
+      return;
+    }
+
+    return (
+      <div id={Styles.navbar}>
+        <div className="row">
+          <div className="col s1">
+            <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
+          </div>
+          <div className={classnames(Styles.hideSmall, 'col', 'm8', 'offset-m3')}>
+            <ul id={Styles.navList}>
+              <Link to="/music-feed">Home</Link>
+              <Link to="/music-feed">Browse Music</Link>
+              <Link to="/video-feed">Browse Videos</Link>
+            </ul>
+          </div>
+          <div id={Styles.signUpButtonContainer}>
+            <Link to="/signup">sign up</Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     if (this.props.allVideos.length === 0 || this.props.videoComments.length === 0) {
       return false;
     }
 
     return (
-      <div style={{marginTop: '168px'}}>
-        { this.generateMoodSections() }
+      <div>
+        { this.signupHeader() }
+        <div style={{marginTop: '168px'}}>
+          { this.generateMoodSections() }
+        </div>
       </div>
+
     );
   }
 }
