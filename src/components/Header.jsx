@@ -34,9 +34,11 @@ export default class Header extends React.Component {
     this.emptyMusicQueueButton = this.emptyMusicQueueButton.bind(this);
     this.homeLink = this.homeLink.bind(this);
     this.logoLink = this.logoLink.bind(this);
+    this.musicQueueDisabled = this.musicQueueDisabled.bind(this);
+    this.videoQueueDisabled = this.videoQueueDisabled.bind(this);
   }
 
-  disabled() {
+  musicQueueDisabled() {
     if (this.props.musicQueue.length === 0) {
       return Styles.disabled;
     } else {
@@ -44,9 +46,15 @@ export default class Header extends React.Component {
     }
   }
 
+  videoQueueDisabled() {
+    if (this.props.videoQueue.length === 0) {
+      return Styles.disabled;
+    } else {
+      return;
+    }
+  }
+
   emptyQueue(queueType) {
-    console.log('here');
-    console.log(queueType, ' this');
     this.props.emptyQueue(queueType);
   }
 
@@ -71,7 +79,7 @@ export default class Header extends React.Component {
       return (
         <div id={Styles.queueContainer}>
           { this.emptyMusicQueueButton() }
-          <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
+          <Link to="/testing-music" className={this.musicQueueDisabled()} id={Styles.queueButton}>
              Music Queue
              <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.musicQueue.length}</span>
            </Link>
@@ -81,7 +89,7 @@ export default class Header extends React.Component {
       return (
         <div id={Styles.queueContainer}>
           { this.emptyVideoQueueButton() }
-          <Link to="/testing-video" className={this.disabled()} id={Styles.queueButton}>
+          <Link to="/testing-video" className={this.videoQueueDisabled()} id={Styles.queueButton}>
              Video Queue
              <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.videoQueue.length}</span>
            </Link>

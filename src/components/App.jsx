@@ -22,11 +22,11 @@ export default class App extends React.Component {
 
       allMusic: [],
       musicComments: [],
-      musicQueue: JSON.parse(localStorage.getItem('musicQueue')) || [],
+      musicQueue: [],
 
       allVideos: [],
       videoComments: [],
-      videoQueue: JSON.parse(localStorage.getItem('videoQueue')) || []
+      videoQueue: []
     }
 
     this.authUser = this.authUser.bind(this);
@@ -178,8 +178,6 @@ export default class App extends React.Component {
 
   render() {
     localStorage.setItem('scUser', JSON.stringify(this.state.scUser));
-    localStorage.setItem('musicQueue', JSON.stringify(this.state.musicQueue));
-    localStorage.setItem('videoQueue', JSON.stringify(this.state.videoQueue));
 
     return (
       <BrowserRouter>

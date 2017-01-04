@@ -3,7 +3,7 @@
   padding: 10px 2px;
   z-index: 5;
   font-size: 1.4rem;
-  margin-top: 50px;
+  margin: 25px;
   height: 250px;
 }
 
@@ -18,7 +18,7 @@
 .artistName,
 .songName {
   color: #f5f5f5;
-  font-size: 24px;
+  font-size: 16px;
 }
 
 .songName {
@@ -50,7 +50,7 @@
   display: block;
   position: relative;
   width: 70%;
-  margin-left: 15%;
+  margin-left: 20%;
   top: 15px;
   height: .5rem;
   background: rgba(255, 255, 255, .3);

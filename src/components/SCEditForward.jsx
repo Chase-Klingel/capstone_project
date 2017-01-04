@@ -11,7 +11,6 @@ export default class SCEditForward extends React.Component {
 
   forward() {
     this.props.nextTrack();
-    this.props.playVideo('restart');
   }
 
   render() {

@@ -9,9 +9,9 @@ import Forward from './Forward';
 import CommentModal from './CommentModal';
 import SCeditForward from './SCeditForward';
 import SCeditPrevious from './SCeditPrevious';
-import Styles from './css/scEditRoomWidget';
+import Styles from './css/scEditRoomUserWidget';
 
-export default class SCEditRoomWidget extends React.Component {
+export default class SCEditRoomUserWidget extends React.Component {
   constructor(props) {
     super(props);
 
@@ -118,13 +118,7 @@ export default class SCEditRoomWidget extends React.Component {
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
     return (
-      <div className={classnames(Styles.player,  Styles.editWidget)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center', backgroundSize: 'cover'}}>
-        <SCeditForward
-          nextTrack={this.props.nextTrack}
-        />
-
-        <h5 className={Styles.playlistCount}>{this.props.songPosition}/{this.props.musicQueue.length}</h5>
-
+      <div className={classnames(Styles.player, 'col', 's12', 'm6', 'offset-m3')} style={{zIndex: '1', backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center', backgroundSize: 'cover'}}>
         <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
 
         <div className="center-align" style={{marginBottom: '30px'}}>
@@ -151,21 +145,9 @@ export default class SCEditRoomWidget extends React.Component {
           { this.renderPlayerIcons() }
         </div>
 
-        <SCeditPrevious
-          previousTrack={this.props.previousTrack}
-        />
-
-        <CommentModal
-          dbId={this.props.dbId}
-          songId={this.props.songId}
-          musicComments={this.props.musicComments}
-          backgroundPhoto={this.props.backgroundPhoto}
-          userInfo={this.props.userInfo}
-          artistName={this.props.artistName}
-          songName={this.props.songName}
-          musicQueue={this.props.musicQueue}
-          userInfo={this.props.userInfo}
-        />
+        <div className="center-align">
+          <button id={Styles.selectSongBtn}>select song</button>;
+        </div>
       </div>
     )
   }

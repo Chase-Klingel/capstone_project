@@ -12,8 +12,7 @@ export default class MusicEditingRoom extends React.Component {
       index: 0,
       videos: [],
       gettingVideos: false,
-      videoId: null,
-      playVideo: true
+      videoId: null
     }
 
     this.previousTrack = this.previousTrack.bind(this);
@@ -22,8 +21,6 @@ export default class MusicEditingRoom extends React.Component {
     this.selectedVideo = this.selectedVideo.bind(this);
     this.getVideoId = this.getVideoId.bind(this);
     this.display = this.display.bind(this);
-    this.playVideo = this.playVideo.bind(this);
-    this.pause = this.pause.bind(this);
   }
 
   componentDidMount() {
@@ -80,26 +77,12 @@ export default class MusicEditingRoom extends React.Component {
     return videoWidgets;
   }
 
-  playVideo(operation) {
-    if (operation === 'pause') {
-      this.setState({ playVideo: false });
-    }
-  }
-
-  pause() {
-    if (this.state.playVideo === true) {
-      return '0';
-    } else {
-      return '1';
-    }
-  }
-
   selectedVideo(operation) {
     if (this.state.videoId === null) {
       return;
     }
 
-    const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=${this.pause()}&player_id=0&amp;color=20daa5&amp;background=000000`;
+    const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
 
     return (
       <div style={{marginTop: '-70px'}} id={Styles.fullScreen}>
@@ -142,7 +125,6 @@ export default class MusicEditingRoom extends React.Component {
               musicQueue={this.props.musicQueue}
               musicComments={this.filteredComments()}
               userInfo={this.props.userInfo}
-              playVideo={this.playVideo}
             />
           </div>
         </div>
