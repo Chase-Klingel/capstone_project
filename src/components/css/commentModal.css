@@ -48,6 +48,10 @@
   letter-spacing: 1.5px;
 }
 
+.commentButton:focus {
+  background-color: #20daa5;
+}
+
 #editCommentButton {
   style=border: none;
   background: transparent;

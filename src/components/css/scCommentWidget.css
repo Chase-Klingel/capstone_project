@@ -48,6 +48,7 @@
 
 .player__trackActive {
   z-index: 10;
+  background-size: cover;
 }
 
 .player__progress__barContainer {

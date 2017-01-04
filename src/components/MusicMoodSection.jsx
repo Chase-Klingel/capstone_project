@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import classnames from 'classnames';
 import SCFeedWidget from './SCFeedWidget';
 import Styles from './css/moodSection';
 
@@ -38,10 +39,6 @@ export default class MoodSection extends React.Component {
   threeOrLessWidgets() {
     const widgets = this.state.widgets.map((widget, i) => {
       if (i <= 2) {
-        if (widget.songName.length > 24) {
-          widget.songName = widget.songName.substr(0, 24).trim() + '...';
-        }
-
         return <SCFeedWidget
           key={i}
           backgroundPhoto={this.state.widgets[i].photoUrl}
@@ -53,6 +50,7 @@ export default class MoodSection extends React.Component {
           musicComments={this.props.musicComments}
           userInfo={this.props.userInfo}
           updateMusicQueue={this.props.updateMusicQueue}
+          musicQueue={this.props.musicQueue}
         />
       }
     });
@@ -87,6 +85,7 @@ export default class MoodSection extends React.Component {
           userInfo={this.props.userInfo}
           backgroundPhoto={this.state.widgets[i].photoUrl}
           updateMusicQueue={this.props.updateMusicQueue}
+          musicQueue={this.props.musicQueue}
         />
       );
     }
@@ -121,6 +120,7 @@ export default class MoodSection extends React.Component {
           userInfo={this.props.userInfo}
           backgroundPhoto={this.state.widgets[i].photoUrl}
           updateMusicQueue={this.props.updateMusicQueue}
+          musicQueue={this.props.musicQueue}
         />
       );
     }
@@ -132,13 +132,27 @@ export default class MoodSection extends React.Component {
     if (this.state.widgets.length > 3) {
       return (
         <div className="col s12">
-          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '25px 0 25px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
+          <h5 className="center-align" style={{padding: '25px 0 25px 0', margin: '0', background: 'rgb(17,123,189)', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row" style={{marginTop: '50px', position: 'relative'}}>
-              <div id={Styles.buttonsContainer}>
-                <button onClick={this.previous} disabled={this.state.min}>Backward</button>
-                <button onClick={this.forward} disabled={this.state.max}>forward</button>
-              </div>
+              <div className={Styles.arrowsContainer}>
+                <button className={classnames(Styles.arrow, Styles.left)} onClick={this.previous} disabled={this.state.min}>
+                  <svg width="80px" height="30px" viewBox="0 0 50 80">
+                    <polyline fill="none" stroke="#9d9d9d"  points="
+	                     45.63,75.8 0.375,38.087 45.63,0.375 "/>
+                  </svg>
+                </button>
+                <button className={classnames(Styles.arrow, Styles.right)} onClick={this.forward} disabled={this.state.max}>
+                  <svg  width="80px" height="30px" viewBox="0 0 50 80">
+                  <polyline fill="none" stroke="#9d9d9d" points="
+	                   0.375,0.375 45.63,38.087 0.375,75.8 "/>
+                   </svg>
+                 </button>
+               </div>
+              {/* <div id={Styles.buttonsContainer}>
+                <button className={Styles.seekButton} onClick={this.previous} disabled={this.state.min}>Backward</button>
+                <button className={Styles.seekButton} onClick={this.forward} disabled={this.state.max}></button>
+              </div> */}
               {this.state.nextWidgets ? this.showNext() : this.showPrevious() }
             </div>
           </div>
@@ -147,7 +161,7 @@ export default class MoodSection extends React.Component {
     } else {
       return (
         <div className="col s12">
-          <h5 className="center-align" style={{borderBottom: '1px solid lightgrey', borderTop: '1px solid lightgrey', padding: '25px 0 25px 0', margin: '0', background: '#20daa5', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
+          <h5 className="center-align" style={{padding: '25px 0 25px 0', margin: '0', background: 'rgb(17,123,189)', color: 'white', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '42px', letterSpacing: '1.5px'}}>{this.props.musicMood}</h5>
           <div style={{margin: '0 35px 0 35px'}}>
             <div className="row">
               { this.threeOrLessWidgets() }

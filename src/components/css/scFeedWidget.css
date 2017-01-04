@@ -4,6 +4,7 @@
   height: 200px;
   position: relative;
   padding: 0;
+  background-size: cover;
 }
 
 .player {
@@ -34,8 +35,8 @@
 
 .player__control__icon {
   cursor: pointer;
-  margin-left: 1%;
-  margin-top: -30px;
+  position: absolute;
+  top: 115px;
 }
 
 .player__trackActive {
@@ -43,17 +44,15 @@
   width: 100%;
   position: absolute;
   left: 0;
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .player__progress__barContainer {
   cursor: pointer;
   display: block;
-  position: relative;
-  width: 75%;
+  position: absolute;
+  width: 65%;
   margin-left: 20%;
-  top: 0px;
+  top: 140px;
   height: .4rem;
   background: rgba(255, 255, 255, .3);
   border-radius: 2px;
@@ -75,14 +74,14 @@
 }
 
 .buttonsContainer {
-  position: relative;
-  top: 40px;
+  position: absolute;
+  top: 200px;
   padding: 0;
-  left: -10px;
+  left: 0px;
 }
 
 @media (max-width: 601px) {
   .widgetContainer {
-    margin-bottom: 1px;
+    margin: 50px;
   }
 }

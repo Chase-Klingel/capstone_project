@@ -13,7 +13,7 @@ export default class MusicEditingRoom extends React.Component {
       videos: [],
       gettingVideos: false,
       videoId: null,
-      playVideo: false
+      playVideo: true
     }
 
     this.previousTrack = this.previousTrack.bind(this);
@@ -23,6 +23,7 @@ export default class MusicEditingRoom extends React.Component {
     this.getVideoId = this.getVideoId.bind(this);
     this.display = this.display.bind(this);
     this.playVideo = this.playVideo.bind(this);
+    this.pause = this.pause.bind(this);
   }
 
   componentDidMount() {
@@ -80,33 +81,32 @@ export default class MusicEditingRoom extends React.Component {
   }
 
   playVideo(operation) {
-    if (operation === 'restart') {
-      console.log('here');
+    if (operation === 'pause') {
       this.setState({ playVideo: false });
     }
+  }
 
-    this.setState({ playVideo: true });
+  pause() {
+    if (this.state.playVideo === true) {
+      return '0';
+    } else {
+      return '1';
+    }
   }
 
   selectedVideo(operation) {
     if (this.state.videoId === null) {
       return;
-    } else if (this.state.playVideo === false) {
-      const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`
-
-      return (
-        <div style={{marginTop: '-70px'}}>
-          <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
-        </div>
-      );
-    } else {
-      const src = `https://player.vimeo.com/video/${this.state.videoId}#t=0m4s?autoplay=1&portrait=0&title=0&byline=0&badge=0&player_id=0&amp;color=20daa5&amp;background=000000`;
-      return (
-        <div style={{marginTop: '-70px'}}>
-          <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
-        </div>
-      );
     }
+
+    const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=${this.pause()}&player_id=0&amp;color=20daa5&amp;background=000000`;
+
+    return (
+      <div style={{marginTop: '-70px'}} id={Styles.fullScreen}>
+        <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
+      </div>
+    );
+
   }
 
   display() {

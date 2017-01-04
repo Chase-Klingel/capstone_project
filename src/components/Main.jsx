@@ -32,6 +32,7 @@ export default class Main extends React.Component {
             userInfo={this.props.userInfo}
             updateMusicQueue={this.props.updateMusicQueue}
             emptyQueue={this.props.emptyQueue}
+            musicQueue={this.props.musicQueue}
           />
         }/>
 
@@ -129,19 +130,19 @@ export default class Main extends React.Component {
           )
         }/>
 
-        {/* test this after you are sure profile-setup is working properly */}
-        {/* <Match pattern="/profile" exactly render={() =>
+        <Match pattern="/profile" exactly render={() =>
           !this.props.loggedIn ? (
             <Redirect to="/signin" />
           ) : (
             <MyProfile
-              vimeoUser={this.props.vimeoUser}
               scUser={this.props.scUser}
+              vimeoUser={this.props.vimeoUser}
+              userInfo={this.props.userInfo}
               profileContent={this.props.profileContent}
               getProfileContent={this.props.getProfileContent}
             />
           )
-        }/> */}
+        }/>
 
         {/* <Match pattern="/profile/:username?" exactly render={() =>
           !this.props.loggedIn ? (

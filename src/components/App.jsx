@@ -9,11 +9,12 @@ import Footer from './Footer';
 export default class App extends React.Component {
   constructor(props) {
     super(props);
+
     // NEED TO FIGURE OUT HOW TO SET VIMEO USER OR SC USER TO TRUE THROUGHOUT USER SESSION
     this.state = {
       loggedIn: false,
       vimeoUser: true,
-      scUser: false,
+      scUser: JSON.parse(localStorage.getItem('scUser')) || false,
       signupInfo: [],
       userInfo: [],
       uploads: [],
@@ -21,7 +22,7 @@ export default class App extends React.Component {
 
       allMusic: [],
       musicComments: [],
-      musicQueue: [],
+      musicQueue: JSON.parse(localStorage.getItem('musicQueue')) || [],
       allVideos: [],
       videoComments: [],
 
@@ -42,6 +43,10 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
+    if (this.state.scUser) {
+      this.setState({ vimeoUser: false });
+    }
+
     axios.get('/api/token')
       .then(res => {
         this.setState({ loggedIn: res.data});
@@ -72,6 +77,7 @@ export default class App extends React.Component {
         getUserInfo={this.getUserInfo}
         signupInfo={this.state.signupInfo}
         musicQueue={this.state.musicQueue}
+        emptyQueue={this.emptyQueue}
       />
     }
   }
@@ -149,6 +155,9 @@ export default class App extends React.Component {
   }
 
   render() {
+    localStorage.setItem('scUser', JSON.stringify(this.state.scUser));
+    localStorage.setItem('musicQueue', JSON.stringify(this.state.musicQueue));
+
     return (
       <BrowserRouter>
         <div>

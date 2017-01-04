@@ -82,11 +82,40 @@ hr {
   top: 180px;
 }
 
-.signoutButton {
+.browseMusicButton {
   top: 210px;
-  color: #cdd3dd;
+}
+
+.browseVideosButton {
+  top: 240px;
+}
+
+.signoutButton {
+  top: 270px;
 }
 
 .modalButton:hover {
   color: black;
+}
+
+#mobileMenu {
+  display: none;
+}
+
+#desktopMenu {
+  display: block;
+}
+
+@media (max-width: 907px) {
+  #desktopMenu {
+    display: none;
+  }
+
+  #mobileMenu {
+    display: block;
+  }
+
+  .hideSmall {
+    display: block;
+  }
 }

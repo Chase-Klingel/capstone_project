@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Dropdown from 'react-dropdown';
 
-const options = ['Carefree', 'Contemplative', 'Eerie', 'Love', 'Sad', 'Serious', 'Tense'];
+const options = ['Beach Vibes', 'Passion', 'Carefree', 'Contemplative', 'Love', 'Sad'];
 
 export default class MoodButton extends React.Component {
   constructor(props) {

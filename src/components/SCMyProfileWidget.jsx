@@ -6,11 +6,11 @@ import Play from './Play';
 import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
-import Styles from './css/scFeedWidget';
+import Styles from './css/scMyProfileWidget';
 import CommentModal from './CommentModal';
 import QueueButton from './QueueButton';
 
-export default class SCFeedWidget extends React.Component {
+export default class SCMyProfileWidget extends React.Component {
   constructor(props) {
     super(props);
 
@@ -133,9 +133,9 @@ export default class SCFeedWidget extends React.Component {
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
     return (
-      <div className={classnames('col', 's12', 'm4', Styles.widgetContainer)}>
-      	<div  style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url(${this.props.backgroundPhoto})`,
-        backgroundPosition: 'center center', height: '180px', backgroundSize: 'cover'}}>
+      <div className={classnames('col', 's12', 'm6', Styles.widgetContainer)} >
+      	<div style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url(${this.props.userInfo[0].photoUrl})`,
+        backgroundPosition: 'center center', height: '200px', backgroundSize: 'cover'}}>
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
           <div className="center-align" style={{marginBottom: '30px'}}>
@@ -162,16 +162,6 @@ export default class SCFeedWidget extends React.Component {
             { this.renderPlayerIcons() }
           </div>
           <div className={classnames(Styles.buttonsContainer)}>
-            <QueueButton
-              updateMusicQueue={this.props.updateMusicQueue}
-              songId={this.props.songId}
-              artistName={this.props.artistName}
-              songName={this.props.songName}
-              backgroundPhoto={this.props.backgroundPhoto}
-              dbId={this.props.dbId}
-              musicComments={this.props.musicComments}
-              musicQueue={this.props.musicQueue}
-            />
             <CommentModal
               dbId={this.props.dbId}
               songId={this.props.songId}

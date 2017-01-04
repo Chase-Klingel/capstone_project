@@ -2,11 +2,19 @@ body {
   overflow-x: hidden;
 }
 
+#vimeoBannerContainer {
+  position: relative;
+  margin-bottom: 180px;
+}
+
 #profileImg {
-  margin-top: 168px;
-  background-position: no-repeat center center;
-  height: 500px;
+  position: absolute;
+  right: 0;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 600px;
+  width: 100%;
 }
 
 #username {
@@ -14,6 +22,7 @@ body {
   position: absolute;
   top: 275px;
   left: 45px;
+  font-weight: bold;
   font-size: 72px;
   text-transform: uppercase;
 }
@@ -22,7 +31,17 @@ body {
   color: white;
   position: absolute;
   top: 375px;
-  left: 55px;
+  left: 47px;
   font-size: 20px;
   width: 480px;
+}
+
+@media (max-width: 577px) {
+  #username {
+    font-size: 42px;
+  }
+
+  #bio {
+    top: 320px;
+  }
 }

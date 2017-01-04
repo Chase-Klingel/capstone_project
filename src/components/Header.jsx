@@ -1,5 +1,6 @@
 import React from 'react';
 import Styles from './css/header';
+import classnames from 'classnames';
 import axios from 'axios';
 import { Link } from 'react-router';
 import SignOutModal from './SignOutModal';
@@ -28,6 +29,7 @@ export default class Header extends React.Component {
     }
 
     this.header = this.header.bind(this);
+    this.emptyQueue =this.emptyQueue.bind(this);
   }
 
   disabled() {
@@ -38,73 +40,27 @@ export default class Header extends React.Component {
     }
   }
 
+  emptyQueue() {
+    console.log('here');
+    this.props.emptyQueue();
+  }
+
   header() {
     if (this.props.vimeoUser) {
       return (
-        <div>
-          <div id={Styles.navbar}>
-            <div className="row">
-              <div className="col s1">
-                <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
-              </div>
-              <div className="col s8 offset-s3">
-                <ul id={Styles.navList}>
-                  <Link to="/music-feed">Home</Link>
-                  <Link to="/">Notifications</Link>
-                  <Link to="/music-feed">Browse Music</Link>
-                  <Link to="/video-feed">Browse Videos</Link>
-                  <Link to="/">Import Latest Videos</Link>
-                </ul>
-              </div>
-            </div>
-            <div id={Styles.modalContainer}>
-              <SignOutModal
-                vimeoUser={this.props.vimeoUser}
-                userInfo={this.props.userInfo}
-                authUser={this.props.authUser}
-                signupInfo={this.props.signupInfo}
-              />
-            </div>
-            <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
-              Music Queue
-              <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.musicQueue.length}</span>
-            </Link>
-          </div>
+        <div id={Styles.queueContainer}>
+          <button id={Styles.deleteButton} onClick={this.emptyQueue}>Empty Queue</button>
+          <Link to="/testing-music" className={this.disabled()} id={Styles.queueButton}>
+             Music Queue
+             <span style={{marginLeft: '20px', color: 'gold'}}>{this.props.musicQueue.length}</span>
+           </Link>
         </div>
       );
     } else {
-      return (
-        <div>
-          <div id={Styles.navbar}>
-            <div className="row">
-              <div className="col s1">
-                <h1 id={Styles.logo}><Link to="/video-feed">AV</Link></h1>
-              </div>
-              <div className="col s8 offset-s3">
-                <ul id={Styles.navList}>
-                  <Link to="/video-feed">Home</Link>
-                  <Link to="/">Notifications</Link>
-                  <Link to="/music-feed">Browse Music</Link>
-                  <Link to="/video-feed">Browse Videos</Link>
-                  <Link to="/" id={Styles.last}>Import Latest Music</Link>
-                </ul>
-              </div>
-              <div id={Styles.modalContainer}>
-                <SignOutModal
-                  scUser={this.props.scUser}
-                  userInfo={this.props.userInfo}
-                  authUser={this.props.authUser}
-                  signupInfo={this.props.signupInfo}
-                />
-              </div>
-            </div>
-            <button id={Styles.queueButton}>Video Queue</button>
-          </div>
-        </div>
-      );
+      return <button id={Styles.queueButton}>Video Queue</button>
     }
   }
-  
+
   render() {
     if (this.props.userInfo.length === 0) {
       return false;
@@ -112,7 +68,31 @@ export default class Header extends React.Component {
 
     return (
       <div>
-        { this.header() }
+        <div id={Styles.navbar}>
+          <div className="row">
+            <div className="col s1">
+              <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
+            </div>
+            <div className={classnames(Styles.hideSmall, 'col', 'm8', 'offset-m3')}>
+              <ul id={Styles.navList}>
+                <Link to="/music-feed">Home</Link>
+                <Link to="/">Notifications</Link>
+                <Link to="/music-feed">Browse Music</Link>
+                <Link to="/video-feed">Browse Videos</Link>
+                <Link to="/">Import Latest Videos</Link>
+              </ul>
+            </div>
+          </div>
+          <div id={Styles.modalContainer}>
+            <SignOutModal
+              vimeoUser={this.props.vimeoUser}
+              userInfo={this.props.userInfo}
+              authUser={this.props.authUser}
+              signupInfo={this.props.signupInfo}
+            />
+          </div>
+          { this.header() }
+        </div>
       </div>
     );
   }

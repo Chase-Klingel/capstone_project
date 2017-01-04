@@ -90,7 +90,7 @@ router.get('/api/videos', authorize, (req, res, next) => {
 
   knex('videos')
     .innerJoin('vimeo_users', 'vimeo_users.id', 'videos.user_id')
-    // .innerJoin('comments', 'videos.id', 'comments.video_id')
+    .innerJoin('comments', 'videos.id', 'comments.video_id')
     .where('vimeo_users.id', userId)
     .then((rows) => {
 

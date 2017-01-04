@@ -1,5 +1,6 @@
 import React from 'react';
 import SCProfileWidget from './SCProfileWidget';
+import SCMyProfileWidget from './SCMyProfileWidget';
 import VimeoProfileWidget from './VimeoProfileWidget';
 
 export default class WidgetList extends React.Component {
@@ -36,19 +37,6 @@ export default class WidgetList extends React.Component {
             artistName={song.artistName}
             getUploads={this.props.getUploads}
             uploads={this.props.uploads}
-          />
-        );
-      });
-
-      return widgetList;
-    // case where someone is returning to their own profile or to some other user's existing profile where their info is already stored in the db
-    } else {
-      const widgetList = this.props.profileContent.map((media, i) => {
-        return (
-          <Widget
-            key={i}
-            src={media.src}
-            title={media.name} // this is assuming both vimeo and sc objects property for 'the name of the song' or 'the name of the video' is 'title'. If it isn't you will have to create another case to seperate the two concerns.
           />
         );
       });

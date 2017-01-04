@@ -15,8 +15,14 @@ const contentStyle = {
 
 const modalStyle = {
   maxHeight: '500px',
+  overflowY: 'scroll'
+};
+
+const editModalStyle = {
+  maxHeight: '500px',
   overflowY: 'scroll',
-  zIndex: '20000',
+  marginTop: '50px',
+  marginBottom: '100px'
 };
 
 export default class CommentModal extends React.Component {
@@ -62,7 +68,6 @@ export default class CommentModal extends React.Component {
     e.preventDefault();
 
     if (this.props.userInfo[0].vimeoUsername && this.props.songId) {
-      console.log('here');
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, songId: this.props.songId }
       const nextComments = this.state.comments.concat(newComment);
       console.log(nextComments, ' next comments');
@@ -143,7 +148,7 @@ export default class CommentModal extends React.Component {
       return (
         <button onClick={this.showModal} style={{border: 'none', background: 'transparent', color: 'grey'}}>
           <img src={CommentIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span className="center-align" style={{marginLeft: '10px', fontSize: '16px', color: 'grey'}}>Comments</span>
+          <span className="center-align" style={{marginLeft: '10px', fontSize: '16px', color: 'grey', fontWeight: '300'}}>Comments</span>
         </button>
       )
     }
@@ -154,7 +159,7 @@ export default class CommentModal extends React.Component {
       return (
         <div className={Styles.modalContainer}>
           { this.commentButton() }
-          <Modal ref="modal" contentStyle={contentStyle} modalStyle={modalStyle}>
+          <Modal ref="modal" contentStyle={contentStyle} modalStyle={editModalStyle}>
             <div className={classnames('col', 's12', Styles.commentsContainer)}>
               <h4 className={classnames('center-align', Styles.commentHeader)}>comments</h4>
               <SCCommentWidget

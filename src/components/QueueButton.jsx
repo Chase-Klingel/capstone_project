@@ -10,12 +10,12 @@ export default class QueueButton extends React.Component {
     }
 
     this.addToQueue = this.addToQueue.bind(this);
-    this.addDisplay = this.addDisplay.bind(this);
-    this.removeDisplay = this.removeDisplay.bind(this);
+    this.grey = this.grey.bind(this);
+    this.gold = this.gold.bind(this);
     this.removeFromQueue = this.removeFromQueue.bind(this);
   }
 
-  addDisplay() {
+  grey() {
     if (this.state.added === true) {
       return 'none'
     } else {
@@ -23,7 +23,7 @@ export default class QueueButton extends React.Component {
     }
   }
 
-  removeDisplay() {
+  gold() {
     if (this.state.added === true) {
       return 'inline';
     } else {
@@ -46,13 +46,13 @@ export default class QueueButton extends React.Component {
   render() {
     return (
       <div style={{display: 'inline'}}>
-        <button onClick={this.addToQueue} style={{display: this.addDisplay(), border: 'none', background: 'transparent', color: 'grey'}}>
+        <button onClick={this.addToQueue} style={{display: this.grey(), border: 'none', background: 'transparent', color: 'grey'}}>
           <img src={QueueIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span style={{marginLeft: '10px'}}>Add to Queue</span>
+          <span style={{marginLeft: '10px', fontWeight: '300'}}>Add to Queue</span>
         </button>
-        <button onClick={this.removeFromQueue} style={{display: this.removeDisplay(), border: 'none', background: 'transparent', color: 'gold'}}>
+        <button onClick={this.removeFromQueue} style={{display: this.gold(), border: 'none', background: 'transparent', color: '#daa520'}}>
           <img src={QueueIcon} height='30px' width='30px' style={{position: 'relative', top: '7px'}} />
-          <span style={{marginLeft: '10px'}}>Add to Queue</span>
+          <span style={{marginLeft: '10px', fontWeight: '300'}}>Add to Queue</span>
         </button>
       </div>
     );

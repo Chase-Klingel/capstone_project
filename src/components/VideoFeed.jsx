@@ -27,7 +27,7 @@ export default class VideoFeed extends React.Component {
   }
 
   generateMoodSections() {
-    const videoMoods = ['Carefree', 'Contemplative', 'Eerie', 'Love', 'Sad', 'Serious', 'Tense'];
+    const videoMoods = ['Carefree', 'Beach Vibes', 'Passion', 'Contemplative', 'Love', 'Sad', 'Serious', 'Tense'];
     const moodSections = [];
     for (let i = 0; i < videoMoods.length; i++) {
       moodSections.push(

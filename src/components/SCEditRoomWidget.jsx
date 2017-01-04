@@ -36,8 +36,11 @@ export default class SCEditRoomWidget extends React.Component {
     })
   }
 
-  togglePlay () {
-    this.props.playVideo();
+  togglePlay (operation) {
+    if (operation === 'pause') {
+      this.props.playVideo('pause');
+    }
+
     const { playing, audioPlayer } = this.state;
     this.setState({ playing: !playing, showAudioPlayer: true }, () => {
       if (audioPlayer.paused) {
@@ -92,7 +95,7 @@ export default class SCEditRoomWidget extends React.Component {
       return (
         <div>
           <div className={Styles.player__control__iconsPause}>
-            <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
+            <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this, 'pause')}>
               <Pause />
             </div>
           </div>
@@ -103,7 +106,7 @@ export default class SCEditRoomWidget extends React.Component {
     return (
       <div>
         <div className={Styles.player__control__iconsPlay}>
-          <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
+          <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this, 'play')}>
             <Play />
           </div>
         </div>
@@ -120,7 +123,7 @@ export default class SCEditRoomWidget extends React.Component {
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
     return (
-      <div className={classnames(Styles.player,  Styles.player__trackActive)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center'}}>
+      <div className={classnames(Styles.player,  Styles.player__trackActive)} style={{zIndex: '0', backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center'}}>
         <SCeditForward
           playVideo={this.props.playVideo}
           nextTrack={this.props.nextTrack}
@@ -159,19 +162,18 @@ export default class SCEditRoomWidget extends React.Component {
           previousTrack={this.props.previousTrack}
         />
 
-        <div>
-          <CommentModal
-            dbId={this.props.dbId}
-            songId={this.props.songId}
-            musicComments={this.props.musicComments}
-            backgroundPhoto={this.props.backgroundPhoto}
-            userInfo={this.props.userInfo}
-            artistName={this.props.artistName}
-            songName={this.props.songName}
-            musicQueue={this.props.musicQueue}
-            userInfo={this.props.userInfo}
-          />
-        </div>
+        <CommentModal
+          dbId={this.props.dbId}
+          songId={this.props.songId}
+          musicComments={this.props.musicComments}
+          backgroundPhoto={this.props.backgroundPhoto}
+          userInfo={this.props.userInfo}
+          artistName={this.props.artistName}
+          songName={this.props.songName}
+          musicQueue={this.props.musicQueue}
+          userInfo={this.props.userInfo}
+        />
+
       </div>
     )
   }

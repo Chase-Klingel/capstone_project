@@ -8,3 +8,75 @@ body {
   right: 0px;
   top: 0;
 }
+
+.seekButton {
+  background: transparent;
+  border: none;
+}
+
+.seekButton:focus {
+  background: transparent;
+}
+
+button {
+  -webkit-appearance: none;
+  background: transparent;
+  border: 0;
+  outline:0;
+}
+
+button:focus {
+  background: none;
+}
+
+svg {
+  padding: 5px;
+}
+
+.arrow {
+  cursor: pointer;
+  top: 50%;
+  width: 70px;
+  height: 90px;
+}
+
+.left {
+  left: 42%;
+}
+
+.right {
+  left: 45.1%;
+}
+
+.left:hover polyline,
+.left:focus polyline {
+  stroke-width: 8;
+  stroke: #bbbbbb;
+}
+
+.left:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+.right:hover polyline,
+.right:focus polyline {
+   stroke-width: 8;
+  stroke: #bbbbbb;
+}
+
+.right:active polyline {
+  stroke-width: 6;
+  transition: all 100ms ease-in-out;
+}
+
+polyline {
+  stroke-width: 3px;
+  transition: all 250ms ease-in-out;
+}
+
+.arrowsContainer {
+  position: absolute;
+  top: -20px;
+  right: 0;
+}

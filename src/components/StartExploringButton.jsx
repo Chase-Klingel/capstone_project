@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, Redirect } from 'react-router';
 import Notifications, { notify } from 'react-notify-toast';
 import axios from 'axios';
 import Styles from './css/startExploringButton';
@@ -7,6 +7,11 @@ import Styles from './css/startExploringButton';
 export default class StartExploringButton extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      redirect: ''
+    }
+
     this.postVideos = this.postVideos.bind(this)
     this.postSongs = this.postSongs.bind(this);
     this.startExploring = this.startExploring.bind(this);
@@ -26,7 +31,7 @@ export default class StartExploringButton extends React.Component {
       return (video.mood && video.needsMusic === true);
     });
 
-    window.location.href = '/music-feed';
+    this.setState({ redirect: '/music-feed' });
 
     axios.post('/api/videos/bulk', {
       videoList: videosNeedingMusic
@@ -46,7 +51,7 @@ export default class StartExploringButton extends React.Component {
       return song.mood;
     });
 
-    window.location.href = '/video-feed';
+    this.setState({ redirect: '/video-feed' });
 
     axios.post('/api/music/bulk', {
       songList: songsWithMoods
@@ -60,25 +65,22 @@ export default class StartExploringButton extends React.Component {
     if (this.props.vimeoUser) {
       return (
         <a className={Styles.btn} onClick={this.postVideos}>
-          <span className={Styles.btnInr}>
-            <span className={Styles.txtA}>Start Exploring</span>
-            <span className={Styles.txtB}>Start Exploring</span>
-          </span>
+          Start Exploring
         </a>
       );
     } else {
       return (
         <a className={Styles.btn} onClick={this.postSongs}>
-          <span className={Styles.btnInr}>
-            <span className={Styles.txtA}>Start Exploring</span>
-            <span className={Styles.txtB}>Start Exploring</span>
-          </span>
+          Start Exploring
         </a>
       );
     }
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect}/>
+    }
     return (
       <div className="center-align" id="button-container">
         { this.startExploring() }

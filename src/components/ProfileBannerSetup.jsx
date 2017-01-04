@@ -98,7 +98,7 @@ export default class ProfileBannerSetup extends React.Component {
       if (this.state.updatingImg) {
         return (
           <div className="row">
-            <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <div style={{ height: '350px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <input id={Styles.uploadImgInput} type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
@@ -110,7 +110,7 @@ export default class ProfileBannerSetup extends React.Component {
       } else if (this.state.updatingBio) {
         return (
           <div className="row">
-            <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <div style={{ height: '350px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <textarea type="text" placeholder="What should we know about you..." ref="bio"></textarea>
@@ -122,7 +122,7 @@ export default class ProfileBannerSetup extends React.Component {
       } else {
         return (
           <div className="row">
-            <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <div style={{ height: '350px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].producerName}</h5>
               <div id={Styles.uploadButtonsContainer}>
                 <button id={Styles.uploadImg} onClick={this.showPhotoInput}>upload profile image</button>
@@ -136,7 +136,7 @@ export default class ProfileBannerSetup extends React.Component {
       if (this.state.updatingImg) {
         return (
           <div className="row">
-            <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <div style={{ height: '350px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <input id={Styles.uploadImgInput} type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>
@@ -148,7 +148,7 @@ export default class ProfileBannerSetup extends React.Component {
       } else if (this.state.updatingBio) {
         return (
           <div className="row">
-            <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <div style={{ height: '350px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <textarea type="text" placeholder="What should we know about you..." ref="bio"></textarea>
@@ -160,7 +160,7 @@ export default class ProfileBannerSetup extends React.Component {
       } else {
         return (
           <div className="row">
-            <div style={{ height: '500px', borderBottom: '1px solid lightgrey'}}>
+            <div style={{ height: '350px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <button id={Styles.addBio} onClick={this.showBioInput}>Add a bio</button>
               <div id={Styles.uploadButtonsContainer}>

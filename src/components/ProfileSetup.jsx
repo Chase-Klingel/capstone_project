@@ -36,7 +36,6 @@ export default class ProfileSetup extends React.Component {
             headers: { "Authorization": `Bearer ${info[1]}`}
           })
           .then((res) => {
-            console.log(res.data.data[0].name, ' video name first');
             const videoData = res.data.data;
             for (let i = 0; i < videoData.length; i++) {
               let videoId = videoData[i].link.slice(18, 27);
@@ -74,6 +73,7 @@ export default class ProfileSetup extends React.Component {
                 user_id: id, limit: 100
               })
               .then((tracks) => {
+                console.log(tracks, ' TRACKS');
                 for (let i = 0; i < tracks.length; i++) {
                   let songId = (tracks[i].id).toString();
                   let songName = tracks[i].title;
@@ -125,14 +125,14 @@ export default class ProfileSetup extends React.Component {
                   signupInfo={this.props.signupInfo}
                 />
               </div>
-
-              <StartExploringButton
-                vimeoUser={this.props.vimeoUser}
-                scUser={this.props.scUser}
-                uploads={this.props.uploads}
-                signupInfo={this.props.signupInfo}
-              />
-
+              <div className="row">
+                <StartExploringButton
+                  vimeoUser={this.props.vimeoUser}
+                  scUser={this.props.scUser}
+                  uploads={this.props.uploads}
+                  signupInfo={this.props.signupInfo}
+                />
+              </div>
             </div>
           </div>
         );
@@ -155,12 +155,14 @@ export default class ProfileSetup extends React.Component {
                 />
               </div>
 
-              <StartExploringButton
-                vimeoUser={this.props.vimeoUser}
-                scUser={this.props.scUser}
-                uploads={this.props.uploads}
-                signupInfo={this.props.signupInfo}
-              />
+              <div className="row">
+                <StartExploringButton
+                  vimeoUser={this.props.vimeoUser}
+                  scUser={this.props.scUser}
+                  uploads={this.props.uploads}
+                  signupInfo={this.props.signupInfo}
+                />
+              </div>
             </div>
           </div>
         );
@@ -185,14 +187,14 @@ export default class ProfileSetup extends React.Component {
                   uploads={this.props.uploads}
                   getUploads={this.props.getUploads}
                 />
-
+              </div>
+              <div className="row">
                 <StartExploringButton
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
                   signupInfo={this.props.signupInfo}
                 />
-
               </div>
             </div>
           </div>
@@ -216,7 +218,7 @@ export default class ProfileSetup extends React.Component {
                   getUploads={this.props.getUploads}
                 />
               </div>
-              <div className="col s6 offset-s3">
+              <div className="row">
                 <StartExploringButton
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}

@@ -6,8 +6,6 @@ export default class MusicFeed extends React.Component {
   constructor(props) {
     super(props);
 
-    this.props.emptyQueue();
-
     axios.get('/api/all-music')
       .then((res) => {
         this.props.getAllMusic(res.data);
@@ -30,7 +28,7 @@ export default class MusicFeed extends React.Component {
   }
 
   generateMoodSections() {
-    const musicMoods = ['Carefree', 'Contemplative', 'Eerie', 'Love', 'Sad', 'Serious', 'Tense'];
+    const musicMoods = ['Beach Vibes', 'Passion', 'Carefree', 'Contemplative', 'Instrumental', 'Love', 'Sad', 'Serious', 'Tense'];
     const moodSections = [];
     for (let i = 0; i < musicMoods.length; i++) {
       moodSections.push(
@@ -41,6 +39,7 @@ export default class MusicFeed extends React.Component {
           musicComments={this.props.musicComments}
           userInfo={this.props.userInfo}
           updateMusicQueue={this.props.updateMusicQueue}
+          musicQueue={this.props.musicQueue}
         />
       );
     }
