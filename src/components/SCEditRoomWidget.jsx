@@ -39,7 +39,10 @@ export default class SCEditRoomWidget extends React.Component {
     })
   }
 
-  togglePlay () {
+  togglePlay (operation) {
+    if (operation === 'play') {
+      this.props.playingSong();
+    }
     const { playing, audioPlayer } = this.state;
     this.setState({ playing: !playing, showAudioPlayer: true }, () => {
       if (audioPlayer.paused) {
@@ -105,7 +108,7 @@ export default class SCEditRoomWidget extends React.Component {
     return (
       <div>
         <div className={Styles.player__control__iconsPlay}>
-          <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this)}>
+          <div className={Styles.player__control__icon} onClick={this.togglePlay.bind(this, 'play')}>
             <Play />
           </div>
         </div>

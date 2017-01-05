@@ -7,7 +7,7 @@ export default class VimeoFeedWidget extends React.Component {
 
     return (
       <div style={{marginTop: '50px'}}>
-        <iframe src={src} width="100%" height="150px" frameBorder="0" allowFullScreen></iframe>
+        <iframe src={src} width="100%" height="150px" frameBorder="0"></iframe>
       </div>
     );
   }

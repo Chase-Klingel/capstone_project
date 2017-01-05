@@ -12,7 +12,8 @@ export default class MusicEditingRoom extends React.Component {
       index: 0,
       videos: [],
       gettingVideos: false,
-      videoId: null
+      videoId: null,
+      playingSong: false
     }
 
     this.previousTrack = this.previousTrack.bind(this);
@@ -21,6 +22,8 @@ export default class MusicEditingRoom extends React.Component {
     this.selectedVideo = this.selectedVideo.bind(this);
     this.getVideoId = this.getVideoId.bind(this);
     this.display = this.display.bind(this);
+    this.playingSong = this.playingSong.bind(this);
+    this.exitTest = this.exitTest.bind(this);
   }
 
   componentDidMount() {
@@ -77,18 +80,39 @@ export default class MusicEditingRoom extends React.Component {
     return videoWidgets;
   }
 
+  playingSong() {
+    this.setState({ playingSong: true });
+  }
+
+  exitTest() {
+    console.log('here');
+    this.setState({ playingSong: false });
+  }
+
   selectedVideo() {
     if (this.state.videoId === null) {
       return;
     }
 
-    const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
+    if (this.state.playingSong) {
+      const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&autoplay=1&player_id=0&amp;color=20daa5&amp;background=000000`;
 
-    return (
-      <div style={{marginTop: '-70px'}} id={Styles.fullScreen}>
-        <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
-      </div>
-    );
+      return (
+        <div style={{marginTop: '-70px'}}>
+          <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '0', top: '0', height: '50px'}} onClick={this.exitTest}>exit test</button>
+          <iframe src={src} frameborder="0" style={{overflow: 'hidden', overflowX: 'hidden', overflowY: 'hidden', height: '100%', width: '100%', position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px', zIndex: '999999', border: 'none'}} height="100%" width="100%"></iframe>
+        </div>
+      );
+    } else {
+      const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
+      return (
+        <div style={{marginTop: '-70px'}}>
+          <iframe src={src} frameborder="0" height="350" width="100%" style={{border: 'none'}}></iframe>
+        </div>
+      );
+    }
+
+
   }
 
   display() {
@@ -124,6 +148,7 @@ export default class MusicEditingRoom extends React.Component {
               musicQueue={this.props.musicQueue}
               musicComments={this.filteredComments()}
               userInfo={this.props.userInfo}
+              playingSong={this.playingSong}
             />
           </div>
         </div>
