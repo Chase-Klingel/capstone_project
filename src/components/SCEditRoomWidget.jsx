@@ -56,13 +56,11 @@ export default class SCEditRoomWidget extends React.Component {
     })
   }
 
+  // pauses video when you exit testing mode
   paused() {
-    console.log(this.props.playingSong, ' playing song');
     if (this.props.playingSong || this.state.audioPlayer === null) {
       return;
     }
-
-    console.log('outside of if pause');
 
     this.state.audioPlayer.pause()
   }

@@ -20,7 +20,6 @@ export default class Header extends React.Component {
     } else {
       axios.get('/api/sc-user')
         .then((res) => {
-          console.log(res.data, ' HEADER USER INFO DATA');
           const userInfo = [res.data];
           this.props.getUserInfo(userInfo);
         })

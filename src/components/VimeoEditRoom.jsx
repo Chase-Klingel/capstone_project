@@ -24,6 +24,7 @@ export default class VimeoEditRoom extends React.Component {
     this.display = this.display.bind(this);
     this.setPlayingSong = this.setPlayingSong.bind(this);
     this.exitTest = this.exitTest.bind(this);
+    this.filteredComments = this.filteredComments.bind(this);
   }
 
   componentDidMount() {
@@ -123,6 +124,7 @@ export default class VimeoEditRoom extends React.Component {
   }
 
   filteredComments() {
+    console.log('in filtered comments');
     const comments = this.props.musicQueue[this.state.index].musicComments.filter((comment) => {
       return comment.songId === this.props.musicQueue[this.state.index].songId;
     });
@@ -131,6 +133,8 @@ export default class VimeoEditRoom extends React.Component {
   }
 
   render() {
+    const comments = this.filteredComments();
+    console.log(comments, ' FILTERED COMMENTS');
     return (
       <div>
         <div className="row">
