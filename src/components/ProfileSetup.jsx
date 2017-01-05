@@ -70,7 +70,7 @@ export default class ProfileSetup extends React.Component {
             })
             .then((id) => {
               SC.get('/tracks', {
-                user_id: id, limit: 100
+                user_id: id
               })
               .then((tracks) => {
                 console.log(tracks, ' TRACKS');

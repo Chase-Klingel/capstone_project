@@ -1,5 +1,6 @@
 import React from 'react';
 import Styles from './css/queueButton';
+import Notifications, {notify} from 'react-notify-toast';
 import QueueIcon from '../img/queue-button.png';
 
 export default class QueueButton extends React.Component {
@@ -36,6 +37,10 @@ export default class QueueButton extends React.Component {
   }
 
   addToQueue() {
+    if (!this.props.loggedIn) {
+      return notify.show('Sign up or log in to use this feature!', 'error');
+    }
+
     this.setState({ added: true });
     const song = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, musicComments: this.props.musicComments };
     this.props.updateMusicQueue(song, 'adding');
@@ -48,6 +53,10 @@ export default class QueueButton extends React.Component {
   }
 
   addToVideoQueue() {
+    if (!this.props.loggedIn) {
+      return notify.show('Sign up or log in to use this feature!', 'error');
+    }
+
     this.setState({ added: true });
     const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, profilePhoto: this.props.profilePhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
     this.props.updateVideoQueue(video, 'adding');

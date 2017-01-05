@@ -40,7 +40,7 @@
 }
 
 .player__trackActive {
-  z-index: 10;
+  z-index: 1;
 }
 
 .player__progress__barContainer {

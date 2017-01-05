@@ -41,6 +41,7 @@ export default class MoodSection extends React.Component {
       if (i <= 2) {
         return <VimeoFeedWidget
           key={i}
+          loggedIn={this.props.loggedIn}
           profilePhoto={this.state.widgets[i].photoUrl}
           dbId={this.state.widgets[i].id}
           videoId={this.state.widgets[i].videoId}
@@ -78,6 +79,7 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <VimeoFeedWidget
           key={i}
+          loggedIn={this.props.loggedIn}
           profilePhoto={this.state.widgets[i].photoUrl}
           dbId={this.state.widgets[i].id}
           videoId={this.state.widgets[i].videoId}
@@ -115,6 +117,7 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <VimeoFeedWidget
           key={i}
+          loggedIn={this.props.loggedIn}
           profilePhoto={this.state.widgets[i].photoUrl}
           dbId={this.state.widgets[i].id}
           videoId={this.state.widgets[i].videoId}

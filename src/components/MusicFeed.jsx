@@ -38,6 +38,7 @@ export default class MusicFeed extends React.Component {
       moodSections.push(
         <MusicMoodSection
           key={i}
+          loggedIn={this.props.loggedIn}
           allMusic={this.props.allMusic}
           musicMood={musicMoods[i]}
           musicComments={this.props.musicComments}

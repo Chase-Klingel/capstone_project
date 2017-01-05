@@ -12,10 +12,11 @@ export default class VimeoFeedWidget extends React.Component {
     this.queueButton = this.queueButton.bind(this);
   }
   queueButton() {
-    if (this.props.scUser === true) {
+    if (this.props.scUser === true || !this.props.loggedIn) {
       return (
         <div style={{display: 'inline'}}>
           <QueueButton
+            loggedIn={this.props.loggedIn}
             dbId={this.props.dbId}
             profilePhoto={this.props.profilePhoto}
             videoId={this.props.videoId}

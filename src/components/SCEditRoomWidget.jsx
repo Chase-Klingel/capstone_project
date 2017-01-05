@@ -30,6 +30,7 @@ export default class SCEditRoomWidget extends React.Component {
     this.forward = this.forward.bind(this);
     this.playlistCount = this.playlistCount.bind(this);
     this.commentModal = this.commentModal.bind(this);
+    this.paused = this.paused.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +42,7 @@ export default class SCEditRoomWidget extends React.Component {
 
   togglePlay (operation) {
     if (operation === 'play') {
-      this.props.playingSong();
+      this.props.setPlayingSong();
     }
     const { playing, audioPlayer } = this.state;
     this.setState({ playing: !playing, showAudioPlayer: true }, () => {
@@ -53,6 +54,17 @@ export default class SCEditRoomWidget extends React.Component {
         audioPlayer.pause()
       }
     })
+  }
+
+  paused() {
+    console.log(this.props.playingSong, ' playing song');
+    if (this.props.playingSong || this.state.audioPlayer === null) {
+      return;
+    }
+
+    console.log('outside of if pause');
+
+    this.state.audioPlayer.pause()
   }
 
   timeUpdated() {
@@ -210,6 +222,9 @@ export default class SCEditRoomWidget extends React.Component {
         <div className={Styles.player__control}>
           { this.renderPlayerIcons() }
         </div>
+
+        { this.paused() }
+
 
         { this.previous() }
         <div style={{marginTop: '40px'}}>

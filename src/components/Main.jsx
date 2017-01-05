@@ -17,8 +17,8 @@ import MyProfile from './MyProfile';
 import MusicFeed from './MusicFeed';
 import VideoFeed from './VideoFeed';
 
-import MusicEditingRoom from './MusicEditingRoom';
-import VideoEditingRoom from './VideoEditingRoom';
+import VimeoEditRoom from './VimeoEditRoom';
+import SCEditRoom from './SCEditRoom';
 
 export default class Main extends React.Component {
   render() {
@@ -131,7 +131,7 @@ export default class Main extends React.Component {
           !this.props.loggedIn ? (
             <Redirect to="/" />
           ) : (
-            <MusicEditingRoom
+            <VimeoEditRoom
               userInfo={this.props.userInfo}
               musicQueue={this.props.musicQueue}
             />
@@ -142,7 +142,7 @@ export default class Main extends React.Component {
           !this.props.loggedIn ? (
             <Redirect to="/video-feed" />
           ) : (
-            <VideoEditingRoom
+            <SCEditRoom
               userInfo={this.props.userInfo}
               videoQueue={this.props.videoQueue}
             />

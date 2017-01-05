@@ -129,6 +129,7 @@ export default class SCFeedWidget extends React.Component {
     if (this.props.vimeoUser === true) {
       return (
         <QueueButton
+          loggedIn={this.props.loggedIn}
           updateMusicQueue={this.props.updateMusicQueue}
           songId={this.props.songId}
           artistName={this.props.artistName}

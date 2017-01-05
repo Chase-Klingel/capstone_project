@@ -5,7 +5,7 @@ import SCEditRoomWidget from './SCEditRoomWidget';
 import SCEditRoomUserWidget from './SCEditRoomUserWidget';
 import VimeoEditRoomWidget from './VimeoEditRoomWidget';
 
-export default class VideoEditingRoom extends React.Component {
+export default class SCEditRoom extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,7 +14,8 @@ export default class VideoEditingRoom extends React.Component {
       songs: [],
       videos: this.props.videoQueue,
       gettingSongs: false,
-      selectedSong: null
+      selectedSong: null,
+      playingSong: false
     }
 
     this.selectSong = this.selectSong.bind(this);
@@ -23,6 +24,8 @@ export default class VideoEditingRoom extends React.Component {
     this.getSelectedSong = this.getSelectedSong.bind(this);
     this.previousVideo = this.previousVideo.bind(this);
     this.nextVideo = this.nextVideo.bind(this);
+    this.setPlayingSong = this.setPlayingSong.bind(this);
+    this.doneTesting = this.doneTesting.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +46,6 @@ export default class VideoEditingRoom extends React.Component {
   }
 
   nextVideo() {
-    console.log(this.state.videos, ' statee videos');
     if (this.state.index === this.state.videos.length - 1) {
       return;
     }
@@ -62,6 +64,8 @@ export default class VideoEditingRoom extends React.Component {
 
     return (
       <SCEditRoomWidget
+        playingSong={this.state.playingSong}
+        setPlayingSong={this.setPlayingSong}
         songId={this.state.selectedSong.songId}
         artistName={this.state.selectedSong.artistName}
         songName={this.state.selectedSong.songName}
@@ -82,6 +86,7 @@ export default class VideoEditingRoom extends React.Component {
       scWidgets.push(
         <SCEditRoomUserWidget
           key={i}
+          playingSong={this.state.playingSong}
           songPosition={this.state.index + 1}
           songId={this.state.songs[i].songId}
           artistName={this.state.songs[i].artistName}
@@ -99,6 +104,14 @@ export default class VideoEditingRoom extends React.Component {
     this.setState({ selectedSong: selectedSong });
   }
 
+  setPlayingSong() {
+    this.setState({ playingSong: true });
+  }
+
+  doneTesting() {
+    this.setState({ playingSong: false });
+  }
+
   render() {
     if (this.state.songs.length === 0) {
       return false;
@@ -109,6 +122,7 @@ export default class VideoEditingRoom extends React.Component {
         <div className="row">
           <div className="col s12" style={{marginTop: '168px'}}>
             <div style={{textAlign: 'center', marginTop: '30px'}}>
+              <p style={{color: 'white'}}>Once you select a song, click play on the song and the video your testing will auto play.</p>
               <button type="button" onClick={this.selectSong} style={{background:'#20daa5', padding: '15px 45px', color: 'white', border: 'none', boxShadow: '0 2px 5px rgba(0, 0, 0, .2)', marginBottom: '30px'}}>Select Song</button>
               {this.selectedSong()}
             </div>
@@ -117,6 +131,8 @@ export default class VideoEditingRoom extends React.Component {
             </div>
             <div className="row">
               <VimeoEditRoomWidget
+                doneTesting={this.doneTesting}
+                playingSong={this.state.playingSong}
                 index={this.state.index}
                 nextVideo={this.nextVideo}
                 previousVideo={this.previousVideo}

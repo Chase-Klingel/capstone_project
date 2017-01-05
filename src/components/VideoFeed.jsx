@@ -44,6 +44,7 @@ export default class VideoFeed extends React.Component {
           updateVideoQueue={this.props.updateVideoQueue}
           videoQueue={this.props.videoQueue}
           scUser={this.props.scUser}
+          loggedIn={this.props.loggedIn}
         />
       );
     }

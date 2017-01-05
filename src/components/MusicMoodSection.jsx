@@ -41,6 +41,7 @@ export default class MoodSection extends React.Component {
       if (i <= 2) {
         return <SCFeedWidget
           key={i}
+          loggedIn={this.props.loggedIn}
           backgroundPhoto={this.state.widgets[i].photoUrl}
           dbId={this.state.widgets[i].id}
           songId={widget.songId}
@@ -78,6 +79,7 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <SCFeedWidget
           key={i}
+          loggedIn={this.props.loggedIn}
           dbId={this.state.widgets[i].id}
           songId={this.state.widgets[i].songId}
           songName={this.state.widgets[i].songName}
@@ -114,6 +116,7 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <SCFeedWidget
           key={i}
+          loggedIn={this.props.loggedIn}
           dbId={this.state.widgets[i].id}
           songId={this.state.widgets[i].songId}
           songName={this.state.widgets[i].songName}

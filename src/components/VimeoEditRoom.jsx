@@ -4,7 +4,7 @@ import axios from 'axios';
 import SCEditRoomWidget from './SCEditRoomWidget';
 import VimeoEditRoomWidget from './VimeoEditRoomWidget';
 
-export default class MusicEditingRoom extends React.Component {
+export default class VimeoEditRoom extends React.Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +22,7 @@ export default class MusicEditingRoom extends React.Component {
     this.selectedVideo = this.selectedVideo.bind(this);
     this.getVideoId = this.getVideoId.bind(this);
     this.display = this.display.bind(this);
-    this.playingSong = this.playingSong.bind(this);
+    this.setPlayingSong = this.setPlayingSong.bind(this);
     this.exitTest = this.exitTest.bind(this);
   }
 
@@ -80,12 +80,11 @@ export default class MusicEditingRoom extends React.Component {
     return videoWidgets;
   }
 
-  playingSong() {
+  setPlayingSong() {
     this.setState({ playingSong: true });
   }
 
   exitTest() {
-    console.log('here');
     this.setState({ playingSong: false });
   }
 
@@ -106,8 +105,8 @@ export default class MusicEditingRoom extends React.Component {
     } else {
       const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
       return (
-        <div style={{marginTop: '-70px'}}>
-          <iframe src={src} frameborder="0" height="350" width="100%" style={{border: 'none'}}></iframe>
+        <div style={{marginTop: '-118px'}}>
+          <iframe src={src} frameborder="0" height="500px" width="100%" style={{border: 'none'}}></iframe>
         </div>
       );
     }
@@ -148,12 +147,14 @@ export default class MusicEditingRoom extends React.Component {
               musicQueue={this.props.musicQueue}
               musicComments={this.filteredComments()}
               userInfo={this.props.userInfo}
-              playingSong={this.playingSong}
+              setPlayingSong={this.setPlayingSong}
+              playingSong={this.state.playingSong}
             />
           </div>
         </div>
         <div className="row">
           <div className="col s12 center-align" id={Styles.selectedVideoContainer}>
+            <p style={{color: 'white'}}>Once you select your video, click play on the current song and your video will auto play.</p>
             <button onClick={this.getVideos} style={{display: this.display()}}>select a video</button>
             {this.selectedVideo()}
           </div>
