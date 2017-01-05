@@ -1,6 +1,8 @@
 import React from 'react';
 import Styles from './css/vimeoEditRoomWidget';
 import MiniVimeoWidget from './MiniVimeoWidget';
+import Forward from '../img/forward.png';
+import Back from '../img/back.png';
 
 export default class VimeoEditRoomWidget extends React.Component {
   constructor(props) {
@@ -8,25 +10,21 @@ export default class VimeoEditRoomWidget extends React.Component {
 
     this.selectVideo = this.selectVideo.bind(this);
     this.widget = this.widget.bind(this);
-    this.miniVimeoWidgets = this.miniVimeoWidgets.bind(this);
+    this.nextVideo = this.nextVideo.bind(this);
+    this.previousVideo = this.previousVideo.bind(this);
   }
 
   selectVideo() {
     this.props.getVideoId(this.props.videoId);
   }
 
-  miniVimeoWidgets() {
-    const miniWidgets = [];
+  nextVideo() {
+    console.log('blah');
+    this.props.nextVideo();
+  }
 
-    for (let i = 0; i < this.props.videos.length; i++) {
-      miniWidgets.push(
-        <MiniVimeoWidget
-          videoId={this.props.videos[i].videoId}
-        />
-      )
-    }
-
-    return miniWidgets;
+  previousVideo() {
+    this.props.previousVideo();
   }
 
   widget() {
@@ -36,7 +34,15 @@ export default class VimeoEditRoomWidget extends React.Component {
       return (
         <div className="col s12 m6 offset-m3" style={{marginBottom: '100px', marginTop: '200px'}}>
           <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
-          { this.miniVimeoWidgets() }
+          <div id={Styles.videoInfo}>
+            <div className={Styles.forwardButtonContainer}>
+              <img onClick={this.nextVideo} className={Styles.forwardButton} src={Forward} />
+            </div>
+            <div className={Styles.previousButtonContainer}>
+              <img onClick={this.previousVideo} className={Styles.previousButton} src={Back} />
+            </div>
+            <h5 id={Styles.videoName}>{this.props.videos[this.props.index].videoName}</h5>
+          </div>
         </div>
       );
     } else {

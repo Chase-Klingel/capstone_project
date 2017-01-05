@@ -21,6 +21,8 @@ export default class VideoEditingRoom extends React.Component {
     this.selectedSong = this.selectedSong.bind(this);
     this.scWidget = this.scWidget.bind(this);
     this.getSelectedSong = this.getSelectedSong.bind(this);
+    this.previousVideo = this.previousVideo.bind(this);
+    this.nextVideo = this.nextVideo.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,22 @@ export default class VideoEditingRoom extends React.Component {
       .catch((err) => {
         return err;
       });
+  }
+
+  previousVideo() {
+    if (this.state.index === 0) {
+      return;
+    }
+    this.setState({ index: this.state.index - 1});
+  }
+
+  nextVideo() {
+    console.log(this.state.videos, ' statee videos');
+    if (this.state.index === this.state.videos.length - 1) {
+      return;
+    }
+
+    this.setState({ index: this.state.index + 1})
   }
 
   selectSong() {
@@ -99,12 +117,14 @@ export default class VideoEditingRoom extends React.Component {
             </div>
             <div className="row">
               <VimeoEditRoomWidget
+                index={this.state.index}
+                nextVideo={this.nextVideo}
+                previousVideo={this.previousVideo}
                 videoQueue={this.props.videoQueue}
                 videoId={this.state.videos[this.state.index].videoId}
                 videos={this.state.videos}
               />
             </div>
-
           </div>
         </div>
       </div>

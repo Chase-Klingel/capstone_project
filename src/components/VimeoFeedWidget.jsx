@@ -17,6 +17,7 @@ export default class VimeoFeedWidget extends React.Component {
         <div style={{display: 'inline'}}>
           <QueueButton
             dbId={this.props.dbId}
+            profilePhoto={this.props.profilePhoto}
             videoId={this.props.videoId}
             videoName={this.props.videoName}
             producerName={this.props.producerName}

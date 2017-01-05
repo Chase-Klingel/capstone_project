@@ -28,8 +28,16 @@ const authorize = function(req, res, next) {
 
 router.get('/api/all-videos', (req, res, next) => {
   knex('videos')
+    .innerJoin('vimeo_users', 'videos.user_id', 'vimeo_users.id')
     .then((rows) => {
       const videos = camelizeKeys(rows);
+
+      for (let i = 0; i < videos.length; i++) {
+        delete videos[i].email;
+        delete videos[i].hashedPassword;
+        delete videos[i].vimeoId;
+        delete videos[i].vimeoToken;
+      }
 
       res.send(videos);
     })

@@ -49,13 +49,13 @@ export default class QueueButton extends React.Component {
 
   addToVideoQueue() {
     this.setState({ added: true });
-    const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
+    const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, profilePhoto: this.props.profilePhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
     this.props.updateVideoQueue(video, 'adding');
   }
 
   removeFromVideoQueue() {
     this.setState({ added: false });
-    const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, backgroundPhoto: this.props.backgroundPhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
+    const video = { videoId: this.props.videoId, producerName: this.props.producerName, videoName: this.props.videoName, profilePhoto: this.props.profilePhoto, dbId: this.props.dbId, videoComments: this.props.videoComments };
     this.props.updateVideoQueue(video, 'removing');
   }
 
