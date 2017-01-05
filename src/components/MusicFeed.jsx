@@ -61,21 +61,22 @@ export default class MusicFeed extends React.Component {
       <div id={Styles.navbar}>
         <div className="row">
           <div className="col s1">
-            <h1 id={Styles.logo}><Link to="/music-feed">AV</Link></h1>
+            <h1 id={Styles.logo}><Link to="/">AV</Link></h1>
           </div>
           <div className={classnames(Styles.hideSmall, 'col', 'm8', 'offset-m3')}>
             <ul id={Styles.navList}>
-              <Link to="/music-feed">Home</Link>
-              <Link to="/music-feed">Browse Music</Link>
+              <Link to="/">Home</Link>
+              <Link to="/">Browse Music</Link>
               <Link to="/video-feed">Browse Videos</Link>
             </ul>
           </div>
           <div className="row">
+            <div className={Styles.signInButtonContainer}>
+              <Link to="/signup">sign in</Link>
+            </div>
+            <span id={Styles.slash}>/</span>
             <div className={Styles.signUpButtonContainer}>
               <Link to="/signup">sign up</Link>
-            </div>
-            <div className={classnames(Styles.signUpButtonContainer, Styles.signInButtonContainer)}>
-              <Link to="/signup">sign in</Link>
             </div>
           </div>
         </div>

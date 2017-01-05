@@ -26,6 +26,10 @@ export default class SCEditRoomWidget extends React.Component {
     }
 
     this.renderWidget = this.renderWidget.bind(this);
+    this.previous = this.previous.bind(this)
+    this.forward = this.forward.bind(this);
+    this.playlistCount = this.playlistCount.bind(this);
+    this.commentModal = this.commentModal.bind(this);
   }
 
   componentDidMount() {
@@ -109,6 +113,61 @@ export default class SCEditRoomWidget extends React.Component {
     )
   }
 
+  previous() {
+    if (this.props.videoQueue) {
+      return;
+    }
+
+    return (
+      <SCeditPrevious
+        previousTrack={this.props.previousTrack}
+      />
+    );
+  }
+
+  forward() {
+    if (this.props.videoQueue) {
+      return;
+    }
+
+    return (
+      <SCeditForward
+        nextTrack={this.props.nextTrack}
+      />
+    );
+  }
+
+  playlistCount() {
+    if (this.props.videoQueue) {
+      return;
+    }
+
+    return (
+      <h5 className={Styles.playlistCount}>{this.props.songPosition}/{this.props.musicQueue.length}</h5>
+    );
+  }
+
+  commentModal() {
+    if (this.props.videoQueue) {
+      return;
+    }
+
+    return (
+      <CommentModal
+        dbId={this.props.dbId}
+        songId={this.props.songId}
+        musicComments={this.props.musicComments}
+        backgroundPhoto={this.props.backgroundPhoto}
+        userInfo={this.props.userInfo}
+        artistName={this.props.artistName}
+        songName={this.props.songName}
+        musicQueue={this.props.musicQueue}
+        userInfo={this.props.userInfo}
+      />
+    );
+  }
+
+
   renderWidget() {
     const { playing, audioPlayer, percent_remains, percent_progress_remains, duration, current_time, client_id } = this.state
     let streamUrl = `https://api.soundcloud.com/tracks/${this.props.songId}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
@@ -119,11 +178,9 @@ export default class SCEditRoomWidget extends React.Component {
 
     return (
       <div className={classnames(Styles.player,  Styles.editWidget)} style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${this.props.backgroundPhoto})`, backgroundPosition: 'center center', backgroundSize: 'cover'}}>
-        <SCeditForward
-          nextTrack={this.props.nextTrack}
-        />
+        { this.forward() }
 
-        <h5 className={Styles.playlistCount}>{this.props.songPosition}/{this.props.musicQueue.length}</h5>
+        { this.playlistCount() }
 
         <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
 
@@ -151,21 +208,10 @@ export default class SCEditRoomWidget extends React.Component {
           { this.renderPlayerIcons() }
         </div>
 
-        <SCeditPrevious
-          previousTrack={this.props.previousTrack}
-        />
-
-        <CommentModal
-          dbId={this.props.dbId}
-          songId={this.props.songId}
-          musicComments={this.props.musicComments}
-          backgroundPhoto={this.props.backgroundPhoto}
-          userInfo={this.props.userInfo}
-          artistName={this.props.artistName}
-          songName={this.props.songName}
-          musicQueue={this.props.musicQueue}
-          userInfo={this.props.userInfo}
-        />
+        { this.previous() }
+        <div style={{marginTop: '40px'}}>
+          { this.commentModal() }
+        </div>
       </div>
     )
   }

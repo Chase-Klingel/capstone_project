@@ -99,7 +99,7 @@
   cursor: pointer;
 }
 
-#selectSongBtn {
+.selectSongBtn {
   background: transparent;
   color: rgba(255, 255, 255, .8);
   font-size: 14px;
@@ -108,6 +108,6 @@
 }
 
 
-#selectSongBtn:hover {
+.selectSongBtn:hover {
   border: 1px solid rgba(255, 255, 255, .7);
 }

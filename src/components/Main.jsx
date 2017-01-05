@@ -144,7 +144,7 @@ export default class Main extends React.Component {
           ) : (
             <VideoEditingRoom
               userInfo={this.props.userInfo}
-              videoQueue={this.props.musicQueue}
+              videoQueue={this.props.videoQueue}
             />
           )
         }/>

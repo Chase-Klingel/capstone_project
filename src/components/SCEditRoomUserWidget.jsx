@@ -26,6 +26,7 @@ export default class SCEditRoomUserWidget extends React.Component {
     }
 
     this.renderWidget = this.renderWidget.bind(this);
+    this.selectSong = this.selectSong.bind(this);
   }
 
   componentDidMount() {
@@ -109,6 +110,11 @@ export default class SCEditRoomUserWidget extends React.Component {
     )
   }
 
+  selectSong() {
+    const selectedSong = { songId: this.props.songId, artistName: this.props.artistName, songName: this.props.songName, backgroundPhoto: this.props.backgroundPhoto };
+    this.props.getSelectedSong(selectedSong);
+  }
+
   renderWidget() {
     const { playing, audioPlayer, percent_remains, percent_progress_remains, duration, current_time, client_id } = this.state
     let streamUrl = `https://api.soundcloud.com/tracks/${this.props.songId}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
@@ -146,7 +152,7 @@ export default class SCEditRoomUserWidget extends React.Component {
         </div>
 
         <div className="center-align">
-          <button id={Styles.selectSongBtn}>select song</button>;
+          <button onClick={this.selectSong} className={Styles.selectSongBtn}>select song</button>;
         </div>
       </div>
     )

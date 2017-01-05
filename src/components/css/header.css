@@ -86,28 +86,33 @@
   z-index: 300;
 }
 
+.signInButtonContainer,
 .signUpButtonContainer {
   position: absolute;
-  top: 20px;
-  right: 200px;
-  display: inline-block;
-  background: #e74c3c;
-  width: 140px;
-  height: 60px;
-  text-align: center;
-  line-height: 60px;
+  right: 100px;
+  top: 10px;
+  background: none;
 }
 
-.signInButtonContainer {
-  right: 60px;
-  border-left: 1px solid white;
+.signUpButtonContainer {
+  right: 40px;
 }
 
+.signInButtonContainer a,
 .signUpButtonContainer a {
+  color: #787878;
+}
+
+.signInButtonContainer a:hover,
+.signUpButtonContainer a:hover {
   color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 1.5px;
+}
+
+#slash {
+  position: absolute;
+  right: 90px;
+  top: 10px;
+  color: #787878;
 }
 
 .disabled {

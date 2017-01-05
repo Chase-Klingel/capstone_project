@@ -29,6 +29,7 @@
 }
 
 .player__control__icon {
+  position: absolute;
   cursor: pointer;
   margin-left: 7%;
   margin-top: -15px;

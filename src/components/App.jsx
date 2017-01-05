@@ -209,6 +209,7 @@ export default class App extends React.Component {
               videoComments={this.state.videoComments}
               getVideoComments={this.getVideoComments}
               updateVideoQueue={this.updateVideoQueue}
+              videoQueue={this.state.videoQueue}
               userInfo={this.state.userInfo}
             />
           </main>

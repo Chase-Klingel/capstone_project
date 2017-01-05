@@ -77,7 +77,7 @@ export default class MusicEditingRoom extends React.Component {
     return videoWidgets;
   }
 
-  selectedVideo(operation) {
+  selectedVideo() {
     if (this.state.videoId === null) {
       return;
     }
@@ -89,7 +89,6 @@ export default class MusicEditingRoom extends React.Component {
         <iframe src={src} width="100%" height="500px" frameBorder="0" allowFullScreen></iframe>
       </div>
     );
-
   }
 
   display() {
