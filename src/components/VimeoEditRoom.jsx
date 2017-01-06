@@ -99,7 +99,7 @@ export default class VimeoEditRoom extends React.Component {
 
       return (
         <div style={{marginTop: '-70px'}}>
-          <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '0', top: '0', height: '50px'}} onClick={this.exitTest}>exit test</button>
+          <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '35', top: '0', height: '50px', background: 'none', boxShadow: 'none'}} onClick={this.exitTest}>EXIT TEST</button>
           <iframe src={src} frameborder="0" style={{overflow: 'hidden', overflowX: 'hidden', overflowY: 'hidden', height: '100%', width: '100%', position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px', zIndex: '999999', border: 'none'}} height="100%" width="100%"></iframe>
         </div>
       );

@@ -49,6 +49,8 @@ export default class VideoFeed extends React.Component {
       );
     }
 
+    console.log(moodSections, ' mood sections');
+
     return moodSections
   }
 

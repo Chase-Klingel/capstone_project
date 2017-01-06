@@ -47,11 +47,12 @@ export default class VimeoEditRoomWidget extends React.Component {
 
         return (
           <div style={{marginTop: '-70px'}}>
-            <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '0', top: '0', height: '50px'}} onClick={this.exitTest}>exit test</button>
+            <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '45', top: '0', height: '50px'}} onClick={this.exitTest}>EXIT TEST</button>
             <iframe src={src} frameborder="0" style={{overflow: 'hidden', overflowX: 'hidden', overflowY: 'hidden', height: '100%', width: '100%', position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px', zIndex: '999999', border: 'none'}} height="100%" width="100%"></iframe>
           </div>
         );
       } else  {
+        console.log('this is displaying');
         // video but no autoplay
         const src = `https://player.vimeo.com/video/${this.props.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
 
@@ -66,7 +67,7 @@ export default class VimeoEditRoomWidget extends React.Component {
                 <img onClick={this.previousVideo} className={Styles.previousButton} src={Back} />
               </div>
               <h5 id={Styles.videoName}>{this.props.videos[this.props.index].videoName}</h5>
-              <h6>{this.props.videos[this.props.index].producerName}</h6>
+              <h6 id={Styles.producerName}>Produced by {this.props.videos[this.props.index].producerName}</h6>
             </div>
           </div>
         );
@@ -77,7 +78,8 @@ export default class VimeoEditRoomWidget extends React.Component {
 
         return (
           <div className="col s12 m6 offset-m3" style={{marginBottom: '100px', marginTop: '200px'}}>
-            <button style={{position: 'absolute', zIndex: '100000000', color: 'grey', left: '0', top: '0', height: '50px', width: '120px', fontSize: '12px'}} onClick={this.exitTest}>Exit Testing Mode</button>
+            <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '45', top: '0', height: '50px'}} onClick={this.exitTest}>EXIT TEST</button>
+            {/* <button style={{position: 'absolute', zIndex: '100000000', color: 'grey', left: '0', top: '0', height: '50px', width: '120px', fontSize: '12px'}} onClick={this.exitTest}>Exit Testing Mode</button> */}
             <iframe src={src} frameborder="0" style={{overflow: 'hidden', overflowX: 'hidden', overflowY: 'hidden', height: '100%', width: '100%', position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px', zIndex: '999999', border: 'none'}} height="100%" width="100%"></iframe>
             <div id={Styles.videoInfo}>
               <h5 id={Styles.videoName}>{this.props.videos[this.props.index].videoName}</h5>
