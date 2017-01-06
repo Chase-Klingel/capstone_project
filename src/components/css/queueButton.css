@@ -18,6 +18,10 @@
   border-bottom: 1px solid #daa520;
 }
 
+.addBtn:focus {
+  background: #daa520;
+}
+
 button:focus {
   background: #daa520;
 }

@@ -127,6 +127,16 @@ export default class SCFeedWidget extends React.Component {
 
   queueButton() {
     if (this.props.vimeoUser === true) {
+      let songAdded = false;
+
+      const songInQueue = this.props.musicQueue.filter((song) => {
+        return this.props.songId === song.songId;
+      });
+
+      if (songInQueue.length === 1) {
+        songAdded = true;
+      }
+
       return (
         <QueueButton
           loggedIn={this.props.loggedIn}
@@ -139,6 +149,7 @@ export default class SCFeedWidget extends React.Component {
           musicComments={this.props.musicComments}
           musicQueue={this.props.musicQueue}
           vimeoUser={this.props.vimeoUser}
+          songAdded={songAdded}
         />
       );
     }

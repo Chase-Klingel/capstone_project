@@ -24,10 +24,10 @@ export default class ProfileSetup extends React.Component {
     if (this.props.vimeoUser) {
       axios.get('/api/vimeo-user')
         .then((res) => {
-          const signupInfo = [res.data];
-          this.props.getsignupInfo(signupInfo);
-          const vimeoToken = signupInfo[0].vimeoToken;
-          const vimeoId = signupInfo[0].vimeoId;
+          const userInfo = [res.data];
+          this.props.getUserInfo(userInfo);
+          const vimeoToken = userInfo[0].vimeoToken;
+          const vimeoId = userInfo[0].vimeoId;
           const info = [vimeoId, vimeoToken];
           return info;
         })
@@ -40,7 +40,7 @@ export default class ProfileSetup extends React.Component {
             for (let i = 0; i < videoData.length; i++) {
               let videoId = videoData[i].link.slice(18, 27);
               let videoName = videoData[i].name;
-              let producerName = this.props.signupInfo[0].vimeoUsername;
+              let producerName = this.props.userInfo[0].vimeoUsername;
               let video = { videoId: videoId, videoName: videoName, producerName: producerName };
               videoUploads = videoUploads.concat(video);
             }
@@ -57,11 +57,11 @@ export default class ProfileSetup extends React.Component {
     } else {
       axios.get('/api/sc-user')
         .then((res) => {
-          const signupInfo = [res.data];
-          this.props.getsignupInfo(signupInfo);
+          const userInfo = [res.data];
+          this.props.getUserInfo(userInfo);
         })
         .then(() => {
-          const name = this.props.signupInfo[0].scUsername;
+          const name = this.props.userInfo[0].scUsername;
           axios.get(`${corsURL}http://api.soundcloud.com/resolve?url=http://soundcloud.com/${name}&${clientId}`)
             .then((res) => {
               const id = res.data.id;
@@ -104,16 +104,16 @@ export default class ProfileSetup extends React.Component {
 
   profileSetup() {
     if (this.props.vimeoUser) {
-      if (this.props.signupInfo[0].photoUrl === '' || this.props.signupInfo[0].bio === '') {
+      if (this.props.userInfo[0].photoUrl === '' || this.props.userInfo[0].bio === '') {
         return (
           <div>
             <ProfileBannerSetup
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
-              getsignupInfo={this.props.getsignupInfo}
+              getUserInfo={this.props.getUserInfo}
               getUploads={this.props.getUploads}
               uploads={this.props.uploads}
-              signupInfo={this.props.signupInfo}
+              userInfo={this.props.userInfo}
             />
 
             <div className="container" id={Styles.widgetContainer}>
@@ -122,7 +122,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   uploads={this.props.uploads}
                   getUploads={this.props.getUploads}
-                  signupInfo={this.props.signupInfo}
+                  userInfo={this.props.userInfo}
                 />
               </div>
               <div className="row">
@@ -130,7 +130,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
-                  signupInfo={this.props.signupInfo}
+                  userInfo={this.props.userInfo}
                 />
               </div>
             </div>
@@ -143,7 +143,7 @@ export default class ProfileSetup extends React.Component {
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
               uploads={this.props.uploads}
-              signupInfo={this.props.signupInfo}
+              userInfo={this.props.userInfo}
             />
 
             <div className="container" id={Styles.widgetContainer}>
@@ -160,7 +160,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
-                  signupInfo={this.props.signupInfo}
+                  userInfo={this.props.userInfo}
                 />
               </div>
             </div>
@@ -168,16 +168,16 @@ export default class ProfileSetup extends React.Component {
         );
       }
     } else {
-      if (this.props.signupInfo[0].photoUrl === '' || this.props.signupInfo[0].bio === '') {
+      if (this.props.userInfo[0].photoUrl === '' || this.props.userInfo[0].bio === '') {
         return (
           <div>
             <ProfileBannerSetup
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
-              getsignupInfo={this.props.getsignupInfo}
+              getUserInfo={this.props.getUserInfo}
               getUploads={this.props.getUploads}
               uploads={this.props.uploads}
-              signupInfo={this.props.signupInfo}
+              userInfo={this.props.userInfo}
             />
 
             <div className="container" id={Styles.widgetContainer}>
@@ -193,7 +193,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
-                  signupInfo={this.props.signupInfo}
+                  userInfo={this.props.userInfo}
                 />
               </div>
             </div>
@@ -206,7 +206,7 @@ export default class ProfileSetup extends React.Component {
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
               uploads={this.props.uploads}
-              signupInfo={this.props.signupInfo}
+              userInfo={this.props.userInfo}
             />
 
             <div className="container" id={Styles.widgetContainer}>
@@ -223,7 +223,7 @@ export default class ProfileSetup extends React.Component {
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}
                   uploads={this.props.uploads}
-                  signupInfo={this.props.signupInfo}
+                  userInfo={this.props.userInfo}
                 />
               </div>
             </div>
@@ -234,7 +234,7 @@ export default class ProfileSetup extends React.Component {
   }
 
   render() {
-    if (this.props.signupInfo.length === 0 || this.props.uploads.length === 0) {
+    if (this.props.userInfo.length === 0 || this.props.uploads.length === 0) {
       return false;
     }
 
@@ -272,7 +272,7 @@ export default class ProfileSetup extends React.Component {
     // componentDidMount() {
     //   axios.get('/api/vimeo-user')
     //     .then(res => {
-    //       this.props.getsignupInfo(res.data);
+    //       this.props.getuserInfo(res.data);
     //       const vimeoToken = res.data[0].vimeoToken;
     //       const vimeoId = res.data[0].vimeoId;
     //       const info = [vimeoId, vimeoToken];

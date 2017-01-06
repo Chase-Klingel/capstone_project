@@ -13,6 +13,20 @@ export default class VimeoFeedWidget extends React.Component {
   }
   queueButton() {
     if (this.props.scUser === true || !this.props.loggedIn) {
+      // do logic for seeing if videoID is in videoQueue
+        // if it is, then set prop 'added' to true
+      let videoAdded = false;
+
+      const videoInQueue = this.props.videoQueue.filter((video) => {
+        return this.props.videoId === video.videoId;
+      });
+
+      if (videoInQueue.length === 1) {
+        videoAdded = true;
+      }
+
+      console.log(videoAdded, ' VIDEO ADDED');
+
       return (
         <div style={{display: 'inline'}}>
           <QueueButton
@@ -26,6 +40,7 @@ export default class VimeoFeedWidget extends React.Component {
             updateVideoQueue={this.props.updateVideoQueue}
             videoQueue={this.props.videoQueue}
             scUser={this.props.scUser}
+            videoAdded={videoAdded}
           />
         </div>
       )

@@ -149,7 +149,7 @@ export default class Header extends React.Component {
               vimeoUser={this.props.vimeoUser}
               userInfo={this.props.userInfo}
               authUser={this.props.authUser}
-              signupInfo={this.props.signupInfo}
+              userInfo={this.props.userInfo}
             />
           </div>
           <div id={Styles.queueContainer}>

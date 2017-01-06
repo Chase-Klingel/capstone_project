@@ -57,7 +57,7 @@ export default class SignOutModal extends React.Component {
   }
 
   signOutModal() {
-    if (this.props.vimeoUser && this.props.signupInfo.length !== 0) {
+    if (this.props.vimeoUser && this.props.userInfo.length !== 0) {
       return (
         <div id={Styles.desktopMenu}>
           <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].vimeoUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
@@ -66,7 +66,7 @@ export default class SignOutModal extends React.Component {
               <img src={this.props.userInfo[0].photoUrl} />
             </div>
             <div id={Styles.infoContainer}>
-              <p id={Styles.name}>{this.props.signupInfo[0].vimeoUsername}</p>
+              <p id={Styles.name}>{this.props.userInfo[0].vimeoUsername}</p>
               <Link to="/profile" id={Styles.viewProfile}>View Profile</Link>
             </div>
             <hr />
@@ -78,13 +78,13 @@ export default class SignOutModal extends React.Component {
           </Modal>
         </div>
       );
-    } else if (this.props.scUser && this.props.signupInfo.length !== 0) {
+    } else if (this.props.scUser && this.props.userInfo.length !== 0) {
       return (
         <div>
           <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].scUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
           <Modal ref="modal" modalStyle={modalStyle} backdropStyle={backdropStyle} contentStyle={contentStyle}>
             <div id={Styles.profileImgContainer}>
-              <img src={this.props.signupInfo[0].photoUrl} />
+              <img src={this.props.userInfo[0].photoUrl} />
             </div>
             <div id={Styles.infoContainer}>
               <p id={Styles.name}>{this.props.userInfo[0].scUsername}</p>

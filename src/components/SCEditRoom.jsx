@@ -122,7 +122,7 @@ export default class SCEditRoom extends React.Component {
         <div className="row">
           <div className="col s12" style={{marginTop: '168px'}}>
             <div style={{textAlign: 'center', marginTop: '30px'}}>
-              <p style={{color: 'white'}}>Once you select a song, click play on the song and the video your testing will auto play.</p>
+              <p style={{color: 'white'}}>Once you select a song, click the play button on the song and the video your testing will auto play.</p>
               <button type="button" onClick={this.selectSong} style={{background:'#20daa5', padding: '15px 45px', color: 'white', border: 'none', boxShadow: '0 2px 5px rgba(0, 0, 0, .2)', marginBottom: '30px'}}>Select Song</button>
               {this.selectedSong()}
             </div>

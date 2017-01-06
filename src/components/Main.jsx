@@ -61,8 +61,10 @@ export default class Main extends React.Component {
             <ProfileSetup
               vimeoUser={this.props.vimeoUser}
               scUser={this.props.scUser}
-              signupInfo={this.props.signupInfo}
-              getsignupInfo={this.props.getsignupInfo}
+              userInfo={this.props.userInfo}
+              getUserInfo={this.props.getUserInfo}
+              // signupInfo={this.props.signupInfo}
+              // getsignupInfo={this.props.getsignupInfo}
               uploads={this.props.uploads}
               getUploads={this.props.getUploads}
             />

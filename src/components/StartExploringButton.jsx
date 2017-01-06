@@ -20,10 +20,10 @@ export default class StartExploringButton extends React.Component {
   postVideos(e) {
     e.preventDefault();
 
-    if (this.props.signupInfo[0].photoUrl === '') {
+    if (this.props.userInfo[0].photoUrl === '') {
       return notify.show('Please add a profile photo', 'error');
       return;
-    } else if (this.props.signupInfo[0].bio === '') {
+    } else if (this.props.userInfo[0].bio === '') {
       return notify.show('Please add a bio', 'error');
     }
 
@@ -41,9 +41,9 @@ export default class StartExploringButton extends React.Component {
   postSongs(e) {
     e.preventDefault();
 
-    if (this.props.signupInfo[0].photoUrl === '') {
+    if (this.props.userInfo[0].photoUrl === '') {
       return notify.show('Please add a profile photo', 'error');
-    } else if (this.props.signupInfo[0].bio === '') {
+    } else if (this.props.userInfo[0].bio === '') {
       return notify.show('Please add a bio', 'error');
     }
 

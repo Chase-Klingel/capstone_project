@@ -15,7 +15,7 @@ export default class App extends React.Component {
       loggedIn: false,
       vimeoUser: true,
       scUser: JSON.parse(localStorage.getItem('scUser')) || false,
-      signupInfo: [],
+      // signupInfo: [],
       userInfo: [],
       uploads: [],
       profileContent: [],
@@ -26,12 +26,13 @@ export default class App extends React.Component {
 
       allVideos: [],
       videoComments: [],
-      videoQueue: []
+      videoQueue: [],
+      // editingMode: false
     }
 
     this.authUser = this.authUser.bind(this);
     this.showHeader = this.showHeader.bind(this);
-    this.getsignupInfo = this.getsignupInfo.bind(this);
+    // this.getsignupInfo = this.getsignupInfo.bind(this);
     this.getUserInfo = this.getUserInfo.bind(this);
     this.getUploads = this.getUploads.bind(this);
     this.getProfileContent = this.getProfileContent.bind(this);
@@ -42,6 +43,7 @@ export default class App extends React.Component {
     this.getVideoComments = this.getVideoComments.bind(this);
     this.updateVideoQueue = this.updateVideoQueue.bind(this);
     this.emptyQueue = this.emptyQueue.bind(this);
+    // this.setEditingMode = this.setEditingMode.bind(this);
   }
 
   componentDidMount() {
@@ -81,19 +83,22 @@ export default class App extends React.Component {
         musicQueue={this.state.musicQueue}
         videoQueue={this.state.videoQueue}
         emptyQueue={this.emptyQueue}
+        // setEditingMode={this.setEditingMode}
+        // editingMode={this.state.editingMode}
       />
     }
   }
 
-  getsignupInfo(signupInfo) {
-    this.setState({ signupInfo: signupInfo });
-  }
+  // getsignupInfo(signupInfo) {
+  //   this.setState({ signupInfo: signupInfo });
+  // }
 
   getUserInfo(userInfo) {
     this.setState({ userInfo: userInfo });
   }
 
   getUploads(uploads) {
+    console.log(uploads, ' UPLOADS');
     if (uploads[0].mood && this.state.scUser === true) {
       const mappedUploads = this.state.uploads.map((upload) => {
         if (uploads[0].songId !== upload.songId) {
@@ -191,8 +196,9 @@ export default class App extends React.Component {
               vimeoUser={this.state.vimeoUser}
               scUser={this.state.scUser}
               authUser={this.authUser}
-              signupInfo={this.state.signupInfo}
-              getsignupInfo={this.getsignupInfo}
+              // signupInfo={this.state.signupInfo}
+              getUserInfo={this.getUserInfo}
+              // getsignupInfo={this.getsignupInfo}
               uploads={this.state.uploads}
               getUploads={this.getUploads}
               profileContent={this.state.profileContent}

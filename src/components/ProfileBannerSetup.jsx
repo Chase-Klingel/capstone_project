@@ -36,8 +36,8 @@ export default class ProfileBannerSetup extends React.Component {
       })
       .then((res) => {
         notify.show('Profile photo was updated successfully!', 'success');
-        const signupInfo = [res.data];
-        this.props.getsignupInfo(signupInfo);
+        const userInfo = [res.data];
+        this.props.getUserInfo(userInfo);
         this.setState({ updatingImg: false });
       })
       .catch((err) => {
@@ -49,8 +49,8 @@ export default class ProfileBannerSetup extends React.Component {
       })
       .then((res) => {
         notify.show('Profile photo was updated successfully!', 'success');
-        const signupInfo = [res.data];
-        this.props.getsignupInfo(signupInfo);
+        const userInfo = [res.data];
+        this.props.getUserInfo(userInfo);
         this.setState({ updatingImg: false });
       })
       .catch((err) => {
@@ -69,8 +69,8 @@ export default class ProfileBannerSetup extends React.Component {
       })
       .then((res) => {
         notify.show('Bio was updated successfully!', 'success');
-        const signupInfo = [res.data];
-        this.props.getsignupInfo(signupInfo);
+        const userInfo = [res.data];
+        this.props.getUserInfo(userInfo);
         this.setState({ updatingBio: false });
       })
       .catch((err) => {
@@ -82,8 +82,8 @@ export default class ProfileBannerSetup extends React.Component {
       })
       .then((res) => {
         notify.show('Bio was updated successfully!', 'success');
-        const signupInfo = [res.data];
-        this.props.getsignupInfo(signupInfo);
+        const userInfo = [res.data];
+        this.props.getUserInfo(userInfo);
         this.setState({ updatingBio: false })
       })
       .catch((err) => {
