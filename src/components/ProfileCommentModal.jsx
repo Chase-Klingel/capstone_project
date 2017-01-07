@@ -23,7 +23,7 @@ const editModalStyle = {
   marginTop: '50px'
 };
 
-export default class CommentModal extends React.Component {
+export default class ProfileCommentModal extends React.Component {
   constructor(props) {
     super(props);
 
@@ -40,18 +40,34 @@ export default class CommentModal extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.videoId) {
-      const comments = this.props.videoComments.filter((comment) => {
-        return comment.videoId === this.props.dbId;
-      });
+    if (this.props.vimeoUser) {
+      axios.get('/api/user/videos/comments')
+        .then((res) => {
+          let comments = res.data;
 
-      this.setState({ comments: comments });
+          comments = comments.filter((comment) => {
+            return comment.videoId === this.props.videoId;
+          });
+
+          this.setState({ comments: comments });
+        })
+        .catch((err) => {
+          return err;
+        })
     } else {
-      const comments = this.props.musicComments.filter((comment) => {
-        return comment.songId === this.props.songId;
-      });
+      axios.get('/api/user/music/comments')
+        .then((res) => {
+          let comments = res.data;
 
-      this.setState({ comments: comments });
+          comments = comments.filter((comment) => {
+            return comment.songId === this.props.songId;
+          });
+
+          this.setState({ comments: comments });
+        })
+        .catch((err) => {
+          return err;
+        })
     }
   }
 
@@ -134,24 +150,15 @@ export default class CommentModal extends React.Component {
   }
 
   commentButton() {
-    if (this.props.musicQueue) {
-      return (
-        <div className="center-align">
-          <button onClick={this.showModal} id={Styles.editCommentButton}>
-            Comments
-          </button>
-        </div>
-      );
-    } else {
-      return (
-        <div style={{display: 'inline'}}>
-          <button onClick={this.showModal} id={Styles.feedCommentButton}>
-            Comments
-          </button>
-        </div>
-      )
-    }
+    return (
+      <div style={{display: 'inline'}}>
+        <button onClick={this.showModal} id={Styles.feedCommentButton}>
+          Comments
+        </button>
+      </div>
+    );
   }
+
 
   widget() {
     if (this.props.songId) {

@@ -7,7 +7,7 @@ import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
 import Styles from './css/scMyProfileWidget';
-import CommentModal from './CommentModal';
+import ProfileCommentModal from './ProfileCommentModal';
 import QueueButton from './QueueButton';
 
 export default class SCMyProfileWidget extends React.Component {
@@ -162,10 +162,9 @@ export default class SCMyProfileWidget extends React.Component {
             { this.renderPlayerIcons() }
           </div>
           <div className={classnames(Styles.buttonsContainer)}>
-            <CommentModal
+            <ProfileCommentModal
               dbId={this.props.dbId}
               songId={this.props.songId}
-              musicComments={this.props.musicComments}
               backgroundPhoto={this.props.backgroundPhoto}
               userInfo={this.props.userInfo}
               artistName={this.props.artistName}

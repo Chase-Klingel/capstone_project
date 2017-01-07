@@ -10,12 +10,6 @@ export default class ProfileWidgetList extends React.Component {
 
   widgetList() {
     if (this.props.scUser && this.props.profileContent) {
-        const comments = [];
-
-        this.props.profileContent.map((song, i) => {
-          comments.push({ comment: song.comment, songId: song.songId, commenterPhotoUrl: song.commenterPhotoUrl });
-        })
-
         const widgetList = this.props.profileContent.map((song, i) => {
           return (
             <SCMyProfileWidget
@@ -25,7 +19,6 @@ export default class ProfileWidgetList extends React.Component {
               songName={song.songName}
               artistName={song.artistName}
               userInfo={this.props.userInfo}
-              musicComments={comments}
               backgroundPhoto={song.photoUrl}
             />
           );
@@ -42,9 +35,9 @@ export default class ProfileWidgetList extends React.Component {
           }
         }
 
-        console.log(widgetList);
-
         return widgetList;
+    } else {
+
     }
   }
 

@@ -10,15 +10,20 @@ export default class MyProfile extends React.Component {
     if (this.props.userInfo[0].vimeoUsername) {
       axios.get('/api/videos')
         .then((res) => {
-          console.log(res.data, ' DATA');
+          this.props.getProfileContent(res.data);
         })
-          // then some callback to set state for 'profileContent'
+        .catch((err) => {
+          return err;
+        })
     } else {
       axios.get('/api/music')
         .then((res) => {
+          console.log(res.data, ' DATA');
           this.props.getProfileContent(res.data);
         })
-        // then some callback to set state for 'profileContent'
+        .catch((err) => {
+          return err;
+        })
     }
   }
 

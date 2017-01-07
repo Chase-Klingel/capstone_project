@@ -92,13 +92,35 @@ router.get('/api/music', authorize, (req, res, next) => {
 
   knex('sc_users')
     .innerJoin('music', 'sc_users.id', 'music.user_id')
-    .innerJoin('comments', 'music.id', 'comments.music_id')
-    // may have some issues here. It was logging out userId as '2' when it should have been '1'
+    // .innerJoin('comments', 'music.id', 'comments.music_id')
     .where('sc_users.id', userId)
     .then((rows) => {
+      console.log(rows, ' ROWS');
       const userMusic = camelizeKeys(rows);
 
+      for (let i = 0; i < userMusic.length; i++) {
+        delete userMusic[i].email;
+        delete userMusic[i].hashedPassword;
+      }
+
       res.send(userMusic);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
+router.get('/api/user/music/comments', authorize, (req, res, next) => {
+  const { userId } = req.token;
+
+  knex('sc_users')
+    .innerJoin('music', 'sc_users.id', 'music.user_id')
+    .innerJoin('comments', 'music.id', 'comments.music_id')
+    .where('sc_users.id', userId)
+    .then((rows) => {
+      const comments = camelizeKeys(rows);
+
+      res.send(comments);
     })
     .catch((err) => {
       next(err);

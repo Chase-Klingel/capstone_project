@@ -21,19 +21,36 @@ export default class MoodSection extends React.Component {
     this.threeOrLessWidgets = this.threeOrLessWidgets.bind(this);
     this.forward= this.forward.bind(this);
     this.showNext = this.showNext.bind(this);
-
+    this.shuffleWidgets = this.shuffleWidgets.bind(this);
     this.previous = this.previous.bind(this);
     this.showPrevious = this.showPrevious.bind(this);
   }
 
   componentDidMount() {
+    console.log('here');
     const songs = this.props.allMusic;
 
     const widgets = songs.filter((song) => {
       return song.mood === this.props.musicMood;
     });
 
+    const shuffledWidgets = this.shuffleWidgets(widgets);
+    console.log('after shuffle');
+    //
+    // console.log(shuffledWidgets, ' SHUF WIDGS');
+
     this.setState({ widgets: widgets });
+  }
+
+  shuffleWidgets(widgets) {
+    for (var i = widgets.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = widgets[i];
+        widgets[i] = widgets[j];
+        widgets[j] = temp;
+    }
+
+    return widgets;
   }
 
   threeOrLessWidgets() {
