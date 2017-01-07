@@ -14,7 +14,7 @@ export default class ProfileBanner extends React.Component {
   }
 
   profileBanner() {
-    if (this.props.vimeoUser && this.props.uploads) {
+    if (this.props.vimeoUser) {
       return (
         <div id={Styles.vimeoBannerContainer}>
           <div className='row' id={Styles.profileImg} style={{backgroundImage: `linear-gradient(

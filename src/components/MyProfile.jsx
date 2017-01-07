@@ -33,7 +33,7 @@ export default class MyProfile extends React.Component {
     }
 
     return (
-      <div className="container">
+      <div>
         <ProfileBanner
           scUser={this.props.scUser}
           vimeoUser={this.props.vimeoUser}

@@ -98,6 +98,7 @@ export default class CommentModal extends React.Component {
         return err;
       })
     } else if (this.props.userInfo[0].vimeoUsername && this.props.videoId) {
+      console.log(this.props.dbId, ' db id');
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, videoId: this.props.videoId }
       const nextComments = this.state.comments.concat(newComment);
       this.setState({ comments: nextComments });

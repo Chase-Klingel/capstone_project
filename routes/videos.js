@@ -27,8 +27,8 @@ const authorize = function(req, res, next) {
 
 
 router.get('/api/all-videos', (req, res, next) => {
-  knex('videos')
-    .innerJoin('vimeo_users', 'videos.user_id', 'vimeo_users.id')
+  knex('vimeo_users')
+    .innerJoin('videos', 'videos.user_id', 'vimeo_users.id')
     .then((rows) => {
       const videos = camelizeKeys(rows);
 
@@ -96,8 +96,8 @@ router.post('/api/videos-comments', authorize, (req, res, next) => {
 router.get('/api/videos', authorize, (req, res, next) => {
   const { userId } = req.token;
 
-  knex('videos')
-    .innerJoin('vimeo_users', 'vimeo_users.id', 'videos.user_id')
+  knex('vimeo_users')
+    .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
     // .innerJoin('comments', 'videos.id', 'comments.video_id')
     .where('vimeo_users.id', userId)
     .then((rows) => {
@@ -120,8 +120,8 @@ router.get('/api/videos', authorize, (req, res, next) => {
 router.get('/api/user/videos/comments', authorize, (req, res, next) => {
   const { userId } = req.token;
 
-  knex('videos')
-    .innerJoin('vimeo_users', 'vimeo_users.id', 'videos.user_id')
+  knex('vimeo_users')
+    .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
     .innerJoin('comments', 'videos.id', 'comments.video_id')
     .where('vimeo_users.id', userId)
     .then((rows) => {
