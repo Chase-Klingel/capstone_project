@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import ProfileCommentModal from './ProfileCommentModal';
 import Styles from './css/vimeoFeedWidget';
 
-export default class VimeoFeedWidget extends React.Component {
+export default class VimeoMyProfileWidget extends React.Component {
   render() {
     const src = `https://player.vimeo.com/video/${this.props.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`
 
@@ -15,6 +15,9 @@ export default class VimeoFeedWidget extends React.Component {
         </div>
         <div style={{marginTop: '10px'}}>
           <ProfileCommentModal
+            userId={this.props.userId}
+            scProfile={this.props.scProfile}
+            vimeoProfile={this.props.vimeoProfile}
             dbId={this.props.dbId}
             videoId={this.props.videoId}
             userInfo={this.props.userInfo}

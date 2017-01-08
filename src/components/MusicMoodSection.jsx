@@ -33,8 +33,6 @@ export default class MoodSection extends React.Component {
       return song.mood === this.props.musicMood;
     });
 
-    console.log(widgets, ' WIDGETS');
-
     const shuffledWidgets = this.shuffleWidgets(widgets);
 
     this.setState({ widgets: widgets });

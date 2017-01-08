@@ -81,8 +81,12 @@ export default class VimeoEditRoom extends React.Component {
     return videoWidgets;
   }
 
-  setPlayingSong() {
-    this.setState({ playingSong: true });
+  setPlayingSong(operation) {
+    if (operation === 'play') {
+      this.setState({ playingSong: true });
+    } else {
+      this.setState({ playingSong: false });
+    }
   }
 
   exitTest() {
@@ -100,14 +104,14 @@ export default class VimeoEditRoom extends React.Component {
       return (
         <div style={{marginTop: '-70px'}}>
           <button style={{position: 'absolute', zIndex: '100000000', color: 'white', right: '35', top: '0', height: '50px', background: 'none', boxShadow: 'none'}} onClick={this.exitTest}>EXIT TEST</button>
-          <iframe src={src} frameborder="0" style={{overflow: 'hidden', overflowX: 'hidden', overflowY: 'hidden', height: '100%', width: '100%', position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px', zIndex: '999999', border: 'none'}} height="100%" width="100%"></iframe>
+          <iframe src={src} style={{overflow: 'hidden', overflowX: 'hidden', overflowY: 'hidden', height: '100%', width: '100%', position: 'absolute', top: '0px', left: '0px', right: '0px', bottom: '0px', zIndex: '999999', border: 'none'}} height="100%" width="100%"></iframe>
         </div>
       );
     } else {
       const src = `https://player.vimeo.com/video/${this.state.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
       return (
         <div style={{marginTop: '-118px'}}>
-          <iframe src={src} frameborder="0" height="500px" width="100%" style={{border: 'none'}}></iframe>
+          <iframe src={src} height="500px" width="100%" style={{border: 'none'}}></iframe>
         </div>
       );
     }
@@ -133,7 +137,7 @@ export default class VimeoEditRoom extends React.Component {
 
   render() {
     const comments = this.filteredComments();
-    
+
     return (
       <div>
         <div className="row">

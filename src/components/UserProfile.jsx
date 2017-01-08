@@ -26,6 +26,7 @@ export default class UserProfile extends React.Component {
     }
   }
   render() {
+    console.log(this.props.userId, ' USER ID IN USER PROFILE');
     if (this.props.profileContent.length === 0) {
       return false;
     }
@@ -38,6 +39,9 @@ export default class UserProfile extends React.Component {
         />
         <div className="row" style={{marginBottom: '200px'}}>
           <ProfileWidgetList
+            userId={this.props.userId}
+            scProfile={this.props.scProfile}
+            vimeoProfile={this.props.vimeoProfile}
             vimeoUser={this.props.vimeoUser}
             scUser={this.props.scUser}
             profileContent={this.props.profileContent}

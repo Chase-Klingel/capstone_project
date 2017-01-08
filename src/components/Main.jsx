@@ -163,6 +163,8 @@ export default class Main extends React.Component {
             <Redirect to="/signin" />
           ) : (
             <MyProfile
+              scProfile={this.props.scProfile}
+              vimeoProfile={this.props.vimeoProfile}
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
               userInfo={this.props.userInfo}

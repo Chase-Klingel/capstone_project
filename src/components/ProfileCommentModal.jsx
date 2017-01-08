@@ -40,10 +40,12 @@ export default class ProfileCommentModal extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.vimeoUser) {
-      axios.get('/api/user/videos/comments')
+    if (this.props.vimeoProfile === true) {
+      axios.get(`/api/user/videos/comments/${this.props.userId}`)
         .then((res) => {
           let comments = res.data;
+
+          console.log(comments, 'COMMENTS IN COMP DID MOUNT');
 
           comments = comments.filter((comment) => {
             return comment.videoId === this.props.dbId;
@@ -55,9 +57,11 @@ export default class ProfileCommentModal extends React.Component {
           return err;
         })
     } else {
-      axios.get('/api/user/music/comments')
+      axios.get(`/api/user/music/comments/${this.props.userId}`)
         .then((res) => {
           let comments = res.data;
+
+          console.log(comments, 'COMMENTS IN COMP DID MOUNT');
 
           comments = comments.filter((comment) => {
             return comment.songId === this.props.songId;
@@ -80,7 +84,6 @@ export default class ProfileCommentModal extends React.Component {
   }
 
   postComment(e) {
-    console.log('here');
     e.preventDefault();
 
     if (this.props.userInfo[0].vimeoUsername && this.props.songId) {

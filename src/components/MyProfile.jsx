@@ -34,17 +34,17 @@ export default class MyProfile extends React.Component {
     return (
       <div>
         <ProfileBanner
-          // scUser={this.props.scUser}
-          // vimeoUser={this.props.vimeoUser}
           userInfo={this.props.userInfo}
           profileContent={this.props.profileContent}
         />
         <div className="row" style={{marginBottom: '200px'}}>
           <ProfileWidgetList
-            // vimeoUser={this.props.vimeoUser}
-            // scUser={this.props.scUser}
+            scProfile={this.props.scProfile}
+            vimeoProfile={this.props.vimeoProfile}
             profileContent={this.props.profileContent}
             userInfo={this.props.userInfo}
+            vimeoUser={this.props.vimeoUser}
+            scUser={this.props.scUser}
           />
         </div>
       </div>

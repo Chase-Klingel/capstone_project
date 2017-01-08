@@ -164,6 +164,9 @@ export default class SCMyProfileWidget extends React.Component {
             </div>
             <div className={classnames(Styles.buttonsContainer)}>
               <ProfileCommentModal
+                userId={this.props.userId}
+                scProfile={this.props.scProfile}
+                vimeoProfile={this.props.vimeoProfile}
                 dbId={this.props.dbId}
                 songId={this.props.songId}
                 backgroundPhoto={this.props.backgroundPhoto}
@@ -207,6 +210,9 @@ export default class SCMyProfileWidget extends React.Component {
             </div>
             <div className={classnames(Styles.buttonsContainer)}>
               <ProfileCommentModal
+                userId={this.props.userId}
+                scProfile={this.props.scProfile}
+                vimeoProfile={this.props.vimeoProfile}
                 dbId={this.props.dbId}
                 songId={this.props.songId}
                 backgroundPhoto={this.props.backgroundPhoto}
@@ -222,6 +228,7 @@ export default class SCMyProfileWidget extends React.Component {
   }
 
   render () {
+    console.log(this.props.userId, ' IN SC MY PROFILE WIDGETTTT');
     return (
       <div>
         { this.renderWidget() }

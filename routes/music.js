@@ -127,6 +127,24 @@ router.get('/api/user/music/comments', authorize, (req, res, next) => {
     });
 });
 
+router.get('/api/user/music/comments/:id', (req, res, next) => {
+  const userId  = Number.parseInt(req.params.id);
+
+  knex('sc_users')
+    .innerJoin('music', 'sc_users.id', 'music.user_id')
+    .innerJoin('comments', 'music.id', 'comments.music_id')
+    .where('sc_users.id', userId)
+    .orderBy('comments.created_at', 'asc') // make sure this goes oldest to newest
+    .then((rows) => {
+      const comments = camelizeKeys(rows);
+
+      res.send(comments);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 router.get('/api/music/edit', authorize, (req, res, next) => {
   const { userId } = req.token;
 

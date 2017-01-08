@@ -156,9 +156,9 @@ export default class App extends React.Component {
 
   getUserId(userId, profileType) {
     if (profileType === 'vimeo user') {
-      this.setState({ userId: userId, vimeoProfile: true });
+      this.setState({ userId: userId, vimeoProfile: true, scProfile: false });
     } else {
-      this.setState({ userId: userId, scProfile: true });
+      this.setState({ userId: userId, scProfile: true, vimeoProfile: false });
     }
   }
 

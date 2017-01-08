@@ -141,6 +141,30 @@ router.get('/api/user/videos/comments', authorize, (req, res, next) => {
     });
 });
 
+router.get('/api/user/videos/comments/:id', (req, res, next) => {
+  const userId  = Number.parseInt(req.params.id);
+
+  knex('vimeo_users')
+    .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
+    .innerJoin('comments', 'videos.id', 'comments.video_id')
+    .where('vimeo_users.id', userId)
+    .then((rows) => {
+
+      const userVideos = camelizeKeys(rows);
+
+      for (let i = 0; i < userVideos.length; i++) {
+        delete userVideos[i].email;
+        delete userVideos[i].vimeoId;
+        delete userVideos[i].vimeoToken;
+      }
+
+      res.send(userVideos);
+    })
+    .catch((err) => {
+      next(err);
+    });
+});
+
 
 router.get('/api/videos/edit', authorize, (req, res, next) => {
   const { userId } = req.token;

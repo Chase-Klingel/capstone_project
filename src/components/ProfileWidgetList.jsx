@@ -15,6 +15,9 @@ export default class ProfileWidgetList extends React.Component {
         return (
           <VimeoMyProfileWidget
             key={i}
+            userId={this.props.userId}
+            scProfile={this.props.scProfile}
+            vimeoProfile={this.props.vimeoProfile}
             dbId={video.id}
             videoId={video.videoId}
             videoName={video.videoName}
@@ -41,6 +44,9 @@ export default class ProfileWidgetList extends React.Component {
         return (
           <SCMyProfileWidget
             key={i}
+            userId={this.props.userId}
+            scProfile={this.props.scProfile}
+            vimeoProfile={this.props.vimeoProfile}
             profileContent={this.props.profileContent}
             dbId={song.id}
             songId={song.songId}
@@ -67,6 +73,8 @@ export default class ProfileWidgetList extends React.Component {
   }
 
   render() {
+    console.log(this.props.userId, ' USER ID IN PROFILE WID LIST');
+
     return (
       <div className="container">
         { this.widgetList() }

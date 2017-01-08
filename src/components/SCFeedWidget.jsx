@@ -28,7 +28,7 @@ export default class SCFeedWidget extends React.Component {
 
     this.renderWidget = this.renderWidget.bind(this);
     this.queueButton = this.queueButton.bind(this);
-    this.testing = this.testing.bind(this);
+    this.getArtistName = this.getArtistName.bind(this);
   }
 
   componentDidMount() {
@@ -158,7 +158,7 @@ export default class SCFeedWidget extends React.Component {
     }
   }
 
-  testing(artistName) {
+  getArtistName(artistName) {
     // db is wrong. we need to serve up the userId associated with song in music table and pass that to sc feed widget
     this.props.getUserId(this.props.userId, 'sc user');
     this.setState({ redirect: `/user/${artistName.toLowerCase()}`});
@@ -179,7 +179,7 @@ export default class SCFeedWidget extends React.Component {
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
           <div className="center-align" style={{marginBottom: '30px'}}>
-            <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> <button onClick={this.testing.bind(this, this.props.artistName)}>{this.props.artistName}</button></h4>
+            <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> <button onClick={this.getArtistName.bind(this, this.props.artistName)}>{this.props.artistName}</button></h4>
             <h4 className={Styles.songName}>{this.props.songName}</h4>
           </div>
 

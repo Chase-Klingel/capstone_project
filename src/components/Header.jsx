@@ -59,7 +59,7 @@ export default class Header extends React.Component {
   }
 
   emptyMusicQueueButton() {
-    if (this.props.musicQueue.length === 0) {
+    if (this.props.musicQueue.length === 0 || location.pathname === '/testing-music') {
       return;
     }
 
@@ -67,7 +67,7 @@ export default class Header extends React.Component {
   }
 
   emptyVideoQueueButton() {
-    if (this.props.videoQueue.length === 0) {
+    if (this.props.videoQueue.length === 0 || location.pathname === '/testing-video') {
       return;
     }
 
