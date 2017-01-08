@@ -20,12 +20,17 @@ import VideoFeed from './VideoFeed';
 import VimeoEditRoom from './VimeoEditRoom';
 import SCEditRoom from './SCEditRoom';
 
+import UserProfile from './UserProfile';
+
+// make '/user/:artistName?'
+
 export default class Main extends React.Component {
   render() {
     return (
       <div>
         <Match pattern="/" exactly render={() =>
           <MusicFeed
+            getUserId={this.props.getUserId}
             loggedIn={this.props.loggedIn}
             vimeoUser={this.props.vimeoUser}
             allMusic={this.props.allMusic}
@@ -41,6 +46,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/video-feed" exactly render={() =>
           <VideoFeed
+            getUserId={this.props.getUserId}
             loggedIn={this.props.loggedIn}
             scUser={this.props.scUser}
             allVideos={this.props.allVideos}
@@ -59,6 +65,7 @@ export default class Main extends React.Component {
             <Redirect to="/signin" />
           ) : (
             <ProfileSetup
+              profileContent={this.props.profileContent}
               vimeoUser={this.props.vimeoUser}
               scUser={this.props.scUser}
               userInfo={this.props.userInfo}
@@ -163,6 +170,17 @@ export default class Main extends React.Component {
               getProfileContent={this.props.getProfileContent}
             />
           )
+        }/>
+
+        <Match pattern="/user/:artistName?" exactly render={() =>
+          <UserProfile
+            scProfile={this.props.scProfile}
+            vimeoProfile={this.props.vimeoProfile}
+            userInfo={this.props.userInfo}
+            profileContent={this.props.profileContent}
+            getProfileContent={this.props.getProfileContent}
+            userId={this.props.userId}
+          />
         }/>
 
         {/* <Match pattern="/profile/:username?" exactly render={() =>

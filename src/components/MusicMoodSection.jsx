@@ -27,17 +27,15 @@ export default class MoodSection extends React.Component {
   }
 
   componentDidMount() {
-    console.log('here');
     const songs = this.props.allMusic;
 
     const widgets = songs.filter((song) => {
       return song.mood === this.props.musicMood;
     });
 
+    console.log(widgets, ' WIDGETS');
+
     const shuffledWidgets = this.shuffleWidgets(widgets);
-    console.log('after shuffle');
-    //
-    // console.log(shuffledWidgets, ' SHUF WIDGS');
 
     this.setState({ widgets: widgets });
   }
@@ -58,10 +56,12 @@ export default class MoodSection extends React.Component {
       if (i <= 2) {
         return <SCFeedWidget
           key={i}
+          getUserId={this.props.getUserId}
           loggedIn={this.props.loggedIn}
           backgroundPhoto={this.state.widgets[i].photoUrl}
           dbId={this.state.widgets[i].id}
           songId={widget.songId}
+          userId={widget.userId}
           songName={widget.songName}
           artistName={widget.artistName}
           widgets={this.state.widgets}
@@ -96,6 +96,8 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <SCFeedWidget
           key={i}
+          userId={this.state.widgets[i].userId}
+          getUserId={this.props.getUserId}
           loggedIn={this.props.loggedIn}
           dbId={this.state.widgets[i].id}
           songId={this.state.widgets[i].songId}
@@ -133,6 +135,8 @@ export default class MoodSection extends React.Component {
       widgets.push(
         <SCFeedWidget
           key={i}
+          userId={this.state.widgets[i].userId}
+          getUserId={this.props.getUserId}
           loggedIn={this.props.loggedIn}
           dbId={this.state.widgets[i].id}
           songId={this.state.widgets[i].songId}

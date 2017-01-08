@@ -95,7 +95,6 @@ router.get('/api/music', authorize, (req, res, next) => {
     // .innerJoin('comments', 'music.id', 'comments.music_id')
     .where('sc_users.id', userId)
     .then((rows) => {
-      console.log(rows, ' ROWS');
       const userMusic = camelizeKeys(rows);
 
       for (let i = 0; i < userMusic.length; i++) {
@@ -117,6 +116,7 @@ router.get('/api/user/music/comments', authorize, (req, res, next) => {
     .innerJoin('music', 'sc_users.id', 'music.user_id')
     .innerJoin('comments', 'music.id', 'comments.music_id')
     .where('sc_users.id', userId)
+    .orderBy('comments.created_at', 'asc') // make sure this goes oldest to newest
     .then((rows) => {
       const comments = camelizeKeys(rows);
 
@@ -150,13 +150,11 @@ router.get('/api/music/edit', authorize, (req, res, next) => {
 });
 
 // get music content for specific user when another user goes to their profile
-router.get('/api/music/:username', (req, res, next) => {
-  let userName = req.params.username;
-  // uppercase first letter to match db.
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+router.get('/api/music/:id', (req, res, next) => {
+  const userId  = Number.parseInt(req.params.id);
   knex('sc_users')
     .innerJoin('music', 'music.user_id', 'sc_users.id')
-    .where('sc_users.sc_username', userName)
+    .where('sc_users.id', userId)
     .then((rows) => {
       const userData = camelizeKeys(rows);
 

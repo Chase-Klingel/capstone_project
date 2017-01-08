@@ -27,6 +27,9 @@ export default class App extends React.Component {
       allVideos: [],
       videoComments: [],
       videoQueue: [],
+      userId: '',
+      vimeoProfile: false,
+      scProfile: false
       // editingMode: false
     }
 
@@ -43,6 +46,7 @@ export default class App extends React.Component {
     this.getVideoComments = this.getVideoComments.bind(this);
     this.updateVideoQueue = this.updateVideoQueue.bind(this);
     this.emptyQueue = this.emptyQueue.bind(this);
+    this.getUserId = this.getUserId.bind(this);
     // this.setEditingMode = this.setEditingMode.bind(this);
   }
 
@@ -98,7 +102,6 @@ export default class App extends React.Component {
   }
 
   getUploads(uploads) {
-    console.log(uploads, ' UPLOADS');
     if (uploads[0].mood && this.state.scUser === true) {
       const mappedUploads = this.state.uploads.map((upload) => {
         if (uploads[0].songId !== upload.songId) {
@@ -141,7 +144,7 @@ export default class App extends React.Component {
   updateMusicQueue(song, operation) {
     if (operation === 'adding') {
       const nextQueue = this.state.musicQueue.concat(song);
-      console.log(nextQueue, ' next queue');
+
       this.setState({ musicQueue: nextQueue });
     } else {
       const nextQueue = this.state.musicQueue.filter((queueSong) => {
@@ -151,8 +154,15 @@ export default class App extends React.Component {
     }
   }
 
+  getUserId(userId, profileType) {
+    if (profileType === 'vimeo user') {
+      this.setState({ userId: userId, vimeoProfile: true });
+    } else {
+      this.setState({ userId: userId, scProfile: true });
+    }
+  }
+
   emptyQueue(queueType) {
-    console.log('here and the queue type is ' + queueType);
     if (queueType === 'musicQueue') {
       this.setState({ musicQueue: [] });
     } else {
@@ -196,8 +206,12 @@ export default class App extends React.Component {
               vimeoUser={this.state.vimeoUser}
               scUser={this.state.scUser}
               authUser={this.authUser}
+              scProfile={this.state.scProfile}
+              vimeoProfile={this.state.vimeoProfile}
               // signupInfo={this.state.signupInfo}
               getUserInfo={this.getUserInfo}
+              getUserId={this.getUserId}
+              userId={this.state.userId}
               // getsignupInfo={this.getsignupInfo}
               uploads={this.state.uploads}
               getUploads={this.getUploads}

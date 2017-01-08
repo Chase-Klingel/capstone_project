@@ -37,6 +37,7 @@ export default class VideoFeed extends React.Component {
       moodSections.push(
         <VideoMoodSection
           key={i}
+          getUserId={this.props.getUserId}
           allVideos={this.props.allVideos}
           videoMood={videoMoods[i]}
           videoComments={this.props.videoComments}
@@ -48,8 +49,6 @@ export default class VideoFeed extends React.Component {
         />
       );
     }
-
-    console.log(moodSections, ' mood sections');
 
     return moodSections
   }

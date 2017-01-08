@@ -69,7 +69,7 @@ export default class CommentModal extends React.Component {
     if (this.props.userInfo[0].vimeoUsername && this.props.songId) {
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, songId: this.props.songId }
       const nextComments = this.state.comments.concat(newComment);
-      console.log(nextComments, ' next comments');
+
       this.setState({ comments: nextComments });
 
       axios.post('/api/music-comments', {
@@ -98,9 +98,9 @@ export default class CommentModal extends React.Component {
         return err;
       })
     } else if (this.props.userInfo[0].vimeoUsername && this.props.videoId) {
-      console.log(this.props.dbId, ' db id');
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, videoId: this.props.videoId }
       const nextComments = this.state.comments.concat(newComment);
+
       this.setState({ comments: nextComments });
 
       axios.post('/api/videos-comments', {

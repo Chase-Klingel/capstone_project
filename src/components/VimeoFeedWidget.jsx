@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import { Redirect } from 'react-router';
 import CommentModal from './CommentModal';
 import QueueButton from './QueueButton';
 import Styles from './css/vimeoFeedWidget';
@@ -9,7 +10,12 @@ export default class VimeoFeedWidget extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      redirect: ''
+    }
+
     this.queueButton = this.queueButton.bind(this);
+    this.testing = this.testing.bind(this);
   }
   queueButton() {
     if (this.props.scUser === true || !this.props.loggedIn) {
@@ -24,8 +30,6 @@ export default class VimeoFeedWidget extends React.Component {
       if (videoInQueue.length === 1) {
         videoAdded = true;
       }
-
-      console.log(videoAdded, ' VIDEO ADDED');
 
       return (
         <div style={{display: 'inline'}}>
@@ -46,14 +50,26 @@ export default class VimeoFeedWidget extends React.Component {
       )
     }
   }
+
+
+  testing(producerName) {
+    // db is wrong. we need to serve up the userId associated with song in music table and pass that to sc feed widget
+    this.props.getUserId(this.props.userId, 'vimeo user');
+    this.setState({ redirect: `/user/${producerName.toLowerCase()}`});
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect}/>
+    }
+
     const src = `https://player.vimeo.com/video/${this.props.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`
 
     return (
       <div className='col s12 m4' style={{marginTop: '70px', marginBottom: '50px'}}>
         <div className={Styles.videoWrapper}>
           <iframe src={src} width="100%" height="250px" frameBorder="0" allowFullScreen></iframe>
-          <h5 className={Styles.videoName}>{this.props.videoName} | Produced by <span className={Styles.producerName}>{this.props.producerName}</span></h5>
+          <h5 className={Styles.videoName}>{this.props.videoName} | Produced by <span className={Styles.producerName}><button onClick={this.testing.bind(this, this.props.producerName)}>{this.props.producerName}</button></span></h5>
           {/* <h6 className={Styles.producerName}>Posted by: </h6> */}
         </div>
         <div style={{marginTop: '10px'}}>

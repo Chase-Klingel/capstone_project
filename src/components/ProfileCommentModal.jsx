@@ -44,9 +44,9 @@ export default class ProfileCommentModal extends React.Component {
       axios.get('/api/user/videos/comments')
         .then((res) => {
           let comments = res.data;
-          // figure out on profile view why you are not getting the right id for the videoId = '1293384'
+
           comments = comments.filter((comment) => {
-            return comment.videoId === this.props.videoId;
+            return comment.videoId === this.props.dbId;
           });
 
           this.setState({ comments: comments });
@@ -80,12 +80,13 @@ export default class ProfileCommentModal extends React.Component {
   }
 
   postComment(e) {
+    console.log('here');
     e.preventDefault();
 
     if (this.props.userInfo[0].vimeoUsername && this.props.songId) {
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, songId: this.props.songId }
       const nextComments = this.state.comments.concat(newComment);
-      console.log(nextComments, ' next comments');
+
       this.setState({ comments: nextComments });
 
       axios.post('/api/music-comments', {
@@ -99,8 +100,6 @@ export default class ProfileCommentModal extends React.Component {
         return err;
       })
     } else if (this.props.userInfo[0].scUsername && this.props.songId) {
-      console.log('went to the right conditional in profile comment modal');
-      console.log(this.props.dbId, ' the db id');
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].scUsername, comment: this.refs['comment'].value, songId: this.props.songId }
       const nextComments = this.state.comments.concat(newComment);
       this.setState({ comments: nextComments });
@@ -112,16 +111,13 @@ export default class ProfileCommentModal extends React.Component {
         comment:  this.refs['comment'].value,
         viewed: false
       })
-      .then(() => {
-        console.log('successfully posted!');
-      })
       .catch((err) => {
         return err;
       })
     } else if (this.props.userInfo[0].vimeoUsername && this.props.videoId) {
-      console.log(this.props.dbId, ' the db id');
       const newComment = { commenterPhotoUrl: this.props.userInfo[0].photoUrl, commenter: this.props.userInfo[0].vimeoUsername, comment: this.refs['comment'].value, videoId: this.props.videoId }
       const nextComments = this.state.comments.concat(newComment);
+
       this.setState({ comments: nextComments });
 
       axios.post('/api/videos-comments', {
@@ -130,9 +126,6 @@ export default class ProfileCommentModal extends React.Component {
         commenterPhotoUrl: this.props.userInfo[0].photoUrl,
         comment:  this.refs['comment'].value,
         viewed: false
-      })
-      .then(() => {
-        console.log('successfully posted!');
       })
       .catch((err) => {
         return err;
@@ -203,13 +196,15 @@ export default class ProfileCommentModal extends React.Component {
             <Comments
               comments={this.state.comments}
             />
-            <div className="col s12">
-              <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
+            <form onSubmit={this.postComment}>
+              <div className="col s12">
+                <textarea className={Styles.commentBox} ref="comment" placeholder='Write a comment...'></textarea>
+              </div>
+              <div className={Styles.buttonContainer}>
+                <button type="submit" className={Styles.commentButton}>post comment</button>
+              </div>
+            </form>
             </div>
-            <div className={Styles.buttonContainer}>
-              <button type="submit" className={Styles.commentButton} onClick={this.postComment}>post comment</button>
-            </div>
-          </div>
         </Modal>
       </div>
     );

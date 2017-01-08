@@ -132,48 +132,93 @@ export default class SCMyProfileWidget extends React.Component {
     let time_remains = { transform: `translateX(-${percent_remains.toString()}%)` }
     let progress_remains = { transform: `translateX(-${percent_progress_remains.toString()}%)` }
 
-    return (
-      <div className={classnames('col', 's12', 'm6', Styles.widgetContainer)} >
-      	<div style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url(${this.props.userInfo[0].photoUrl})`,
-        backgroundPosition: 'center center', height: '200px', backgroundSize: 'cover'}}>
+    if (this.props.profileContent.length === 1) {
+      return (
+        <div className={classnames('col', 's12', 'm6', 'offset-m3', Styles.widgetContainer)} >
+          <div style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url(${this.props.profileContent[0].photoUrl})`,
+          backgroundPosition: 'center center', height: '200px', backgroundSize: 'cover'}}>
 
-          <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
-          <div className="center-align" style={{marginBottom: '30px'}}>
-            <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> {this.props.artistName}</h4>
-            <h4 className={Styles.songName}>{this.props.songName}</h4>
-          </div>
+            <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
+            <div className="center-align" style={{marginBottom: '30px'}}>
+              <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> {this.props.artistName}</h4>
+              <h4 className={Styles.songName}>{this.props.songName}</h4>
+            </div>
 
 
-          <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
+            <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
 
-            <div className={Styles.player__progress}>
-              <span className={Styles.player__progress__bar}>
-                <span ref='progress' className={Styles.player__progress__barContainer}>
+              <div className={Styles.player__progress}>
+                <span className={Styles.player__progress__bar}>
+                  <span ref='progress' className={Styles.player__progress__barContainer}>
 
-                  <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
-                        style={progress_remains}></span>
-                  <span className={Styles.player__progress__barPercent} style={time_remains}></span>
+                    <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
+                          style={progress_remains}></span>
+                    <span className={Styles.player__progress__barPercent} style={time_remains}></span>
+                  </span>
                 </span>
-              </span>
+              </div>
+            </div>
+
+            <div className={Styles.player__control}>
+              { this.renderPlayerIcons() }
+            </div>
+            <div className={classnames(Styles.buttonsContainer)}>
+              <ProfileCommentModal
+                dbId={this.props.dbId}
+                songId={this.props.songId}
+                backgroundPhoto={this.props.backgroundPhoto}
+                userInfo={this.props.userInfo}
+                artistName={this.props.artistName}
+                songName={this.props.songName}
+              />
             </div>
           </div>
+        </div>
+      );
+    } else {
+      return (
+        <div className={classnames('col', 's12', 'm6', Styles.widgetContainer)} >
+          <div style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, .4), rgba(0, 0, 0, .4)), url(${this.props.profileContent[0].photoUrl})`,
+          backgroundPosition: 'center center', height: '200px', backgroundSize: 'cover'}}>
 
-          <div className={Styles.player__control}>
-            { this.renderPlayerIcons() }
-          </div>
-          <div className={classnames(Styles.buttonsContainer)}>
-            <ProfileCommentModal
-              dbId={this.props.dbId}
-              songId={this.props.songId}
-              backgroundPhoto={this.props.backgroundPhoto}
-              userInfo={this.props.userInfo}
-              artistName={this.props.artistName}
-              songName={this.props.songName}
-            />
+            <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
+            <div className="center-align" style={{marginBottom: '30px'}}>
+              <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> {this.props.artistName}</h4>
+              <h4 className={Styles.songName}>{this.props.songName}</h4>
+            </div>
+
+
+            <div className={Styles.player__display} onClick={this.positionChange.bind(this)}>
+
+              <div className={Styles.player__progress}>
+                <span className={Styles.player__progress__bar}>
+                  <span ref='progress' className={Styles.player__progress__barContainer}>
+
+                    <span className={classnames(Styles.player__progress__barPercent, Styles.player__progress__barProgress)}
+                          style={progress_remains}></span>
+                    <span className={Styles.player__progress__barPercent} style={time_remains}></span>
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            <div className={Styles.player__control}>
+              { this.renderPlayerIcons() }
+            </div>
+            <div className={classnames(Styles.buttonsContainer)}>
+              <ProfileCommentModal
+                dbId={this.props.dbId}
+                songId={this.props.songId}
+                backgroundPhoto={this.props.backgroundPhoto}
+                userInfo={this.props.userInfo}
+                artistName={this.props.artistName}
+                songName={this.props.songName}
+              />
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 
   render () {

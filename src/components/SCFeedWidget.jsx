@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import FormatTime from './FormatTime';
 import classnames from 'classnames';
 import Play from './Play';
+import { Redirect } from 'react-router';
 import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
@@ -22,10 +23,12 @@ export default class SCFeedWidget extends React.Component {
       duration: '0:00',
       current_time: '0:00',
       client_id: 'c6e1e2a98490d428460f8d36af919bb4',
+      redirect: ''
     }
 
     this.renderWidget = this.renderWidget.bind(this);
     this.queueButton = this.queueButton.bind(this);
+    this.testing = this.testing.bind(this);
   }
 
   componentDidMount() {
@@ -155,6 +158,12 @@ export default class SCFeedWidget extends React.Component {
     }
   }
 
+  testing(artistName) {
+    // db is wrong. we need to serve up the userId associated with song in music table and pass that to sc feed widget
+    this.props.getUserId(this.props.userId, 'sc user');
+    this.setState({ redirect: `/user/${artistName.toLowerCase()}`});
+  }
+
   renderWidget() {
     const { playing, audioPlayer, percent_remains, percent_progress_remains, duration, current_time, client_id } = this.state
     let streamUrl = `https://api.soundcloud.com/tracks/${this.props.songId}/stream?client_id=c6e1e2a98490d428460f8d36af919bb4`
@@ -170,7 +179,7 @@ export default class SCFeedWidget extends React.Component {
 
           <audio id='audio' preload='none' ref='audio' src={streamUrl}></audio>
           <div className="center-align" style={{marginBottom: '30px'}}>
-            <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> {this.props.artistName}</h4>
+            <h4 className={Styles.artistName}><span style={{fontSize: '12px', textTransform: 'none'}}>Posted by:</span> <button onClick={this.testing.bind(this, this.props.artistName)}>{this.props.artistName}</button></h4>
             <h4 className={Styles.songName}>{this.props.songName}</h4>
           </div>
 
@@ -212,6 +221,10 @@ export default class SCFeedWidget extends React.Component {
   }
 
   render () {
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect}/>
+    }
+
     return (
       <div>
         { this.renderWidget() }

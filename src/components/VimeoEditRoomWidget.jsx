@@ -52,7 +52,6 @@ export default class VimeoEditRoomWidget extends React.Component {
           </div>
         );
       } else  {
-        console.log('this is displaying');
         // video but no autoplay
         const src = `https://player.vimeo.com/video/${this.props.videoId}?portrait=0&title=0&byline=0&badge=0&autopause=0&player_id=0&amp;color=20daa5&amp;background=000000`;
 

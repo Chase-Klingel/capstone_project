@@ -166,13 +166,12 @@ router.get('/api/videos/edit', authorize, (req, res, next) => {
 });
 
 // get video content for specific user when another user goes to their profile
-router.get('/api/videos/:username', (req, res, next) => {
-  let userName = req.params.username;
-  // uppercase first letter to match db.
-  userName = userName.charAt(0).toUpperCase() + userName.slice(1);
+router.get('/api/videos/:id', (req, res, next) => {
+  const userId  = Number.parseInt(req.params.id);
+
   knex('vimeo_users')
     .innerJoin('videos', 'videos.user_id', 'vimeo_users.id')
-    .where('vimeo_users.vimeo_username', userName)
+    .where('vimeo_users.id', userId)
     .then((rows) => {
       const userData = camelizeKeys(rows);
 

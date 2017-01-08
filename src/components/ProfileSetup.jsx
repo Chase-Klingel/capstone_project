@@ -73,7 +73,6 @@ export default class ProfileSetup extends React.Component {
                 user_id: id
               })
               .then((tracks) => {
-                console.log(tracks, ' TRACKS');
                 for (let i = 0; i < tracks.length; i++) {
                   let songId = (tracks[i].id).toString();
                   let songName = tracks[i].title;
@@ -140,6 +139,7 @@ export default class ProfileSetup extends React.Component {
         return (
           <div>
             <ProfileBanner
+              profileContent={this.props.profileContent}
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
               uploads={this.props.uploads}
@@ -203,6 +203,7 @@ export default class ProfileSetup extends React.Component {
         return (
           <div>
             <ProfileBanner
+              profileContent={this.props.profileContent}
               scUser={this.props.scUser}
               vimeoUser={this.props.vimeoUser}
               uploads={this.props.uploads}
@@ -243,100 +244,3 @@ export default class ProfileSetup extends React.Component {
     </div>
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // componentDidMount() {
-    //   axios.get('/api/vimeo-user')
-    //     .then(res => {
-    //       this.props.getuserInfo(res.data);
-    //       const vimeoToken = res.data[0].vimeoToken;
-    //       const vimeoId = res.data[0].vimeoId;
-    //       const info = [vimeoId, vimeoToken];
-    //       return info;
-    //     })
-    //     .then((info) => {
-    //       axios.get(`https://api.vimeo.com/users/${info[0]}/videos`, {
-    //         headers: { "Authorization": `Bearer ${info[1]}`}
-    //       })
-    //       .then((res) => {
-    //         return res.data.metadata.connections.videos.uri;
-    //       })
-    //       .catch((err) => {
-    //         return err;
-    //       })
-    //     })
-    //     .catch(err => {
-    //       return err;
-    //     });
-    // }
-
-
-//
-//   // video() {
-//   //   console.log('here');
-//   //   if (this.state.playingVideo === true) {
-//   //     // playing
-//   //     return (
-//   //       <div className="row">
-//   //         <div className='vimeo-embed'>
-//   //           <iframe src="https://player.vimeo.com/video/195883596?badge=0&autopause=0&player_id=0&amp;color=daa520&amp;background=000000&autoplay=true" width="100" height="100" frameBorder="0" title="test-2" allowFullScreen></iframe>
-//   //         </div>
-//   //       </div>
-//   //     );
-//   //   } else {
-//   //     return (
-//   //       <div className="row">
-//   //         <div className='vimeo'>
-//   //           <div className='vimeo-image' style={{'backgroundImage' : 'url(https://i.vimeocdn.com/video/523350661_640.jpg)', 'display' : 'block'}}>
-//   //             <PlayButton onClick={this.playVideo.bind(this)} />
-//   //           </div>
-//   //           <div className='vimeo-embed'>
-//   //             <iframe src="https://player.vimeo.com/video/195883596?badge=0&autopause=0&player_id=0&amp;color=daa520&amp;background=000000" width="100" height="100" frameBorder="0" title="test-2" allowFullScreen></iframe>
-//   //           </div>
-//   //         </div>
-//   //       </div>
-//   //     );
-//   //   }
-//   // }
-//
-
-
-
-
-
-
-
-
-
-
-/*
-        <iframe src="https://player.vimeo.com/video/195883596?badge=0&autopause=0&player_id=0&amp;color=daa520&amp;background=000000" width="100" height="100" frameBorder="0" title="test-2" allowFullScreen></iframe>
-
-        <div style={{backgroundImage: 'url(' + imgUrl + ') noRepeat center center fixed', backgroundSize: styles.root.backgroundSize, height: '500px', width: '100vw'}}>
-
-        </div>
-         { this.video() }  */
