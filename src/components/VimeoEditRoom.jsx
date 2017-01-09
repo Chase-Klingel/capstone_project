@@ -1,5 +1,5 @@
 import React from 'react';
-import Styles from './css/MusicEditingRoom';
+import Styles from './css/musicEditingRoom';
 import axios from 'axios';
 import SCEditRoomWidget from './SCEditRoomWidget';
 import VimeoEditRoomWidget from './VimeoEditRoomWidget';

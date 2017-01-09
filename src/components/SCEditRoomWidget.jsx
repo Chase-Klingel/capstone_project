@@ -7,8 +7,8 @@ import Pause from './Pause';
 import Replay from './Replay';
 import Forward from './Forward';
 import CommentModal from './CommentModal';
-import SCeditForward from './SCeditForward';
-import SCeditPrevious from './SCeditPrevious';
+import SCeditForward from './SCEditForward';
+import SCeditPrevious from './SCEditPrevious';
 import Styles from './css/scEditRoomWidget';
 
 export default class SCEditRoomWidget extends React.Component {
