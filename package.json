@@ -29,6 +29,9 @@
   "author": "Tyler Miller <tylermillerome@gmail.com> (http://github.com/Voxelsdev)",
   "license": "CC0-1.0",
   "devDependencies": {
+
+  },
+  "dependencies": {
     "babel-core": "^6.6.5",
     "babel-eslint": "^5.0.0-beta4",
     "babel-loader": "^6.2.4",
@@ -46,9 +49,7 @@
     "rimraf": "^2.4.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
-    "webpack-hot-middleware": "^2.9.1"
-  },
-  "dependencies": {
+    "webpack-hot-middleware": "^2.9.1",
     "axios": "^0.15.3",
     "babel-core": "^6.6.5",
     "babel-eslint": "^5.0.0-beta4",
