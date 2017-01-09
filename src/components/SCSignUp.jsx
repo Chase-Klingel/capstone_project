@@ -69,7 +69,7 @@ export default class SCSignUp extends React.Component {
           </div>
 
           <p id={Styles.authTitle} className="center-align">Create an account</p>
-
+          <p style={{color: 'lightgrey'}}>When you create an account with AudioVisual, all of your songs from SoundCloud will be imported. However, only the songs you specifically select will show up on our app. We want this to be a community that shares, but at the same time we want to protect your work.</p>
           <div>
             <input type="text" ref="scUsername" placeholder="soundcloud username" autoFocus/>
             <input type="email" ref="email" placeholder="email" />

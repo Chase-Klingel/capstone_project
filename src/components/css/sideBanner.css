@@ -1,5 +1,6 @@
 #noPadding {
   padding: 0;
+  position: fixed;
 }
 
 .bannerContainer {

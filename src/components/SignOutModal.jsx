@@ -33,6 +33,7 @@ export default class SignOutModal extends React.Component {
     this.hideModal = this.hideModal.bind(this);
     this.signOut = this.signOut.bind(this);
     this.signOutModal = this.signOutModal.bind(this);
+    this.viewProfile = this.viewProfile.bind(this);
   }
 
   showModal() {
@@ -56,8 +57,17 @@ export default class SignOutModal extends React.Component {
       });
   }
 
+  viewProfile() {
+    if (this.props.userInfo[0].vimeoUsername) {
+      this.props.getUserId(this.props.userInfo[0].id, 'vimeo user')
+    } else {
+      this.props.getUserId(this.props.userInfo[0].id, 'sc user')
+    }
+  }
+
   signOutModal() {
     if (this.props.vimeoUser && this.props.userInfo.length !== 0) {
+      console.log('getting right singout');
       return (
         <div id={Styles.desktopMenu}>
           <button onClick={this.showModal} id={Styles.clickableName}>{this.props.userInfo[0].vimeoUsername}<i className={classnames('material-icons', Styles.carrotIcon)}>arrow_drop_down</i></button>
@@ -67,7 +77,7 @@ export default class SignOutModal extends React.Component {
             </div>
             <div id={Styles.infoContainer}>
               <p id={Styles.name}>{this.props.userInfo[0].vimeoUsername}</p>
-              <Link to="/profile" id={Styles.viewProfile}>View Profile</Link>
+              <Link onClick={this.viewProfile} to="/profile" id={Styles.viewProfile}>View Profile</Link>
             </div>
             <hr />
             <Link to="/music-feed" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>
@@ -88,7 +98,7 @@ export default class SignOutModal extends React.Component {
             </div>
             <div id={Styles.infoContainer}>
               <p id={Styles.name}>{this.props.userInfo[0].scUsername}</p>
-              <Link to="/profile" id={Styles.viewProfile}>View Profile</Link>
+              <Link onClick={this.viewProfile} to="/profile" id={Styles.viewProfile}>View Profile</Link>
             </div>
             <hr />
             <Link to="/video-feed" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>
@@ -109,7 +119,7 @@ export default class SignOutModal extends React.Component {
             </div>
             <div id={Styles.infoContainer}>
               <p id={Styles.name}>{this.props.userInfo[0].vimeoUsername}</p>
-              <Link to="/profile" id={Styles.viewProfile}>View Profile</Link>
+              <Link onClick={this.viewProfile} to="/profile" id={Styles.viewProfile}>View Profile</Link>
             </div>
             <hr />
             <Link to="/music-feed" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>
@@ -130,7 +140,7 @@ export default class SignOutModal extends React.Component {
             </div>
             <div id={Styles.infoContainer}>
               <p id={Styles.name}>{this.props.userInfo[0].scUsername}</p>
-              <Link to="/profile" id={Styles.viewProfile}>View Profile</Link>
+              <Link onClick={this.viewProfile} to="/profile" id={Styles.viewProfile}>View Profile</Link>
             </div>
             <hr />
             <Link to="/video-feed" className={classnames(Styles.modalButton, Styles.homeButton)}>home</Link>

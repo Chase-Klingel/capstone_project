@@ -163,6 +163,7 @@ export default class Main extends React.Component {
             <Redirect to="/signin" />
           ) : (
             <MyProfile
+              userId={this.props.userId}
               scProfile={this.props.scProfile}
               vimeoProfile={this.props.vimeoProfile}
               scUser={this.props.scUser}
@@ -176,6 +177,7 @@ export default class Main extends React.Component {
 
         <Match pattern="/user/:artistName?" exactly render={() =>
           <UserProfile
+            loggedIn={this.props.loggedIn}
             scProfile={this.props.scProfile}
             vimeoProfile={this.props.vimeoProfile}
             userInfo={this.props.userInfo}

@@ -10,7 +10,6 @@ export default class SideBanner extends React.Component {
       <div className={classnames('hide-on-small-only', 'col', 'm4')} id={Styles.noPadding}>
         <div className={classnames('hide-on-small-only', Styles.bannerContainer)}>
           <div id={Styles.banner}>
-            {/* will need to be '/' later on */}
             <h1 id={Styles.logo}><a id={Styles.av} href="/signup">AV</a></h1>
             <div id={Styles.descriptionContainer}>
               <h2 id={Styles.title}>AudioVisual</h2>

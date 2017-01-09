@@ -136,7 +136,7 @@ export default class ProfileBannerSetup extends React.Component {
       if (this.state.updatingImg) {
         return (
           <div className="row">
-            <div style={{ height: '350px'}}>
+            <div style={{ height: '500px'}}>
               <h5 id={Styles.username}>{this.props.uploads[0].artistName}</h5>
               <div id={Styles.uploadInputContainer} className="col s12 m6 offset-m3">
                 <input id={Styles.uploadImgInput} type="text" placeholder="paste a url link to upload a profile photo..." ref="photo"/>

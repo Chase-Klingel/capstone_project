@@ -143,6 +143,7 @@ export default class VimeoEditRoom extends React.Component {
         <div className="row">
           <div className="col s12" style={{marginTop: '168px'}}>
             <SCEditRoomWidget
+              key={this.state.index}
               dbId={this.props.musicQueue[this.state.index].dbId}
               songPosition={this.state.index + 1}
               songId={this.props.musicQueue[this.state.index].songId}

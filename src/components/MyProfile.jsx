@@ -39,6 +39,7 @@ export default class MyProfile extends React.Component {
         />
         <div className="row" style={{marginBottom: '200px'}}>
           <ProfileWidgetList
+            userId={this.props.userId}
             scProfile={this.props.scProfile}
             vimeoProfile={this.props.vimeoProfile}
             profileContent={this.props.profileContent}

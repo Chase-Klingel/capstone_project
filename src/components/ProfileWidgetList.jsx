@@ -73,10 +73,8 @@ export default class ProfileWidgetList extends React.Component {
   }
 
   render() {
-    console.log(this.props.userId, ' USER ID IN PROFILE WID LIST');
-
     return (
-      <div className="container">
+      <div className="container" style={{marginTop: '-40px'}}>
         { this.widgetList() }
       </div>
     )

@@ -40,16 +40,20 @@ export default class ProfileCommentModal extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.vimeoProfile === true) {
+    console.log('mounting');
+    if (this.props.producerName) {
+      console.log(this.props.userId, ' producer user id');
       axios.get(`/api/user/videos/comments/${this.props.userId}`)
         .then((res) => {
           let comments = res.data;
 
-          console.log(comments, 'COMMENTS IN COMP DID MOUNT');
+          console.log(comments, ' video comments');
 
           comments = comments.filter((comment) => {
             return comment.videoId === this.props.dbId;
           });
+
+          console.log(comments, ' video comments after filter');
 
           this.setState({ comments: comments });
         })
@@ -57,15 +61,18 @@ export default class ProfileCommentModal extends React.Component {
           return err;
         })
     } else {
+      console.log('artist name');
       axios.get(`/api/user/music/comments/${this.props.userId}`)
         .then((res) => {
           let comments = res.data;
 
-          console.log(comments, 'COMMENTS IN COMP DID MOUNT');
+          console.log(comments, ' music comments');
 
           comments = comments.filter((comment) => {
             return comment.songId === this.props.songId;
           });
+
+          console.log(comments, ' music comments after filter');
 
           this.setState({ comments: comments });
         })
@@ -76,6 +83,7 @@ export default class ProfileCommentModal extends React.Component {
   }
 
   showModal() {
+    console.log(this.state.comments);
     this.refs['modal'].show();
   }
 

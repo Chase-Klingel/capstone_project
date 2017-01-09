@@ -46,7 +46,9 @@ export default class SCEditRoomWidget extends React.Component {
     } else {
       this.props.setPlayingSong('pause')
     }
+
     const { playing, audioPlayer } = this.state;
+
     this.setState({ playing: !playing, showAudioPlayer: true }, () => {
       if (audioPlayer.paused) {
         audioPlayer.play()
@@ -64,7 +66,7 @@ export default class SCEditRoomWidget extends React.Component {
       return;
     }
 
-    this.state.audioPlayer.pause()
+    this.state.audioPlayer.pause();
   }
 
   timeUpdated() {
@@ -169,6 +171,7 @@ export default class SCEditRoomWidget extends React.Component {
 
     return (
       <CommentModal
+        key={this.props.index}
         dbId={this.props.dbId}
         songId={this.props.songId}
         musicComments={this.props.musicComments}

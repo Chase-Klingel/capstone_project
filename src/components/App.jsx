@@ -77,6 +77,7 @@ export default class App extends React.Component {
   showHeader() {
     if (this.state.loggedIn) {
       return <Header
+        getUserId={this.getUserId}
         loggedIn={this.state.loggedIn}
         vimeoUser={this.state.vimeoUser}
         scUser={this.state.scUser}
@@ -156,7 +157,7 @@ export default class App extends React.Component {
 
   getUserId(userId, profileType) {
     if (profileType === 'vimeo user') {
-      this.setState({ userId: userId, vimeoProfile: true, scProfile: false });
+      this.setState({ userId: userId, scProfile: false, vimeoProfile: true });
     } else {
       this.setState({ userId: userId, scProfile: true, vimeoProfile: false });
     }

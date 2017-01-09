@@ -12,13 +12,29 @@ export default class ProfileBanner extends React.Component {
   }
 
   userInfo() {
-    if (this.props.userInfo[0].vimeoUsername === undefined && this.props.profileContent.length === 0) {
+      if (this.props.userInfo.length === 0 && this.props.profileContent[0].hasOwnProperty('scUsername')) {
+        return (
+          <div>
+            <h5 id={Styles.username}>{this.props.profileContent[0].scUsername}</h5>
+            <p id={Styles.bio}>{this.props.profileContent[0].bio}</p>
+          </div>
+        );
+      } else if (this.props.userInfo.length === 0 &&  this.props.profileContent[0].hasOwnProperty('vimeoUsername'))  {
+        return (
+          <div>
+            <h5 id={Styles.username}>{this.props.profileContent[0].vimeoUsername}</h5>
+            <p id={Styles.bio}>{this.props.profileContent[0].bio}</p>
+          </div>
+        );
+        // sc user going to their own profile
+      } else if (this.props.userInfo[0].vimeoUsername === undefined && this.props.profileContent.length === 0) {
       return (
         <div>
           <h5 id={Styles.username}>{this.props.userInfo[0].scUsername}</h5>
           <p id={Styles.bio}>{this.props.userInfo[0].bio}</p>
         </div>
       );
+    // vimeo user going to their own profile
     } else if (this.props.userInfo[0].scUsername === undefined && this.props.profileContent.length === 0) {
       return (
         <div>
@@ -26,6 +42,7 @@ export default class ProfileBanner extends React.Component {
           <p id={Styles.bio}>{this.props.userInfo[0].bio}</p>
         </div>
       );
+    // going to an sc user profile
     } else if (this.props.profileContent[0].vimeoUsername === undefined) {
       return (
         <div>
@@ -33,6 +50,7 @@ export default class ProfileBanner extends React.Component {
           <p id={Styles.bio}>{this.props.profileContent[0].bio}</p>
         </div>
       );
+    // going to a vimeo user profile
     } else {
       return (
         <div>

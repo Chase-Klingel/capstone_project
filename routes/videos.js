@@ -124,6 +124,7 @@ router.get('/api/user/videos/comments', authorize, (req, res, next) => {
     .innerJoin('videos', 'vimeo_users.id', 'videos.user_id')
     .innerJoin('comments', 'videos.id', 'comments.video_id')
     .where('vimeo_users.id', userId)
+    .orderBy('comments.created_at', 'asc') // make sure this goes oldest to newest
     .then((rows) => {
 
       const userVideos = camelizeKeys(rows);

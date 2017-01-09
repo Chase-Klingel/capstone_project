@@ -117,6 +117,7 @@ export default class ProfileSetup extends React.Component {
 
             <div className="container" id={Styles.widgetContainer}>
               <div className="row">
+                <p style={{color: 'lightgrey'}} className="center-align"><span style={{color: 'gold'}}>Note:</span> Only videos that have a selected mood and that are labeled as needing music will show up on AudioVisual.</p>
                 <WidgetList
                   vimeoUser={this.props.vimeoUser}
                   uploads={this.props.uploads}
@@ -148,6 +149,7 @@ export default class ProfileSetup extends React.Component {
 
             <div className="container" id={Styles.widgetContainer}>
               <div className="row">
+                <p style={{color: 'lightgrey', marginBottom: '50px', marginTop: '-25px'}} className="center-align"><span style={{color: 'gold'}}>Note:</span> Only videos that have a selected mood and that are labeled as needing music will show up on AudioVisual.</p>
                 <WidgetList
                   vimeoUser={this.props.vimeoUser}
                   uploads={this.props.uploads}
@@ -181,6 +183,7 @@ export default class ProfileSetup extends React.Component {
             />
 
             <div className="container" id={Styles.widgetContainer}>
+              <p style={{color: 'lightgrey'}} className="center-align"><span style={{color: 'gold'}}>Note:</span> Only select moods for the music you are okay with sharing for free. Music with no mood selected will never show up on AudioVisual.</p>
               <div className="row">
                 <WidgetList
                   scUser={this.props.scUser}
@@ -212,6 +215,7 @@ export default class ProfileSetup extends React.Component {
 
             <div className="container" id={Styles.widgetContainer}>
               <div className="row">
+                <p style={{color: 'lightgrey'}} className="center-align"><span style={{color: 'gold'}}>Note:</span> Only select moods for the music you are okay with sharing for free. Music with no mood selected will never show up on AudioVisual.</p>
                 <WidgetList
                   vimeoUser={this.props.vimeoUser}
                   scUser={this.props.scUser}

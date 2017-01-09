@@ -146,6 +146,7 @@ export default class Header extends React.Component {
           </div>
           <div id={Styles.modalContainer}>
             <SignOutModal
+              getUserId={this.props.getUserId}
               vimeoUser={this.props.vimeoUser}
               userInfo={this.props.userInfo}
               authUser={this.props.authUser}

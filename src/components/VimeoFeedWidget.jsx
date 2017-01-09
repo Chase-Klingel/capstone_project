@@ -53,8 +53,6 @@ export default class VimeoFeedWidget extends React.Component {
 
 
   getProducerName(producerName) {
-    console.log('here');
-    // db is wrong. we need to serve up the userId associated with song in music table and pass that to sc feed widget
     this.props.getUserId(this.props.userId, 'vimeo user');
     this.setState({ redirect: `/user/${producerName.toLowerCase()}`});
   }
