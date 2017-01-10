@@ -4,7 +4,6 @@ import { Redirect } from 'react-router';
 import CommentModal from './CommentModal';
 import QueueButton from './QueueButton';
 import Styles from './css/vimeoFeedWidget';
-import PlayButton from './PlayButton';
 
 export default class VimeoFeedWidget extends React.Component {
   constructor(props) {

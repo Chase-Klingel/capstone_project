@@ -10,12 +10,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
 
-    // NEED TO FIGURE OUT HOW TO SET VIMEO USER OR SC USER TO TRUE THROUGHOUT USER SESSION
     this.state = {
       loggedIn: false,
       vimeoUser: true,
       scUser: JSON.parse(localStorage.getItem('scUser')) || false,
-      // signupInfo: [],
       userInfo: [],
       uploads: [],
       profileContent: [],
@@ -30,12 +28,10 @@ export default class App extends React.Component {
       userId: '',
       vimeoProfile: false,
       scProfile: false
-      // editingMode: false
     }
 
     this.authUser = this.authUser.bind(this);
     this.showHeader = this.showHeader.bind(this);
-    // this.getsignupInfo = this.getsignupInfo.bind(this);
     this.getUserInfo = this.getUserInfo.bind(this);
     this.getUploads = this.getUploads.bind(this);
     this.getProfileContent = this.getProfileContent.bind(this);
@@ -47,7 +43,6 @@ export default class App extends React.Component {
     this.updateVideoQueue = this.updateVideoQueue.bind(this);
     this.emptyQueue = this.emptyQueue.bind(this);
     this.getUserId = this.getUserId.bind(this);
-    // this.setEditingMode = this.setEditingMode.bind(this);
   }
 
   componentDidMount() {
@@ -88,15 +83,9 @@ export default class App extends React.Component {
         musicQueue={this.state.musicQueue}
         videoQueue={this.state.videoQueue}
         emptyQueue={this.emptyQueue}
-        // setEditingMode={this.setEditingMode}
-        // editingMode={this.state.editingMode}
       />
     }
   }
-
-  // getsignupInfo(signupInfo) {
-  //   this.setState({ signupInfo: signupInfo });
-  // }
 
   getUserInfo(userInfo) {
     this.setState({ userInfo: userInfo });
@@ -129,7 +118,6 @@ export default class App extends React.Component {
     }
   }
 
-  // get existing user media
   getProfileContent(content) {
     this.setState({ profileContent: content });
   }
@@ -209,11 +197,9 @@ export default class App extends React.Component {
               authUser={this.authUser}
               scProfile={this.state.scProfile}
               vimeoProfile={this.state.vimeoProfile}
-              // signupInfo={this.state.signupInfo}
               getUserInfo={this.getUserInfo}
               getUserId={this.getUserId}
               userId={this.state.userId}
-              // getsignupInfo={this.getsignupInfo}
               uploads={this.state.uploads}
               getUploads={this.getUploads}
               profileContent={this.state.profileContent}

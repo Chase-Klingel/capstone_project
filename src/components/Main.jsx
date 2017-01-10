@@ -4,15 +4,15 @@ import axios from 'axios';
 
 import SignUp from './SignUp';
 import VimeoSignUp from './VimeoSignUp';
-import VimeoSignIn from './VimeoSignIn';
+import SCSignUp from './SCSignUp';
 
 import SignIn from './SignIn';
-import SCSignUp from './SCSignUp';
+import VimeoSignIn from './VimeoSignIn';
 import SCSignIn from './SCSignIn';
 
-import PlayButton from './PlayButton';
 import ProfileSetup from './ProfileSetup';
 import MyProfile from './MyProfile';
+import UserProfile from './UserProfile';
 
 import MusicFeed from './MusicFeed';
 import VideoFeed from './VideoFeed';
@@ -20,9 +20,6 @@ import VideoFeed from './VideoFeed';
 import VimeoEditRoom from './VimeoEditRoom';
 import SCEditRoom from './SCEditRoom';
 
-import UserProfile from './UserProfile';
-
-// make '/user/:artistName?'
 
 export default class Main extends React.Component {
   render() {
@@ -39,7 +36,6 @@ export default class Main extends React.Component {
             getMusicComments={this.props.getMusicComments}
             userInfo={this.props.userInfo}
             updateMusicQueue={this.props.updateMusicQueue}
-            // emptyQueue={this.props.emptyQueue}
             musicQueue={this.props.musicQueue}
           />
         }/>
@@ -55,7 +51,6 @@ export default class Main extends React.Component {
             getVideoComments={this.props.getVideoComments}
             userInfo={this.props.userInfo}
             updateVideoQueue={this.props.updateVideoQueue}
-            // emptyQueue={this.props.emptyQueue}
             videoQueue={this.props.videoQueue}
           />
         }/>
@@ -70,8 +65,6 @@ export default class Main extends React.Component {
               scUser={this.props.scUser}
               userInfo={this.props.userInfo}
               getUserInfo={this.props.getUserInfo}
-              // signupInfo={this.props.signupInfo}
-              // getsignupInfo={this.props.getsignupInfo}
               uploads={this.props.uploads}
               getUploads={this.props.getUploads}
             />
@@ -186,17 +179,6 @@ export default class Main extends React.Component {
             userId={this.props.userId}
           />
         }/>
-
-        {/* <Match pattern="/profile/:username?" exactly render={() =>
-          !this.props.loggedIn ? (
-            <Redirect to="/signin" />
-          ) : (
-            <Profile
-              profileContent={this.props.profileContent}
-              getProfileContent={this.props.getProfileContent}
-            />
-          )
-        }/> */}
       </div>
     );
   }
