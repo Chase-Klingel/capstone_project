@@ -11,6 +11,7 @@ export default class MusicFeed extends React.Component {
 
     axios.get('/api/all-music')
       .then((res) => {
+        console.log(res.data, ' data');
         this.props.getAllMusic(res.data);
       })
       .then(() => {
@@ -87,9 +88,12 @@ export default class MusicFeed extends React.Component {
   }
 
   render() {
-    if (this.props.allMusic.length === 0 || this.props.musicComments.length === 0) {
+    if (this.props.allMusic.length === 0) {
+      console.log('here');
       return false;
     }
+
+    console.log('outside here');
 
     return (
       <div>

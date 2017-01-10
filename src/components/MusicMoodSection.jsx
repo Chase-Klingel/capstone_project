@@ -195,6 +195,7 @@ export default class MoodSection extends React.Component {
   }
 
   render() {
+    console.log('rendering music mood');
     if (this.state.widgets.length === 0) {
       return false;
     }
