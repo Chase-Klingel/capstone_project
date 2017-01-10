@@ -15,7 +15,6 @@ const router = express.Router();
 passport.use(new VimeoStrategy({
   clientID: process.env.VIMEO_CLIENT_ID,
   clientSecret: process.env.VIMEO_CLIENT_SECRET,
-  callbackURL: 'http://audiovisual.herokuapp.com/auth/vimeo/callback',
   scope: ['private', 'public', 'email']
 }, (accessToken, refreshToken, profile, done) => {
   return done(null, { profile, accessToken, refreshToken });
