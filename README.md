@@ -24,7 +24,7 @@ When a Vimeo user signs up, I import all of their videos from Vimeo (both public
 * React-router
 * Axios
 * Node.js
-* Express
+* Express.js
 * Knex
 * PostgreSQL
 * Webpack
