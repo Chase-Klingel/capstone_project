@@ -89,11 +89,8 @@ export default class MusicFeed extends React.Component {
 
   render() {
     if (this.props.allMusic.length === 0) {
-      console.log('here');
       return false;
     }
-
-    console.log('outside here');
 
     return (
       <div>

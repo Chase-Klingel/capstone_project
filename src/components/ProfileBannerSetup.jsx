@@ -90,7 +90,6 @@ export default class ProfileBannerSetup extends React.Component {
         return err;
       })
     }
-
   }
 
   displayUpdateOptions() {
