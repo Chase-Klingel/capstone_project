@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './css/login';
-// import VimeoImg from '../img/vimeo.png';
+import VimeoImg from '../img/vimeo.png';
 import { Link, Match } from 'react-router';
 import SideBanner from './SideBanner';
 
@@ -43,7 +43,7 @@ export default class VimeoSignUp extends React.Component {
         <div className="row">
           <p id={Styles.authTitle} className="center-align">Create an account</p>
           <div className="col s12 center-align" id={Styles.vimeoButtonContainer}>
-            {/* <img src={VimeoImg} id={Styles.vimeoImg} /> */}
+            <img src={VimeoImg} id={Styles.vimeoImg} />
             <a id={Styles.vimeoButton} onClick={this.signup}>sign up with vimeo</a>
           </div>
         </div>

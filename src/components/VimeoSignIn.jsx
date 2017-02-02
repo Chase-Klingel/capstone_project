@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './css/login';
-// import VimeoImg from '../img/vimeo.png';
+import VimeoImg from '../img/vimeo.png';
 import axios from 'axios';
 import { Link } from 'react-router'
 import SideBanner from './SideBanner';
@@ -32,7 +32,7 @@ export default class VimeoSignIn extends React.Component {
             <p id={Styles.authTitle} className="center-align">Sign In</p>
 
             <div className="col s12 center-align" id={Styles.vimeoButtonContainer}>
-              {/* <img src={VimeoImg} id={Styles.vimeoImg} /> */}
+              <img src={VimeoImg} id={Styles.vimeoImg} />
               <a id={Styles.vimeoButton} onClick={this.signIn}>sign in with vimeo</a>
             </div>
           </div>
