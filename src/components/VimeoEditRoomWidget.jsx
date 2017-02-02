@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './css/vimeoEditRoomWidget';
-import Forward from '../img/vimeo-forward.png';
-import Back from '../img/vimeo-previous.png';
+// import Forward from '../img/vimeo-forward.png';
+// import Back from '../img/vimeo-previous.png';
 
 export default class VimeoEditRoomWidget extends React.Component {
   constructor(props) {

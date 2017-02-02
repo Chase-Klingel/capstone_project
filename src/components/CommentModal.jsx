@@ -6,7 +6,7 @@ import Comments from './Comments';
 import SCCommentWidget from './SCCommentWidget';
 import VimeoCommentWidget from './VimeoCommentWidget';
 import Styles from './css/commentModal';
-import CommentIcon from '../img/comment-button.png';
+// import CommentIcon from '../img/comment-button.png';
 
 
 const contentStyle = {

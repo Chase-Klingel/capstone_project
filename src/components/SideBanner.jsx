@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './css/sideBanner';
 import classnames from 'classnames';
-import VideoImg from '../img/video.png';
+// import VideoImg from '../img/video.png';
 
 
 export default class SideBanner extends React.Component {
@@ -17,8 +17,8 @@ export default class SideBanner extends React.Component {
                 and share their work to create amazing experiences.</h5>
               <p id={Styles.slogan}><i>Collaborate. Share. Create.</i></p>
             </div>
-            <div id={Styles.videoImg} style={{backgroundImage: `url(${VideoImg})`}}></div>
-            <div id={Styles.musicImg}></div>
+            {/* <div id={Styles.videoImg} style={{backgroundImage: `url(${VideoImg})`}}></div> */}
+            {/* <div id={Styles.musicImg}></div> */}
           </div>
         </div>
       </div>

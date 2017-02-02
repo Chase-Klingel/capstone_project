@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './css/queueButton';
 import Notifications, {notify} from 'react-notify-toast';
-import QueueIcon from '../img/queue-button.png';
+// import QueueIcon from '../img/queue-button.png';
 
 export default class QueueButton extends React.Component {
   constructor(props) {

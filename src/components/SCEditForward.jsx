@@ -1,6 +1,6 @@
 import React from 'react';
 import Styles from './css/scEditRoomWidget';
-import Forward from '../img/forward.png';
+// import Forward from '../img/forward.png';
 
 export default class SCEditForward extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export default class SCEditForward extends React.Component {
   render() {
     return (
       <div className={Styles.forwardButtonContainer}>
-        <img className={Styles.forwardButton} onClick={this.forward} src={Forward} />
+        {/* <img className={Styles.forwardButton} onClick={this.forward} src={Forward} /> */}
       </div>
     );
   }
